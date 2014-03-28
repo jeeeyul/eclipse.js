@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="net.jeeeyul.eclipsejs.ui.QueryView"
+            icon="icons/eclipse-js.gif"
+            id="net.jeeeyul.eclipsejs.ui.QueryView"
+            name="Eclipse.JS"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer">
+         <JsGlobalScopeContainerInitializer
+            class="net.jeeeyul.eclipsejs.core.EJSLibraryInitializer"
+            id="net.jeeeyul.eclipsejs.lib">
+      </JsGlobalScopeContainerInitializer>
+   </extension>
+   <extension
+         point="org.eclipse.wst.jsdt.ui.JsGlobalScopeContainerPage">
+         <JsGlobalScopeContainerPage
+         	id="net.jeeeyul.eclipsejs.lib"
+         	name="Eclipse.JS Libraries"
+         	class="net.jeeeyul.eclipsejs.core.EJSLibPage"
+         	>
+         </JsGlobalScopeContainerPage>
+   </extension>
+   
+      <extension point="org.eclipse.wst.jsdt.ui.JsGlobalScopeUIInitializer">
+     <JsGlobalScopeUIInitializer
+     	id="net.jeeeyul.eclipsejs.lib"
+     	class="net.jeeeyul.eclipsejs.core.EJSLibUiInitializer">
+     </JsGlobalScopeUIInitializer>
+   </extension>
+      <extension
+            point="org.eclipse.ui.console.consoleFactories">
+         <consoleFactory
+               class="net.jeeeyul.eclipsejs.EJSConsoleFactory"
+               icon="icons/eclipse-js.gif"
+               label="Eclipse.JS">
+         </consoleFactory>
+      </extension>
+
+</plugin>
