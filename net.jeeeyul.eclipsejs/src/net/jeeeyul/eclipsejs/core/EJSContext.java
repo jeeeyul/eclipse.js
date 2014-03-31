@@ -9,15 +9,18 @@ public class EJSContext extends Context {
 
 	private IProgressMonitor monitor;
 
-	public EJSContext(EJSContextFactory factory, IProgressMonitor monitor) {
-		super(factory);
+	public void setMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor;
 		setInstructionObserverThreshold(100);
 	}
 
+	public EJSContext(EJSContextFactory factory) {
+		super(factory);
+	}
+
 	@Override
 	protected void observeInstructionCount(int instructionCount) {
-		if (monitor.isCanceled()) {
+		if (monitor != null && monitor.isCanceled()) {
 			throw new CancellationException();
 		}
 	}

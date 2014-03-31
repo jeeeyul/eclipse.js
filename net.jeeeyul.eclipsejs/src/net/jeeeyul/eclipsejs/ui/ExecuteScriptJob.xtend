@@ -12,6 +12,7 @@ import org.mozilla.javascript.Context
 import org.mozilla.javascript.RhinoException
 import org.mozilla.javascript.ScriptStackElement
 import org.mozilla.javascript.ScriptableObject
+import net.jeeeyul.eclipsejs.core.EJSContext
 
 class ExecuteScriptJob extends WorkspaceJob {
 	IScriptProvider scriptProvider
@@ -24,10 +25,11 @@ class ExecuteScriptJob extends WorkspaceJob {
 	}
 
 	override runInWorkspace(IProgressMonitor monitor) throws CoreException {
-		var factory = new EJSContextFactory(monitor)
-		var ctx = factory.enterContext
+		var factory = new EJSContextFactory()
+		var ctx = factory.enterContext as EJSContext
+		ctx.setMonitor(monitor)
 		try {
-			var scope = ScopeFactory.instance.create()
+			var scope = ScopeFactory.instance.create(scriptProvider.fullPath)
 			ScriptableObject.putProperty(scope, "monitor", Context.javaToJS(monitor, scope))
 			ctx.evaluateString(scope, scriptProvider.getScript(), scriptProvider.scriptFileName, 1, null)
 		} catch (RhinoException e) {

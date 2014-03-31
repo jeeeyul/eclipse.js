@@ -19,9 +19,9 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 
-public class EnsureHiddenProject extends WorkspaceJob {
+public class EnsureEJSProject extends WorkspaceJob {
 
-	public EnsureHiddenProject() {
+	public EnsureEJSProject() {
 		super("Eclipse.JS Project Preparing");
 		setSystem(true);
 		setUser(false);

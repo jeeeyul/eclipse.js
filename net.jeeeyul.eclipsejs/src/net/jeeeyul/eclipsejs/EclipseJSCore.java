@@ -24,7 +24,7 @@ public class EclipseJSCore extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	private EnsureHiddenProject ensureHiddenProject = new EnsureHiddenProject();
+	private EnsureEJSProject ensureEJSProject = new EnsureEJSProject();
 
 	/**
 	 * The constructor
@@ -32,8 +32,8 @@ public class EclipseJSCore extends AbstractUIPlugin {
 	public EclipseJSCore() {
 	}
 
-	public void getWSQueryProject(IWSQProjectCallback callback) {
-		ensureHiddenProject.addCallback(callback);
+	public void getEJSProject(IWSQProjectCallback callback) {
+		ensureEJSProject.addCallback(callback);
 	}
 
 	/*

@@ -4,6 +4,7 @@ import net.jeeeyul.eclipsejs.api.IO;
 import net.jeeeyul.eclipsejs.ui.IScriptProvider;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IPath;
 
 public class FileScript implements IScriptProvider {
 
@@ -26,6 +27,11 @@ public class FileScript implements IScriptProvider {
 	@Override
 	public String getScriptFileName() {
 		return file.getName();
+	}
+
+	@Override
+	public IPath getFullPath() {
+		return file.getFullPath();
 	}
 
 }

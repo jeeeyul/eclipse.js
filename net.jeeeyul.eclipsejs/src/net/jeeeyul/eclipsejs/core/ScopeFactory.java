@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import net.jeeeyul.eclipsejs.EclipseJSCore;
 import net.jeeeyul.eclipsejs.api.IO;
 
+import org.eclipse.core.runtime.IPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ScriptableObject;
 import org.osgi.framework.Bundle;
@@ -26,9 +27,11 @@ public class ScopeFactory {
 	private ScopeFactory() {
 	}
 
-	public ScriptableObject create() {
+	public ScriptableObject create(IPath path) {
 		Context ctx = Context.getCurrentContext();
 		ScriptableObject scope = ctx.initStandardObjects();
+		
+		ScriptableObject.putProperty(scope, "__REQUIRE__", new Require(path, ctx));
 
 		Bundle bundle = EclipseJSCore.getDefault().getBundle();
 		Enumeration<URL> entries = bundle.findEntries("runtime", "*.js", true);

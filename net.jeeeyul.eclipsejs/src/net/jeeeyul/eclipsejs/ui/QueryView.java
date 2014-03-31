@@ -5,6 +5,7 @@ import net.jeeeyul.eclipsejs.IWSQProjectCallback;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.action.Action;
@@ -44,7 +45,7 @@ public class QueryView extends ViewPart implements IScriptProvider {
 		super.init(site);
 
 		editorSite = new EJSEditorSite(site);
-		EclipseJSCore.getDefault().getWSQueryProject(new IWSQProjectCallback() {
+		EclipseJSCore.getDefault().getEJSProject(new IWSQProjectCallback() {
 			@Override
 			public void projectPrepared(IProject project) {
 				QueryView.this.project = project;
@@ -129,6 +130,11 @@ public class QueryView extends ViewPart implements IScriptProvider {
 	@Override
 	public String getScriptFileName() {
 		return "View Script";
+	}
+
+	@Override
+	public IPath getFullPath() {
+		return project.getFile(new Path("user/view.js")).getFullPath();
 	}
 
 }

@@ -31,3 +31,7 @@ function runInUI(fn) {
 	});
 	return result;
 }
+
+function isUIThread(){
+	return org.eclipse.swt.widgets.Display.getDefault().getThread() == java.lang.Thread.currentThread(); 
+}
