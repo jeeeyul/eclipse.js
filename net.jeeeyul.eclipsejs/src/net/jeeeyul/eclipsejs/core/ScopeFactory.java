@@ -15,7 +15,7 @@ public class ScopeFactory {
 	private static ScopeFactory instance;
 
 	private IO io = new IO();
-
+	
 	public static ScopeFactory getInstance() {
 		if (instance == null) {
 			instance = new ScopeFactory();

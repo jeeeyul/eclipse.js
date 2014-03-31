@@ -1,0 +1,1 @@
+var workbench = org.eclipse.ui.PlatformUI.getWorkbench();

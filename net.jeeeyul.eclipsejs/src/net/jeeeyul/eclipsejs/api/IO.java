@@ -11,6 +11,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
 public class IO {
+	private static final IO instance = new IO();
+
+	public static IO getInstance() {
+		return instance;
+	}
+
 	public IO() {
 	}
 
@@ -26,9 +32,11 @@ public class IO {
 		is.close();
 		return baos.toString();
 	}
-	
-	public void setContents(IFile file, String content) throws UnsupportedEncodingException, CoreException{
+
+	public void setContents(IFile file, String content)
+			throws UnsupportedEncodingException, CoreException {
 		byte[] data = content.getBytes(file.getCharset());
-		file.setContents(new ByteArrayInputStream(data), true, true, new NullProgressMonitor());
+		file.setContents(new ByteArrayInputStream(data), true, true,
+				new NullProgressMonitor());
 	}
 }

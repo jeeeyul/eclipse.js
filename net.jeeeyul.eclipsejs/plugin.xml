@@ -10,6 +10,13 @@
             name="Eclipse.JS"
             restorable="true">
       </view>
+      <view
+            allowMultiple="true"
+            class="net.jeeeyul.eclipsejs.ui.CommonView"
+            id="net.jeeeyul.eclipsejs.common.view"
+            name="Eclipse.JS Views"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer">
