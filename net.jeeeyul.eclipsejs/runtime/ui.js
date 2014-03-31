@@ -1,7 +1,7 @@
 function alert(title, msg) {
 	if (arguments.length == 1) {
 		msg = title;
-		title = "WSQuery";
+		title = "Eclipse.JS";
 	}
 	
 	runInUI(function(){
@@ -13,17 +13,21 @@ function alert(title, msg) {
 function confirm(title, msg) {
 	if (arguments.length == 1) {
 		msg = title;
-		title = "WSQuery";
+		title = "Eclipse.JS";
 	}
 
-	runInUI(function(){
+	return runInUI(function(){
 		var shell = org.eclipse.swt.widgets.Display.getDefault().getActiveShell();
 		return org.eclipse.jface.dialogs.MessageDialog.openConfirm(shell, title, msg);
 	});
 }
 
 function runInUI(fn) {
+	var result = undefined;
 	org.eclipse.swt.widgets.Display.getDefault().syncExec({
-		run : fn
+		run : function(){
+			result = fn();
+		}
 	});
+	return result;
 }
