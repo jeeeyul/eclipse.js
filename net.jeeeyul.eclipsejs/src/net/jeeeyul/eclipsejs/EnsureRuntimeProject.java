@@ -1,8 +1,8 @@
 package net.jeeeyul.eclipsejs;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashSet;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -19,24 +19,24 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 
-public class EnsureEJSProject extends WorkspaceJob {
+public class EnsureRuntimeProject extends WorkspaceJob {
 
-	public EnsureEJSProject() {
+	private ArrayList<IRuntimeProjectCallback> callbacks = new ArrayList<IRuntimeProjectCallback>(
+			50);
+
+	private IProject project;
+
+	public EnsureRuntimeProject() {
 		super("Eclipse.JS Project Preparing");
 		setSystem(true);
 		setUser(false);
 	}
 
-	private HashSet<IWSQProjectCallback> callbacks = new HashSet<IWSQProjectCallback>();
-	private IProject project;
-
-	public void addCallback(IWSQProjectCallback callback) {
-		if (project != null && project.exists()) {
-			callback.projectPrepared(project);
-		} else {
+	public void addCallback(IRuntimeProjectCallback callback) {
+		synchronized (callbacks) {
 			callbacks.add(callback);
-			schedule();
 		}
+		schedule();
 	}
 
 	private IContainer ensureFolder(IContainer container) throws CoreException {
@@ -52,9 +52,32 @@ public class EnsureEJSProject extends WorkspaceJob {
 		return container;
 	}
 
+	private void finish(IProject project) {
+		IRuntimeProjectCallback[] array;
+		synchronized (callbacks) {
+			array = callbacks.toArray(new IRuntimeProjectCallback[callbacks
+					.size()]);
+			callbacks.clear();
+		}
+
+		for (IRuntimeProjectCallback each : array) {
+			each.projectPrepared(project);
+		}
+	}
+
 	@Override
 	public IStatus runInWorkspace(IProgressMonitor monitor)
 			throws CoreException {
+
+		if (project == null) {
+			project = resolveProject();
+		}
+		finish(project);
+
+		return Status.OK_STATUS;
+	}
+
+	private IProject resolveProject() throws CoreException {
 		Enumeration<URL> entries = EclipseJSCore.getDefault().getBundle()
 				.findEntries("hidden-project", "*", true);
 
@@ -62,10 +85,8 @@ public class EnsureEJSProject extends WorkspaceJob {
 				.getProject(EclipseJSCore.PROJECT_NAME);
 
 		if (project.exists()) {
-			finish(project);
-			return Status.OK_STATUS;
+			return project;
 		}
-
 		project.create(new NullProgressMonitor());
 		project.open(new NullProgressMonitor());
 
@@ -98,15 +119,6 @@ public class EnsureEJSProject extends WorkspaceJob {
 		project.refreshLocal(IResource.DEPTH_INFINITE,
 				new NullProgressMonitor());
 
-		finish(project);
-
-		return Status.OK_STATUS;
-	}
-
-	private void finish(IProject project) {
-		for (IWSQProjectCallback each : callbacks) {
-			each.projectPrepared(project);
-		}
-		callbacks.clear();
+		return project;
 	}
 }

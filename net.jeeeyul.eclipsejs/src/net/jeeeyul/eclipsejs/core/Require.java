@@ -1,6 +1,7 @@
 package net.jeeeyul.eclipsejs.core;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import net.jeeeyul.eclipsejs.api.IO;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -50,6 +52,9 @@ public class Require {
 		return cached;
 	}
 
+	/**
+	 * @return module maps for current {@link Thread}.
+	 */
 	private Map<String, Object> getModuleMap() {
 		Map<String, Object> map = moduleMap.get(Thread.currentThread());
 		if (map == null) {
@@ -60,7 +65,7 @@ public class Require {
 		return map;
 	}
 
-	private String resolveQualifiedName(String modulePath) {
+	public String resolveQualifiedName(String modulePath) {
 		IPath offset = getOffsetPath();
 
 		if (modulePath.startsWith(".")) {
@@ -110,14 +115,39 @@ public class Require {
 		moduleMap.clear();
 		moduleMap = new HashMap<Thread, Map<String, Object>>();
 	}
-	
-	public void unload(String modulePath){
+
+	public void unload(String modulePath) {
 		String qualifiedPath = resolveQualifiedName(modulePath);
 		getModuleMap().remove(qualifiedPath);
 	}
-	
-	public void unloadAll(){
+
+	public void unloadAll() {
 		getModuleMap().clear();
+	}
+
+	public String[] lookup() {
+		ArrayList<String> result = new ArrayList<String>();
+		try {
+			IFolder folder = ResourcesPlugin.getWorkspace().getRoot()
+					.getFolder(getOffsetPath());
+			IResource[] members = folder.members();
+			for (IResource each : members) {
+				if (each.getType() == IResource.FOLDER) {
+					IFolder eachFolder = (IFolder) each;
+					if (eachFolder.getFile("index.js").exists()) {
+						result.add(each.getName());
+					}
+				} else if (each.getType() == IResource.FILE
+						&& each.getFileExtension().equals("js")) {
+					result.add(each.getFullPath().removeFileExtension()
+							.lastSegment());
+				}
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+
+		return result.toArray(new String[result.size()]);
 	}
 
 }

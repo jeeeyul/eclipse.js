@@ -1,5 +1,6 @@
 package net.jeeeyul.eclipsejs;
 
+import org.eclipse.core.resources.IProject;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -24,7 +25,9 @@ public class EclipseJSCore extends AbstractUIPlugin {
 		return plugin;
 	}
 
-	private EnsureEJSProject ensureEJSProject = new EnsureEJSProject();
+	private IProject runtimeProject;
+
+	private EnsureRuntimeProject ensureRuntimeProject;;
 
 	/**
 	 * The constructor
@@ -32,8 +35,30 @@ public class EclipseJSCore extends AbstractUIPlugin {
 	public EclipseJSCore() {
 	}
 
-	public void getEJSProject(IWSQProjectCallback callback) {
-		ensureEJSProject.addCallback(callback);
+	private EnsureRuntimeProject getEnsureRuntimeProject() {
+		if (ensureRuntimeProject == null) {
+			ensureRuntimeProject = new EnsureRuntimeProject();
+			ensureRuntimeProject.addCallback(new IRuntimeProjectCallback() {
+				@Override
+				public void projectPrepared(IProject project) {
+					runtimeProject = project;
+				}
+			});
+		}
+		return ensureRuntimeProject;
+	}
+
+	public IProject getPreparedRuntimeProject() {
+		return runtimeProject;
+	}
+
+	public void getRuntimeProject(IRuntimeProjectCallback callback) {
+		getEnsureRuntimeProject().addCallback(callback);
+	}
+
+	public boolean isRuntimeProjectPrepared() {
+		return runtimeProject != null && runtimeProject.exists()
+				&& runtimeProject.isOpen();
 	}
 
 	/*

@@ -15,7 +15,7 @@ class ExecuteScriptAction extends Action {
 	}
 
 	override run() {
-		EclipseJSCore.^default.getEJSProject [
+		EclipseJSCore.^default.getRuntimeProject [
 			job.schedule()
 		]
 	}

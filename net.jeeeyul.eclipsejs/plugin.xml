@@ -49,5 +49,28 @@
                label="Eclipse.JS">
          </consoleFactory>
       </extension>
+      <extension
+            point="org.eclipse.ui.menus">
+         <menuContribution
+               allPopups="false"
+               locationURI="menu:showView">
+            <dynamic
+                  class="net.jeeeyul.eclipsejs.ui.ShowViewContribution"
+                  id="net.jeeeyul.eclipsejs.dynamic1">
+            </dynamic>
+         </menuContribution>
+      </extension>
+      <extension
+            point="org.eclipse.ui.commands">
+         <command
+               id="net.jeeeyul.eclipsejs.common.command"
+               name="Eclipse.JS Command">
+            <commandParameter
+                  id="net.jeeeyul.eclipsejs.command.id"
+                  name="E.JS Command ID"
+                  optional="true">
+            </commandParameter>
+         </command>
+      </extension>
 
 </plugin>

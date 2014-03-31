@@ -1,7 +1,7 @@
 package net.jeeeyul.eclipsejs.ui;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
-import net.jeeeyul.eclipsejs.IWSQProjectCallback;
+import net.jeeeyul.eclipsejs.IRuntimeProjectCallback;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -45,15 +45,16 @@ public class QueryView extends ViewPart implements IScriptProvider {
 		super.init(site);
 
 		editorSite = new EJSEditorSite(site);
-		EclipseJSCore.getDefault().getEJSProject(new IWSQProjectCallback() {
-			@Override
-			public void projectPrepared(IProject project) {
-				QueryView.this.project = project;
-				if (pageBook != null) {
-					createEditor();
-				}
-			}
-		});
+		EclipseJSCore.getDefault().getRuntimeProject(
+				new IRuntimeProjectCallback() {
+					@Override
+					public void projectPrepared(IProject project) {
+						QueryView.this.project = project;
+						if (pageBook != null) {
+							createEditor();
+						}
+					}
+				});
 
 		IActionBars actionBars = getViewSite().getActionBars();
 		contributor.init(actionBars);
@@ -117,7 +118,8 @@ public class QueryView extends ViewPart implements IScriptProvider {
 
 	@Override
 	public void saveState(IMemento memento) {
-		if (editor != null && !editorWrapper.isDisposed()) {
+		if (editor != null && editorWrapper != null
+				&& !editorWrapper.isDisposed()) {
 			editor.doSave(new NullProgressMonitor());
 		}
 		super.saveState(memento);
