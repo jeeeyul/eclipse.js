@@ -59,6 +59,15 @@
                   id="net.jeeeyul.eclipsejs.dynamic1">
             </dynamic>
          </menuContribution>
+         <menuContribution
+               allPopups="false"
+               locationURI="toolbar:net.jeeeyul.eclipsejs.ui.QueryView">
+            <command
+                  commandId="net.jeeeyul.eclipsejs.execute.view.script"
+                  icon="icons/run_exc.gif"
+                  style="push">
+            </command>
+         </menuContribution>
       </extension>
       <extension
             point="org.eclipse.ui.commands">
@@ -71,6 +80,72 @@
                   optional="true">
             </commandParameter>
          </command>
+         <command
+               defaultHandler="net.jeeeyul.eclipsejs.ui.ExecuteViewScriptHandler"
+               id="net.jeeeyul.eclipsejs.execute.view.script"
+               name="Excute View Script">
+         </command>
+      </extension>
+      <extension
+            point="org.eclipse.ui.bindings">
+         <key
+               commandId="net.jeeeyul.eclipsejs.execute.view.script"
+               contextId="net.jeeeyul.eclipsejs.script.view"
+               schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+               sequence="M1+ENTER">
+         </key>
+      </extension>
+      <extension
+            point="org.eclipse.ui.contexts">
+         <context
+               id="net.jeeeyul.eclipsejs.script.view"
+               name="In Eclipse.JS Script View">
+         </context>
+      </extension>
+      <extension
+            point="org.eclipse.ui.editors.templates">
+         <template
+               autoinsert="false"
+               contextTypeId="javaScript"
+               description="Add a listener to SWT Widget"
+               icon="icons/eclipse-js.gif"
+               id="net.jeeeyul.eclipsejs.template.swt.listener"
+               name="addListener">
+            <pattern>
+               ${shell:localVar}.addListener(SWT.${eventType}, {
+	handleEvent : function(/*org.eclipse.swt.widgets.Event*/ e){
+		${cursor}
+	}
+});
+            </pattern>
+         </template>
+         <template
+               autoinsert="false"
+               contextTypeId="javaScript"
+               description="Creates View Extension Module"
+               icon="icons/eclipse-js.gif"
+               id="net.jeeeyul.eclipsejs.template.extension.view"
+               name="View">
+            <pattern>
+               module = View.extend({
+	&quot;name&quot; : &quot;${viewName}&quot;,
+	&quot;icon&quot; : &quot;${icon}&quot;,
+	&quot;init&quot; : function(viewSite){
+		this.viewSite = viewSite;
+	},
+	&quot;create&quot; : function(/*org.eclipse.swt.widgets.Shell*/ parent) {
+		${cursor}
+	},
+	&quot;dispose&quot; : function() {
+	}
+});
+            </pattern>
+         </template>
+      </extension>
+      <extension
+            point="org.eclipse.wst.jsdt.core.inferrenceSupport">
+            <inferenceProvider
+            	class="net.jeeeyul.eclipsejs.jsdt.AdvancedInferenceProvider"/>
       </extension>
 
 </plugin>

@@ -22,6 +22,11 @@ function confirm(title, msg) {
 	});
 }
 
+/**
+ * Runs given function in UI Thread.
+ * @param {Function} fn
+ * @returns
+ */
 function runInUI(fn) {
 	var result = undefined;
 	org.eclipse.swt.widgets.Display.getDefault().syncExec({

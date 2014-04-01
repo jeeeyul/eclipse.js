@@ -10,11 +10,8 @@ function Workspace() {
  */
 Workspace.prototype.find = function(pattern) {
 	var result = [];
-
 	var exp = pattern.replace(/\*\*/g, "«ANY_PATH»").replace(/\*/, "«ANY_SEGMENT»").replace(/\./, "«DOT»").replace("?", "«ANY_CHAR»");
-
 	exp = exp.replace(/«ANY_PATH»/g, ".*").replace(/«ANY_SEGMENT»/g, "[^/]*").replace(/«DOT»/g, "\.").replace(/«ANY_CHAR»/g, ".")
-
 	var regexp = new RegExp("^" + exp + "$");
 
 	this._workspace.root.accept({

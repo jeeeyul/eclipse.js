@@ -16,7 +16,7 @@ public class ScopeFactory {
 	private static ScopeFactory instance;
 
 	private IO io = new IO();
-	
+
 	public static ScopeFactory getInstance() {
 		if (instance == null) {
 			instance = new ScopeFactory();
@@ -30,11 +30,24 @@ public class ScopeFactory {
 	public ScriptableObject create(IPath path) {
 		Context ctx = Context.getCurrentContext();
 		ScriptableObject scope = ctx.initStandardObjects();
-		
-		ScriptableObject.putProperty(scope, "__REQUIRE__", new Require(path, ctx));
+
+		ScriptableObject.putProperty(scope, "__REQUIRE__", new Require(path,
+				ctx));
 
 		Bundle bundle = EclipseJSCore.getDefault().getBundle();
-		Enumeration<URL> entries = bundle.findEntries("runtime", "*.js", true);
+		Enumeration<URL> entries = bundle.findEntries("libraries/both", "*.js",
+				true);
+		while (entries.hasMoreElements()) {
+			URL url = (URL) entries.nextElement();
+			try {
+				String script = io.readInputStream(url.openStream(), "UTF-8");
+				ctx.evaluateString(scope, script, url.getPath(), 1, null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		entries = bundle.findEntries("libraries/runtime", "*.js", true);
 		while (entries.hasMoreElements()) {
 			URL url = (URL) entries.nextElement();
 			try {

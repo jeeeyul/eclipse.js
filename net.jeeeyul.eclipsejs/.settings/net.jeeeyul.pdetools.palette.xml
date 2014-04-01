@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <p:Palette xmlns:p="http://jeeeyul.net/pde-tools" fieldName="ICONS" folder="/net.jeeeyul.eclipsejs/icons">
   <imageFiles fieldName="ECLIPSE_JS" file="/net.jeeeyul.eclipsejs/icons/eclipse-js.gif"/>
+  <imageFiles fieldName="RUN_EXC" file="/net.jeeeyul.eclipsejs/icons/run_exc.gif"/>
 </p:Palette>

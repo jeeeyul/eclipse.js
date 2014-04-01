@@ -19,6 +19,7 @@ import org.eclipse.ui.IMemento;
 import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.ViewPart;
@@ -27,50 +28,18 @@ import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditorActionCo
 
 @SuppressWarnings("restriction")
 public class QueryView extends ViewPart implements IScriptProvider {
-
+	public static final String ID = "net.jeeeyul.eclipsejs.ui.QueryView";
 	private EJSEditorSite editorSite;
 	private CompilationUnitEditor editor;
 	private PageBook pageBook;
 	private IProject project;
 	private Composite editorWrapper;
 	private CompilationUnitEditorActionContributor contributor;
+	private ExecuteScriptJob executeScriptJob;
 
 	public QueryView() {
 		editor = new EJSEditor();
 		contributor = new CompilationUnitEditorActionContributor();
-	}
-
-	@Override
-	public void init(IViewSite site) throws PartInitException {
-		super.init(site);
-
-		editorSite = new EJSEditorSite(site);
-		EclipseJSCore.getDefault().getRuntimeProject(
-				new IRuntimeProjectCallback() {
-					@Override
-					public void projectPrepared(IProject project) {
-						QueryView.this.project = project;
-						if (pageBook != null) {
-							createEditor();
-						}
-					}
-				});
-
-		IActionBars actionBars = getViewSite().getActionBars();
-		contributor.init(actionBars);
-
-		getViewSite().getActionBars().getToolBarManager()
-				.add(new ExecuteScriptAction(this));
-
-		actionBars.setGlobalActionHandler(ActionFactory.SAVE.getId(),
-				new Action() {
-					@Override
-					public void run() {
-						if (editor != null) {
-							editor.doSave(new NullProgressMonitor());
-						}
-					}
-				});
 	}
 
 	private void createEditor() {
@@ -111,18 +80,16 @@ public class QueryView extends ViewPart implements IScriptProvider {
 		}
 	}
 
-	@Override
-	public void setFocus() {
-		pageBook.setFocus();
+	public ExecuteScriptJob getExecuteScriptJob() {
+		if (executeScriptJob == null) {
+			executeScriptJob = new ExecuteScriptJob(this);
+		}
+		return executeScriptJob;
 	}
 
 	@Override
-	public void saveState(IMemento memento) {
-		if (editor != null && editorWrapper != null
-				&& !editorWrapper.isDisposed()) {
-			editor.doSave(new NullProgressMonitor());
-		}
-		super.saveState(memento);
+	public IPath getFullPath() {
+		return project.getFile(new Path("user/view.js")).getFullPath();
 	}
 
 	public String getScript() {
@@ -135,8 +102,51 @@ public class QueryView extends ViewPart implements IScriptProvider {
 	}
 
 	@Override
-	public IPath getFullPath() {
-		return project.getFile(new Path("user/view.js")).getFullPath();
+	public void init(IViewSite site) throws PartInitException {
+		super.init(site);
+
+		editorSite = new EJSEditorSite(site);
+		EclipseJSCore.getDefault().getRuntimeProject(
+				new IRuntimeProjectCallback() {
+					@Override
+					public void projectPrepared(IProject project) {
+						QueryView.this.project = project;
+						if (pageBook != null) {
+							createEditor();
+						}
+					}
+				});
+
+		IActionBars actionBars = getViewSite().getActionBars();
+		contributor.init(actionBars);
+
+		actionBars.setGlobalActionHandler(ActionFactory.SAVE.getId(),
+				new Action() {
+					@Override
+					public void run() {
+						if (editor != null) {
+							editor.doSave(new NullProgressMonitor());
+						}
+					}
+				});
+
+		IContextService service = (IContextService) site
+				.getService(IContextService.class);
+		service.activateContext("net.jeeeyul.eclipsejs.script.view");
+	}
+
+	@Override
+	public void saveState(IMemento memento) {
+		if (editor != null && editorWrapper != null
+				&& !editorWrapper.isDisposed()) {
+			editor.doSave(new NullProgressMonitor());
+		}
+		super.saveState(memento);
+	}
+
+	@Override
+	public void setFocus() {
+		pageBook.setFocus();
 	}
 
 }

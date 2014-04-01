@@ -1,5 +1,7 @@
 package net.jeeeyul.eclipsejs.ui;
 
+import java.text.MessageFormat;
+
 import net.jeeeyul.eclipsejs.EclipseJSCore;
 import net.jeeeyul.eclipsejs.IRuntimeProjectCallback;
 import net.jeeeyul.eclipsejs.core.EJSContextFactory;
@@ -134,14 +136,17 @@ public class CommonView extends ViewPart {
 		IPath viewFilePath = getViewFilePath();
 
 		scope = ScopeFactory.getInstance().create(viewFilePath);
+		ScriptableObject.putProperty(scope, "imageRegistry",
+				Context.javaToJS(imageRegistry, scope));
 
-		context.evaluateString(scope, "var view = require('/"
-				+ EclipseJSCore.PROJECT_NAME + "/extensions/views/" + viewId
-				+ "')", "view-" + viewId, 1, null);
+		String script = MessageFormat
+				.format("var ViewType = require(''/{0}/extensions/views/{1}''), view = new ViewType(imageRegistry);",
+						EclipseJSCore.PROJECT_NAME, viewId);
+		context.evaluateString(scope, script, "view-" + viewId, 1, null);
 
 		callViewFunction("init", site);
 
-		Object partName = callViewFunction("getPartName");
+		Object partName = callViewFunction("getName");
 		if (partName != null) {
 			setPartName((String) Context.jsToJava(partName, String.class));
 			firePropertyChange(PROP_TITLE);

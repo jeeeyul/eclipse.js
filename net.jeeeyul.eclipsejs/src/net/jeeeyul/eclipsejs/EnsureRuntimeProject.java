@@ -69,7 +69,7 @@ public class EnsureRuntimeProject extends WorkspaceJob {
 	public IStatus runInWorkspace(IProgressMonitor monitor)
 			throws CoreException {
 
-		if (project == null) {
+		if (project == null || !project.exists()) {
 			project = resolveProject();
 		}
 		finish(project);
