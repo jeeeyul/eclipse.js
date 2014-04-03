@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.ui;
+package net.jeeeyul.eclipsejs.util;
 
 import java.util.HashMap;
 import java.util.Map;

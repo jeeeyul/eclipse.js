@@ -1,13 +1,15 @@
-package net.jeeeyul.eclipsejs.ui;
+package net.jeeeyul.eclipsejs.extensions.view;
 
 import java.text.MessageFormat;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
-import net.jeeeyul.eclipsejs.IRuntimeProjectCallback;
-import net.jeeeyul.eclipsejs.core.EJSContextFactory;
 import net.jeeeyul.eclipsejs.core.Require;
 import net.jeeeyul.eclipsejs.core.ScopeFactory;
-import net.jeeeyul.eclipsejs.ui.ResourceRegistry.Factory;
+import net.jeeeyul.eclipsejs.runtime.IRuntimeProjectCallback;
+import net.jeeeyul.eclipsejs.script.ScriptErrorPresenter;
+import net.jeeeyul.eclipsejs.script.context.EJSContextFactory;
+import net.jeeeyul.eclipsejs.util.ResourceRegistry;
+import net.jeeeyul.eclipsejs.util.ResourceRegistry.Factory;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -31,7 +33,7 @@ import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.ScriptableObject;
 
 public class CommonView extends ViewPart {
-	public static final String ID = "net.jeeeyul.eclipsejs.common.view";
+	public static final String ID = CommonView.class.getCanonicalName();
 
 	private PageBook pageBook;
 	private Composite viewPage;
@@ -76,6 +78,10 @@ public class CommonView extends ViewPart {
 			ScriptErrorPresenter.INSTANCE.showError(e);
 			return null;
 		}
+	}
+
+	public String getEJSViewID() {
+		return getViewSite().getSecondaryId();
 	}
 
 	@Override
@@ -142,6 +148,10 @@ public class CommonView extends ViewPart {
 		String script = MessageFormat
 				.format("var ViewType = require(''/{0}/extensions/views/{1}''), view = new ViewType(imageRegistry);",
 						EclipseJSCore.PROJECT_NAME, viewId);
+		if(viewId == null){
+			script = "view = new View();";
+		}
+		
 		context.evaluateString(scope, script, "view-" + viewId, 1, null);
 
 		callViewFunction("init", site);
@@ -158,7 +168,6 @@ public class CommonView extends ViewPart {
 			Image image = imageRegistry.get(imagePath);
 			setTitleImage(image);
 		}
-
 	}
 
 	private IPath getViewFilePath() {

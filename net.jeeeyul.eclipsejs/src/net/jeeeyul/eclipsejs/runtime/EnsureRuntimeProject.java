@@ -1,8 +1,10 @@
-package net.jeeeyul.eclipsejs;
+package net.jeeeyul.eclipsejs.runtime;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
+
+import net.jeeeyul.eclipsejs.EclipseJSCore;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;

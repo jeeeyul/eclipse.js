@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.ui
+package net.jeeeyul.eclipsejs.script
 
 import net.jeeeyul.eclipsejs.api.EJSConsole
 import org.mozilla.javascript.RhinoException

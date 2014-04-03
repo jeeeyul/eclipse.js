@@ -1,7 +1,9 @@
-package net.jeeeyul.eclipsejs.ui;
+package net.jeeeyul.eclipsejs.ui.queryview;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
-import net.jeeeyul.eclipsejs.IRuntimeProjectCallback;
+import net.jeeeyul.eclipsejs.runtime.IRuntimeProjectCallback;
+import net.jeeeyul.eclipsejs.script.ExecuteScriptJob;
+import net.jeeeyul.eclipsejs.script.IScriptProvider;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -28,7 +30,7 @@ import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditorActionCo
 
 @SuppressWarnings("restriction")
 public class QueryView extends ViewPart implements IScriptProvider {
-	public static final String ID = "net.jeeeyul.eclipsejs.ui.QueryView";
+	public static final String ID = QueryView.class.getCanonicalName();
 	private EJSEditorSite editorSite;
 	private CompilationUnitEditor editor;
 	private PageBook pageBook;
@@ -36,7 +38,7 @@ public class QueryView extends ViewPart implements IScriptProvider {
 	private Composite editorWrapper;
 	private CompilationUnitEditorActionContributor contributor;
 	private ExecuteScriptJob executeScriptJob;
-
+ 
 	public QueryView() {
 		editor = new EJSEditor();
 		contributor = new CompilationUnitEditorActionContributor();

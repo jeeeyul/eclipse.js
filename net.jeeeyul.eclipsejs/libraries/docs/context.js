@@ -1,0 +1,1 @@
+var monitor = new org.eclipse.core.runtime.IProgressMonitor();

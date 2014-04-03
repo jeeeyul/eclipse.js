@@ -1,6 +1,6 @@
-package net.jeeeyul.eclipsejs.core;
+package net.jeeeyul.eclipsejs.script.context;
 
-import net.jeeeyul.eclipsejs.ui.ScriptErrorPresenter;
+import net.jeeeyul.eclipsejs.script.ScriptErrorPresenter;
 
 import org.mozilla.javascript.Callable;
 import org.mozilla.javascript.Context;
@@ -36,5 +36,7 @@ public class EJSContextFactory extends ContextFactory {
 	protected Context makeContext() {
 		return new EJSContext(this);
 	}
+	
+	
 
 }

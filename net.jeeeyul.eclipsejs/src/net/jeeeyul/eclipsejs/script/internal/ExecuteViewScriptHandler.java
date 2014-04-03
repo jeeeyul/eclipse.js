@@ -1,4 +1,6 @@
-package net.jeeeyul.eclipsejs.ui;
+package net.jeeeyul.eclipsejs.script.internal;
+
+import net.jeeeyul.eclipsejs.ui.queryview.QueryView;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.ui;
+package net.jeeeyul.eclipsejs.script;
 
 import org.eclipse.core.runtime.IPath;
 

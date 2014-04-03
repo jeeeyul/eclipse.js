@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.core;
+package net.jeeeyul.eclipsejs.script.lib.ui;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

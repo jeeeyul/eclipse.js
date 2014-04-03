@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs;
+package net.jeeeyul.eclipsejs.runtime;
 
 import org.eclipse.core.resources.IProject;
 

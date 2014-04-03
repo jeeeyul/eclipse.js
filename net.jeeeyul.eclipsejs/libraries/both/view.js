@@ -5,15 +5,20 @@ function View(imageRegistry) {
 	return this;
 }
 
-View.prototype.getImage = function(relPath){
+View.prototype.getImage = function(relPath) {
 	return this.imageRegistry.get(relPath);
 };
 
-View.prototype.init = function(viewSite){
-	
+View.prototype.init = function(viewSite) {
+
 };
 
-View.prototype.create = function() {
+View.prototype.create = function(parent) {
+	var parent;
+	parent.setLayout(new org.eclipse.swt.layout.GridLayout());
+
+	var messageLabel = new org.eclipse.swt.widgets.Label(parent, SWT.NORMAL);
+	messageLabel.setText("Eclipse.JS View Id(Secondary View ID) is not specified.");
 };
 
 View.prototype.getName = function() {

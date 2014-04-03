@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.ui;
+package net.jeeeyul.eclipsejs.ui.queryview;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.preference.IPreferenceStore;

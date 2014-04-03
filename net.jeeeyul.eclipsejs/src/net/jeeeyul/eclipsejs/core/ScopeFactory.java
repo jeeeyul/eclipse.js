@@ -3,6 +3,8 @@ package net.jeeeyul.eclipsejs.core;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
 import net.jeeeyul.eclipsejs.api.IO;
@@ -28,11 +30,20 @@ public class ScopeFactory {
 	}
 
 	public ScriptableObject create(IPath path) {
+		return create(path, new HashMap<String, Object>());
+	}
+
+	public ScriptableObject create(IPath path, Map<String, Object> map) {
 		Context ctx = Context.getCurrentContext();
 		ScriptableObject scope = ctx.initStandardObjects();
 
 		ScriptableObject.putProperty(scope, "__REQUIRE__", new Require(path,
 				ctx));
+
+		for (String each : map.keySet()) {
+			Object jsObj = Context.javaToJS(map.get(each), scope);
+			ScriptableObject.putProperty(scope, each, jsObj);
+		}
 
 		Bundle bundle = EclipseJSCore.getDefault().getBundle();
 		Enumeration<URL> entries = bundle.findEntries("libraries/both", "*.js",

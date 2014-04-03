@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.ui;
+package net.jeeeyul.eclipsejs.ui.queryview;
 
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.viewers.ISelectionProvider;

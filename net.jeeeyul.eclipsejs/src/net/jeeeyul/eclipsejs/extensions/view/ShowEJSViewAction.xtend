@@ -1,8 +1,9 @@
-package net.jeeeyul.eclipsejs.ui
+package net.jeeeyul.eclipsejs.extensions.view
 
+import net.jeeeyul.eclipsejs.extensions.view.CommonView
 import org.eclipse.jface.action.Action
-import org.eclipse.ui.PlatformUI
 import org.eclipse.ui.IWorkbenchPage
+import org.eclipse.ui.PlatformUI
 
 class ShowEJSViewAction extends Action {
 	String viewId

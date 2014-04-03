@@ -4,16 +4,16 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="net.jeeeyul.eclipsejs.ui.QueryView"
+            class="net.jeeeyul.eclipsejs.ui.queryview.QueryView"
             icon="icons/eclipse-js.gif"
-            id="net.jeeeyul.eclipsejs.ui.QueryView"
+            id="net.jeeeyul.eclipsejs.ui.queryview.QueryView"
             name="Eclipse.JS"
             restorable="true">
       </view>
       <view
             allowMultiple="true"
-            class="net.jeeeyul.eclipsejs.ui.CommonView"
-            id="net.jeeeyul.eclipsejs.common.view"
+            class="net.jeeeyul.eclipsejs.extensions.view.CommonView"
+            id="net.jeeeyul.eclipsejs.extensions.view.CommonView"
             name="Eclipse.JS Views"
             restorable="true">
       </view>
@@ -21,7 +21,7 @@
    <extension
          point="org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer">
          <JsGlobalScopeContainerInitializer
-            class="net.jeeeyul.eclipsejs.core.EJSLibraryInitializer"
+            class="net.jeeeyul.eclipsejs.script.lib.ui.EJSLibraryInitializer"
             id="net.jeeeyul.eclipsejs.lib">
       </JsGlobalScopeContainerInitializer>
    </extension>
@@ -30,7 +30,7 @@
          <JsGlobalScopeContainerPage
          	id="net.jeeeyul.eclipsejs.lib"
          	name="Eclipse.JS Libraries"
-         	class="net.jeeeyul.eclipsejs.core.EJSLibPage"
+         	class="net.jeeeyul.eclipsejs.script.lib.ui.EJSLibPage"
          	>
          </JsGlobalScopeContainerPage>
    </extension>
@@ -38,13 +38,13 @@
       <extension point="org.eclipse.wst.jsdt.ui.JsGlobalScopeUIInitializer">
      <JsGlobalScopeUIInitializer
      	id="net.jeeeyul.eclipsejs.lib"
-     	class="net.jeeeyul.eclipsejs.core.EJSLibUiInitializer">
+     	class="net.jeeeyul.eclipsejs.script.lib.ui.EJSLibUiInitializer">
      </JsGlobalScopeUIInitializer>
    </extension>
       <extension
             point="org.eclipse.ui.console.consoleFactories">
          <consoleFactory
-               class="net.jeeeyul.eclipsejs.EJSConsoleFactory"
+               class="net.jeeeyul.eclipsejs.ui.console.EJSConsoleFactory"
                icon="icons/eclipse-js.gif"
                label="Eclipse.JS">
          </consoleFactory>
@@ -55,8 +55,8 @@
                allPopups="false"
                locationURI="menu:showView">
             <dynamic
-                  class="net.jeeeyul.eclipsejs.ui.ShowViewContribution"
-                  id="net.jeeeyul.eclipsejs.dynamic1">
+                  class="net.jeeeyul.eclipsejs.extensions.view.ShowViewContribution"
+                  id="net.jeeeyul.eclipsejs.extensions.view.ShowViewContribution">
             </dynamic>
          </menuContribution>
          <menuContribution
@@ -81,7 +81,7 @@
             </commandParameter>
          </command>
          <command
-               defaultHandler="net.jeeeyul.eclipsejs.ui.ExecuteViewScriptHandler"
+               defaultHandler="net.jeeeyul.eclipsejs.script.internal.ExecuteViewScriptHandler"
                id="net.jeeeyul.eclipsejs.execute.view.script"
                name="Excute View Script">
          </command>

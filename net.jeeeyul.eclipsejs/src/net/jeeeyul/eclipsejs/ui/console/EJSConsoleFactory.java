@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs;
+package net.jeeeyul.eclipsejs.ui.console;
 
 import net.jeeeyul.eclipsejs.api.EJSConsole;
 

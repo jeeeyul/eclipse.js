@@ -1,7 +1,6 @@
-package net.jeeeyul.eclipsejs.core;
+package net.jeeeyul.eclipsejs.script;
 
 import net.jeeeyul.eclipsejs.api.IO;
-import net.jeeeyul.eclipsejs.ui.IScriptProvider;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;

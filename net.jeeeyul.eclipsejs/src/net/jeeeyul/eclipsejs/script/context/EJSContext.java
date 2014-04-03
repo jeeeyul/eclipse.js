@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.core;
+package net.jeeeyul.eclipsejs.script.context;
 
 import java.util.concurrent.CancellationException;
 

@@ -133,6 +133,7 @@ class JavaDocGenerator {
 		genrate("swt-custom")
 		genrate("swt-event-dnd")
 		genrate("swt-graphics")
+		genrate("workbench-common")
 
 		println(new JavaDocGenerator().primaryConstructor(typeof(GridData)))
 	}
