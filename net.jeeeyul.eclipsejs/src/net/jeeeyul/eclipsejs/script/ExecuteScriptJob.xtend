@@ -2,9 +2,8 @@ package net.jeeeyul.eclipsejs.script
 
 import java.util.Map
 import java.util.concurrent.CancellationException
-import net.jeeeyul.eclipsejs.api.EJSConsole
+import net.jeeeyul.eclipsejs.script.api.EJSConsole
 import net.jeeeyul.eclipsejs.core.ScopeFactory
-import net.jeeeyul.eclipsejs.script.IScriptProvider
 import net.jeeeyul.eclipsejs.script.context.EJSContext
 import net.jeeeyul.eclipsejs.script.context.EJSContextFactory
 import org.eclipse.core.resources.WorkspaceJob
@@ -34,7 +33,7 @@ class ExecuteScriptJob extends WorkspaceJob {
 		
 		try {
 			var scope = ScopeFactory.instance.create(scriptProvider.fullPath, map)
-			ctx.evaluateString(scope, scriptProvider.getScript(), scriptProvider.scriptFileName, 1, null)
+			ctx.evaluateString(scope, scriptProvider.getScript(), scriptProvider.fullPath.toPortableString, 1, null)
 		} catch (CancellationException ce) {
 			EJSConsole.singleton.errorStream.println("Execution was canceled.")
 		} finally {

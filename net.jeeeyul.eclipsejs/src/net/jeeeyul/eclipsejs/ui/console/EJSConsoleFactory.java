@@ -1,6 +1,6 @@
 package net.jeeeyul.eclipsejs.ui.console;
 
-import net.jeeeyul.eclipsejs.api.EJSConsole;
+import net.jeeeyul.eclipsejs.script.api.EJSConsole;
 
 import org.eclipse.ui.console.IConsoleFactory;
 

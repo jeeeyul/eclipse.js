@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.api;
+package net.jeeeyul.eclipsejs.script.api;
 
 public class WorkbenchUtil {
 

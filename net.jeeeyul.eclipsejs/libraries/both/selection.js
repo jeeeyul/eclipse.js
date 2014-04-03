@@ -1,11 +1,14 @@
-function Selection(handle) {
+/**
+ * @constructor
+ */
+ejs.Selection = function(handle) {
 	this.handle = handle;
 }
 
 /**
  * @returns {String}
  */
-Selection.prototype.getType = function() {
+ejs.Selection.prototype.getType = function() {
 	if (this.handle instanceof org.eclipse.jface.text.ITextSelection) {
 		return "text";
 	} else {
@@ -16,14 +19,14 @@ Selection.prototype.getType = function() {
 /**
  * @returns {String}
  */
-Selection.prototype.getText = function() {
+ejs.Selection.prototype.getText = function() {
 
 };
 
 /**
  * @returns {Array}
  */
-Selection.prototype.toArray = function() {
+ejs.Selection.prototype.toArray = function() {
 	if (this.getType() != "structure") {
 		throw new Error("toArray is available when selection type is structure.");
 	}
@@ -31,12 +34,15 @@ Selection.prototype.toArray = function() {
 	return this.handle.toArray();
 };
 
-function SelectionService(handle) {
+/**
+ * @constructor
+ */
+ejs.SelectionService = function(handle) {
 	this.handle = handle;
 
 }
 
-SelectionService.prototype.addSelectionListener = function(listener) {
+ejs.SelectionService.prototype.addSelectionListener = function(listener) {
 	if (typeof listener !== "function") {
 		throw new Error("listener must be a function.");
 	}
@@ -44,14 +50,14 @@ SelectionService.prototype.addSelectionListener = function(listener) {
 	listener.__bridge = {
 		__owner : listener,
 		selectionChanged : function(part, selection) {
-			listener(part, new Selection(selection));
+			listener(part, new ejs.Selection(selection));
 		}
 	};
 
 	this.handle.addSelectionListener(listener.__bridge);
 };
 
-SelectionService.prototype.removeSelectionListener = function(listener) {
+ejs.SelectionService.prototype.removeSelectionListener = function(listener) {
 	if (typeof listener !== "function") {
 		throw new Error("listener must be a function.");
 	}

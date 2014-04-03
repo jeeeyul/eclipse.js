@@ -2,7 +2,6 @@ package net.jeeeyul.eclipsejs.jsdt;
 
 import org.eclipse.wst.jsdt.core.ast.ASTVisitor;
 import org.eclipse.wst.jsdt.core.ast.IArgument;
-import org.eclipse.wst.jsdt.core.ast.IFunctionCall;
 import org.eclipse.wst.jsdt.core.ast.IFunctionDeclaration;
 import org.eclipse.wst.jsdt.core.infer.IInferEngine;
 import org.eclipse.wst.jsdt.core.infer.InferOptions;
@@ -34,16 +33,6 @@ public class AdvancedInferenceEngine extends ASTVisitor implements IInferEngine 
 
 	@Override
 	public void initializeOptions(InferOptions inferOptions) {
-	}
-
-	@Override
-	public boolean visit(IFunctionCall functionCall) {
-		return super.visit(functionCall);
-	}
-
-	@Override
-	public void endVisit(IFunctionCall functionCall) {
-		super.endVisit(functionCall);
 	}
 
 	@Override

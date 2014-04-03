@@ -1,7 +1,8 @@
-var __WORKBENCH__ = org.eclipse.ui.PlatformUI.getWorkbench();
-
-function Workbench() {
-
+/**
+ * @constructor
+ */
+ejs.Workbench = function(handle) {
+	this.handle = handle;
 }
 
 /**
@@ -9,10 +10,10 @@ function Workbench() {
  * 
  * @returns {org.eclipse.swt.widgets.Shell}
  */
-Workbench.prototype.getActiveShell = function() {
-	var window = __WORKBENCH__.getActiveWorkbenchWindow();
+ejs.Workbench.prototype.getActiveShell = function() {
+	var window = this.handle.getActiveWorkbenchWindow();
 	if (window == null) {
-		window = __WORKBENCH__.getWorkbenchWindows()[0];
+		window = this.handle.getWorkbenchWindows()[0];
 	}
 	if (window) {
 		return window.getShell();
@@ -24,13 +25,13 @@ Workbench.prototype.getActiveShell = function() {
 /**
  * @returns {WorkbenchWindow}
  */
-Workbench.prototype.getActiveWorkbenchWindow = function() {
-	var window = __WORKBENCH__.getActiveWorkbenchWindow();
+ejs.Workbench.prototype.getActiveWorkbenchWindow = function() {
+	var window = this.handle.getActiveWorkbenchWindow();
 	if (window == null) {
-		window = __WORKBENCH__.getWorkbenchWindows()[0];
+		window = this.handle.getWorkbenchWindows()[0];
 	}
 	if (window) {
-		return new WorkbenchWindow(window);
+		return new ejs.WorkbenchWindow(window);
 	} else {
 		return null;
 	}
@@ -39,30 +40,36 @@ Workbench.prototype.getActiveWorkbenchWindow = function() {
 /**
  * @returns {WorkbenchPage}
  */
-Workbench.prototype.getActivePage = function() {
-	var window = __WORKBENCH__.getActiveWorkbenchWindow();
+ejs.Workbench.prototype.getActivePage = function() {
+	var window = this.handle.getActiveWorkbenchWindow();
 	if (window == null) {
-		window = __WORKBENCH__.getWorkbenchWindows()[0];
+		window = this.handle.getWorkbenchWindows()[0];
 	}
 	if (window) {
-		return new WorkbenchPage(window.getActivePage());
+		return new ejs.WorkbenchPage(window.getActivePage());
 	} else {
 		return null;
 	}
 };
 
-var workbench = new Workbench();
+var workbench = new ejs.Workbench(org.eclipse.ui.PlatformUI.getWorkbench());
 
-function WorkbenchWindow(handle) {
+/**
+ * @constructor
+ */
+ejs.WorkbenchWindow = function(handle) {
 	this.handle = handle;
 	return this;
 }
 
-WorkbenchWindow.prototype.getSelectionService = function() {
-	return new SelectionService(this.handle.getService(org.eclipse.ui.ISelectionService));
+ejs.WorkbenchWindow.prototype.getSelectionService = function() {
+	return new ejs.SelectionService(this.handle.getService(org.eclipse.ui.ISelectionService));
 };
 
-function WorkbenchPage(handle) {
+/**
+ * @constructor
+ */
+ejs.WorkbenchPage = function(handle) {
 	this.handle = handle;
 };
 
@@ -70,10 +77,10 @@ function WorkbenchPage(handle) {
  * @param {String}
  *            viewId
  */
-WorkbenchPage.prototype.showView = function(viewId) {
+ejs.WorkbenchPage.prototype.showView = function(viewId) {
 	this.handle.showView(viewId);
 };
 
-WorkbenchPage.prototype.showEJSView = function(viewId) {
+ejs.WorkbenchPage.prototype.showEJSView = function(viewId) {
 	this.handle.showView("net.jeeeyul.eclipsejs.common.view", viewId, 1);
 };

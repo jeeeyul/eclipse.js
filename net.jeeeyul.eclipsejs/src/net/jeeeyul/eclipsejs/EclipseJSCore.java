@@ -1,16 +1,23 @@
 package net.jeeeyul.eclipsejs;
 
+import net.jeeeyul.eclipsejs.core.Require;
 import net.jeeeyul.eclipsejs.runtime.EnsureRuntimeProject;
 import net.jeeeyul.eclipsejs.runtime.IRuntimeProjectCallback;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class EclipseJSCore extends AbstractUIPlugin {
+public class EclipseJSCore extends AbstractUIPlugin implements
+		IResourceChangeListener {
 	public static final String PROJECT_NAME = ".eclipse.js";
 
 	// The plug-in ID
@@ -74,6 +81,13 @@ public class EclipseJSCore extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		getRuntimeProject(new IRuntimeProjectCallback() {
+			@Override
+			public void projectPrepared(IProject project) {
+			}
+		});
+
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
 	}
 
 	/*
@@ -85,7 +99,17 @@ public class EclipseJSCore extends AbstractUIPlugin {
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 		super.stop(context);
+	}
+
+	@Override
+	public void resourceChanged(IResourceChangeEvent event) {
+		IResourceDelta member = event.getDelta().findMember(
+				new Path("/" + PROJECT_NAME));
+		if (member != null) {
+			Require.unloadModulesForAllThread();
+		}
 	}
 
 }

@@ -23,6 +23,8 @@ import org.eclipse.core.runtime.Status;
 
 public class EnsureRuntimeProject extends WorkspaceJob {
 
+	private static final String RUNTIME_PROJECT = "runtime-project";
+
 	private ArrayList<IRuntimeProjectCallback> callbacks = new ArrayList<IRuntimeProjectCallback>(
 			50);
 
@@ -81,7 +83,7 @@ public class EnsureRuntimeProject extends WorkspaceJob {
 
 	private IProject resolveProject() throws CoreException {
 		Enumeration<URL> entries = EclipseJSCore.getDefault().getBundle()
-				.findEntries("hidden-project", "*", true);
+				.findEntries(RUNTIME_PROJECT, "*", true);
 
 		project = ResourcesPlugin.getWorkspace().getRoot()
 				.getProject(EclipseJSCore.PROJECT_NAME);

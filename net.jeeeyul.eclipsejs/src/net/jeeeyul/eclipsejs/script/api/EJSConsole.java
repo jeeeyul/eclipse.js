@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.api;
+package net.jeeeyul.eclipsejs.script.api;
 
 import java.io.UnsupportedEncodingException;
 
@@ -19,11 +19,17 @@ public class EJSConsole extends IOConsole {
 
 	public static EJSConsole getSingleton() {
 		if (INSTANCE == null) {
-			INSTANCE = new EJSConsole();
-			IConsoleManager consoleManager = ConsolePlugin.getDefault()
-					.getConsoleManager();
-			consoleManager.addConsoles(new IConsole[] { INSTANCE });
-			INSTANCE.setActivateOnWrite(true);
+			Display.getDefault().syncExec(new Runnable() {
+				@Override
+				public void run() {
+					INSTANCE = new EJSConsole();
+					IConsoleManager consoleManager = ConsolePlugin.getDefault()
+							.getConsoleManager();
+					consoleManager.addConsoles(new IConsole[] { INSTANCE });
+					INSTANCE.setActivateOnWrite(true);
+				}
+			});
+
 		}
 		return INSTANCE;
 	}
@@ -60,17 +66,17 @@ public class EJSConsole extends IOConsole {
 				public void run() {
 					IOConsoleOutputStream newOutputStream = newOutputStream();
 					newOutputStream.setEncoding("utf-8"); //$NON-NLS-1$
-					newOutputStream.setColor(Display.getDefault().getSystemColor(
-							SWT.COLOR_RED));
+					newOutputStream.setColor(Display.getDefault()
+							.getSystemColor(SWT.COLOR_RED));
 					try {
-						EJSConsole.this.errorStream = new ErdConsolePrintStream(newOutputStream,
-								"utf-8"); //$NON-NLS-1$
+						EJSConsole.this.errorStream = new ErdConsolePrintStream(
+								newOutputStream, "utf-8"); //$NON-NLS-1$
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					}
 				}
 			});
-			
+
 		}
 		return this.errorStream;
 	}

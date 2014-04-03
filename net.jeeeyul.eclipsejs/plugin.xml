@@ -4,19 +4,26 @@
    <extension
          point="org.eclipse.ui.views">
       <view
+            category="net.jeeeyul.eclipsejs.category"
             class="net.jeeeyul.eclipsejs.ui.queryview.QueryView"
             icon="icons/eclipse-js.gif"
             id="net.jeeeyul.eclipsejs.ui.queryview.QueryView"
-            name="Eclipse.JS"
+            name="E.JS Query"
             restorable="true">
       </view>
       <view
             allowMultiple="true"
+            category="net.jeeeyul.eclipsejs.category"
             class="net.jeeeyul.eclipsejs.extensions.view.CommonView"
+            icon="icons/eclipse-js.gif"
             id="net.jeeeyul.eclipsejs.extensions.view.CommonView"
-            name="Eclipse.JS Views"
+            name="E.JS Common"
             restorable="true">
       </view>
+      <category
+            id="net.jeeeyul.eclipsejs.category"
+            name="Eclipse.JS">
+      </category>
    </extension>
    <extension
          point="org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer">
@@ -61,12 +68,20 @@
          </menuContribution>
          <menuContribution
                allPopups="false"
-               locationURI="toolbar:net.jeeeyul.eclipsejs.ui.QueryView">
+               locationURI="toolbar:net.jeeeyul.eclipsejs.ui.queryview.QueryView">
             <command
                   commandId="net.jeeeyul.eclipsejs.execute.view.script"
                   icon="icons/run_exc.gif"
                   style="push">
             </command>
+         </menuContribution>
+         <menuContribution
+               allPopups="false"
+               locationURI="popup:org.eclipse.ui.projectConfigure">
+            <dynamic
+                  class="net.jeeeyul.eclipsejs.extensions.builder.ui.NatureContribution"
+                  id="net.jeeeyul.eclipsejs.extensions.builder.ui.NatureContribution">
+            </dynamic>
          </menuContribution>
       </extension>
       <extension
@@ -127,8 +142,7 @@
                id="net.jeeeyul.eclipsejs.template.extension.view"
                name="View">
             <pattern>
-               module = View.extend({
-	&quot;name&quot; : &quot;${viewName}&quot;,
+               module = ejs.View.extend({&quot;name&quot; : &quot;${viewName}&quot;,
 	&quot;icon&quot; : &quot;${icon}&quot;,
 	&quot;init&quot; : function(viewSite){
 		this.viewSite = viewSite;
@@ -141,11 +155,72 @@
 });
             </pattern>
          </template>
+         <template
+               autoinsert="false"
+               contextTypeId="javaScript"
+               description="iterates files in workspace with given pattern."
+               icon="icons/eclipse-js.gif"
+               id="net.jeeeyul.eclipsejs.template.extension.find.files"
+               name="findFiles">
+            <pattern>
+               var ${list:localVar} = workspace.find(${pattern:localVar});
+monitor.beginTask(${taskName:localVar}, ${list}.length);
+${list}.forEach(function(/* ejs.File */it){
+	${cursor}
+	monitor.worked(1);
+});
+monitor.done();
+            </pattern>
+         </template>
+         <template
+               autoinsert="false"
+               contextTypeId="javaScript"
+               description="Creates Builder Extension"
+               icon="icons/eclipse-js.gif"
+               id="net.jeeeyul.eclipsejs.template.extension.builder"
+               name="Builder">
+            <pattern>
+               module = ejs.Builder.extend({
+	changed: function(/*ejs.File*/ file){
+	},
+	added: function(/*ejs.File*/ file){
+	},
+	removed: function(/*ejs.File*/ file){
+	}
+});
+            </pattern>
+         </template>
       </extension>
       <extension
             point="org.eclipse.wst.jsdt.core.inferrenceSupport">
             <inferenceProvider
             	class="net.jeeeyul.eclipsejs.jsdt.AdvancedInferenceProvider"/>
+      </extension>
+      <extension
+            id="net.jeeeyul.eclipsejs.builder"
+            name="Eclipse.JS Builder"
+            point="org.eclipse.core.resources.builders">
+         <builder
+               callOnEmptyDelta="true"
+               hasNature="true"
+               isConfigurable="true"
+               supportsConfigurations="true">
+            <run
+                  class="net.jeeeyul.eclipsejs.extensions.builder.EJSBuilder">
+            </run></builder>
+      </extension>
+      <extension
+            id="net.jeeeyul.eclipsejs.nature"
+            name="Eclipse.JS Nature"
+            point="org.eclipse.core.resources.natures">
+         <runtime>
+            <run
+                  class="net.jeeeyul.eclipsejs.extensions.builder.EJSNature">
+            </run>
+         </runtime>
+         <builder
+               id="net.jeeeyul.eclipsejs.builder">
+         </builder>
       </extension>
 
 </plugin>

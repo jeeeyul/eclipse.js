@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
-import net.jeeeyul.eclipsejs.api.IO;
+import net.jeeeyul.eclipsejs.script.api.IO;
+import net.jeeeyul.eclipsejs.script.context.EJSContextFactory;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -25,9 +26,9 @@ public class Require {
 	private Context context;
 	private ModuleWrapper moduleWrapper = new ModuleWrapper();
 
-	public Require(IPath path, Context context) {
+	public Require(IPath path) {
 		this.path = path;
-		this.context = context;
+		this.context = EJSContextFactory.getSharedContext();
 	}
 
 	public Object require(String modulePath) throws IOException, CoreException {
@@ -111,18 +112,29 @@ public class Require {
 		return file.exists();
 	}
 
-	public static final void unloadModules() {
+	public static final void unloadModulesForAllThread() {
 		moduleMap.clear();
 		moduleMap = new HashMap<Thread, Map<String, Object>>();
 	}
 
-	public void unload(String modulePath) {
+	public void unload(String modulePath, boolean allThread) {
 		String qualifiedPath = resolveQualifiedName(modulePath);
-		getModuleMap().remove(qualifiedPath);
+
+		if (allThread) {
+			for (Map<String, Object> each : moduleMap.values()) {
+				each.remove(qualifiedPath);
+			}
+		} else {
+			getModuleMap().remove(qualifiedPath);
+		}
 	}
 
-	public void unloadAll() {
-		getModuleMap().clear();
+	public void unloadAll(boolean allThread) {
+		if (allThread) {
+			moduleMap.clear();
+		} else {
+			getModuleMap().clear();
+		}
 	}
 
 	public String[] lookup() {
@@ -148,6 +160,12 @@ public class Require {
 		}
 
 		return result.toArray(new String[result.size()]);
+	}
+
+	public IFile getFile(String path) {
+		IFile file = ResourcesPlugin.getWorkspace().getRoot()
+				.getFile(getOffsetPath().append(path));
+		return file;
 	}
 
 }

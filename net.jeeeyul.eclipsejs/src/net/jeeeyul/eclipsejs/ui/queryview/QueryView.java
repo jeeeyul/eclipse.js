@@ -30,6 +30,7 @@ import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditorActionCo
 
 @SuppressWarnings("restriction")
 public class QueryView extends ViewPart implements IScriptProvider {
+	private static final Path QUERY_SCRIPT_PATH = new Path("user/query.js");
 	public static final String ID = QueryView.class.getCanonicalName();
 	private EJSEditorSite editorSite;
 	private CompilationUnitEditor editor;
@@ -38,7 +39,7 @@ public class QueryView extends ViewPart implements IScriptProvider {
 	private Composite editorWrapper;
 	private CompilationUnitEditorActionContributor contributor;
 	private ExecuteScriptJob executeScriptJob;
- 
+
 	public QueryView() {
 		editor = new EJSEditor();
 		contributor = new CompilationUnitEditorActionContributor();
@@ -54,7 +55,7 @@ public class QueryView extends ViewPart implements IScriptProvider {
 			});
 			return;
 		}
-		IFile file = project.getFile(new Path("user/view.js"));
+		IFile file = project.getFile(QUERY_SCRIPT_PATH);
 		try {
 			editor.init(editorSite, new FileEditorInput(file));
 		} catch (PartInitException e) {
@@ -91,16 +92,11 @@ public class QueryView extends ViewPart implements IScriptProvider {
 
 	@Override
 	public IPath getFullPath() {
-		return project.getFile(new Path("user/view.js")).getFullPath();
+		return project.getFile(QUERY_SCRIPT_PATH).getFullPath();
 	}
 
 	public String getScript() {
 		return editor.getViewer().getDocument().get();
-	}
-
-	@Override
-	public String getScriptFileName() {
-		return "View Script";
 	}
 
 	@Override

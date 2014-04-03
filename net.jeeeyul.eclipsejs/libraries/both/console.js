@@ -16,7 +16,7 @@ Console.prototype.log = function(msg) {
 		}
 	});
 
-	var msgConsole = net.jeeeyul.eclipsejs.api.EJSConsole.getSingleton();
+	var msgConsole = net.jeeeyul.eclipsejs.script.api.EJSConsole.getSingleton();
 	msgConsole.getNormalStream().println(_(mapped).join(" ", function(it) {
 		if (it === null) {
 			return "null";

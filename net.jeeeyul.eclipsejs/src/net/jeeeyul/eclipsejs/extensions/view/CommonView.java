@@ -148,10 +148,10 @@ public class CommonView extends ViewPart {
 		String script = MessageFormat
 				.format("var ViewType = require(''/{0}/extensions/views/{1}''), view = new ViewType(imageRegistry);",
 						EclipseJSCore.PROJECT_NAME, viewId);
-		if(viewId == null){
+		if (viewId == null) {
 			script = "view = new View();";
 		}
-		
+
 		context.evaluateString(scope, script, "view-" + viewId, 1, null);
 
 		callViewFunction("init", site);
@@ -172,8 +172,8 @@ public class CommonView extends ViewPart {
 
 	private IPath getViewFilePath() {
 		String fullPath = new Require(new Path("/" + EclipseJSCore.PROJECT_NAME
-				+ "/extensions/views"), null).resolveQualifiedName("./"
-				+ getViewId());
+				+ "/extensions/views"))
+				.resolveQualifiedName("./" + getViewId());
 		return new Path(fullPath);
 	}
 

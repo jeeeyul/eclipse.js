@@ -12,7 +12,7 @@ class ShowViewContribution extends CompoundContributionItem {
 		var result = new ArrayList<IContributionItem>
 		val folder = EclipseJSCore.^default.preparedRuntimeProject.getFolder("extensions/views")
 
-		for (eachModuleName : new Require(folder.fullPath, null).lookup) {
+		for (eachModuleName : new Require(folder.fullPath).lookup) {
 			result.add(new ActionContributionItem(new ShowEJSViewAction(eachModuleName)))
 		}
 		return result;
