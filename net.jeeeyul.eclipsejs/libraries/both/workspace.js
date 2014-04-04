@@ -213,16 +213,23 @@ ejs.Container.prototype.members = function() {
  * 
  * @returns {Array}
  */
-ejs.Container.prototype.find = function(pattern) {
+ejs.Container.prototype.findFiles = function(pattern) {
 	var result = [];
 	var exp = pattern.replace(/\*\*/g, "«ANY_PATH»").replace(/\*/, "«ANY_SEGMENT»").replace(/\./, "«DOT»").replace("?", "«ANY_CHAR»");
-	exp = exp.replace(/«ANY_PATH»/g, ".*").replace(/«ANY_SEGMENT»/g, "[^/]*").replace(/«DOT»/g, "\.").replace(/«ANY_CHAR»/g, ".")
+	exp = exp.replace(/«ANY_PATH»/g, ".*").replace(/«ANY_SEGMENT»/g, "[^/]*").replace(/«DOT»/g, "\\\.").replace(/«ANY_CHAR»/g, ".")
 	var regexp = new RegExp("^" + exp + "$");
+	
+	var offsetLength = this.getFullPath().segmentCount();
 
 	this.handle.accept({
 		visit : function(it) {
+			var fullPath = it.getFullPath();
+			var relPath = fullPath.removeFirstSegments(offsetLength)
 			var isFile = (it.type == org.eclipse.core.resources.IResource.FILE);
-			if (isFile && regexp.test(it.fullPath.toString())) {
+			if(offsetLength == 0){
+				relPath = relPath.makeRelative();
+			}
+			if (isFile && regexp.test(relPath.toString())) {
 				result.push(new ejs.File(it));
 			}
 			return true;
