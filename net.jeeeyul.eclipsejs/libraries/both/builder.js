@@ -1,53 +1,115 @@
-ejs.Builder = function() {
+/**
+ * @param {String}
+ *            id
+ */
+ejs.Builder = function(id) {
+	this.id = id;
+	this.toolkit = new ejs.Builder.Toolkit(this);
+};
 
+ejs.Builder.prototype.getId = function() {
+	return this.id;
 };
 
 ejs.Builder.prototype.build = function(delta, monitor) {
 	var me = this;
-	delta.accept({
-		visit : function(delta) {
-			var handle = delta.resource;
-			if (handle instanceof org.eclipse.core.resources.IFile) {
-				var file = new ejs.File(handle.fullPath);
-				if (delta.kind == org.eclipse.core.resources.IResourceDelta.CHANGED) {
-					me.changed(file);
-				}
+	var deltas = [];
+	if (delta) {
+		delta.accept({
+			visit : function(delta) {
+				var handle = delta.resource;
+				if (handle instanceof org.eclipse.core.resources.IFile) {
+					var file = new ejs.File(handle.fullPath);
+					if (delta.kind == org.eclipse.core.resources.IResourceDelta.CHANGED) {
+						deltas.push({
+							"handler" : me.changed,
+							"file" : file
+						});
+					}
 
-				else if (delta.kind == org.eclipse.core.resources.IResourceDelta.REMOVED) {
-					me.removed(file);
-				}
+					else if (delta.kind == org.eclipse.core.resources.IResourceDelta.REMOVED) {
+						deltas.push({
+							"handler" : me.removed,
+							"file" : file
+						});
+					}
 
-				else if (delta.kind == org.eclipse.core.resources.IResourceDelta.ADDED) {
-					me.added(file);
+					else if (delta.kind == org.eclipse.core.resources.IResourceDelta.ADDED) {
+						deltas.push({
+							"handler" : me.added,
+							"file" : file
+						});
+					}
 				}
+				return true;
 			}
+		});
 
-			return true;
+		monitor.beginTask("Build", deltas.length);
+		deltas.forEach(function(it) {
+			if (monitor.isCanceled()) {
+				return;
+			}
+			monitor.subTask(it.file.getName());
+			it.handler.call(me, it.file, me.toolkit);
+			monitor.worked(1);
+		});
+		monitor.done();
+	}
+};
+
+ejs.Builder.prototype.fullBuild = function(projectHandle, monitor) {
+	var me = this;
+	var project = new ejs.Project(projectHandle);
+	var allFiles = project.find("**");
+
+	monitor.beginTask("Build", allFiles.length);
+	allFiles.forEach(function(/* ejs.File */it) {
+		if (monitor.isCanceled()) {
+			return;
 		}
+		monitor.subTask(it.getName());
+		me.added.call(me, it, me.toolkit);
+		monitor.worked(1);
+	});
+	monitor.done();
+};
+
+ejs.Builder.prototype.clean = function(projectHandle, monitor) {
+	var project = new ejs.Project(projectHandle);
+	var files = this.toolkit.getBuildResults(project);
+	files.forEach(function(/* ejs.Resource */r) {
+		r.deleteResource();
 	});
 };
 
 /**
  * @param {ejs.File}
  *            file
+ * @param {ejs.Builder.Toolkit}
+ *            toolkit
  */
-ejs.Builder.prototype.changed = function(file) {
+ejs.Builder.prototype.changed = function(file, toolkit) {
 
 };
 
 /**
  * @param {ejs.File}
  *            file
+ * @param {ejs.Builder.Toolkit}
+ *            toolkit
  */
-ejs.Builder.prototype.added = function(file) {
+ejs.Builder.prototype.added = function(file, toolkit) {
 
 };
 
 /**
  * @param {ejs.File}
  *            file
+ * @param {ejs.Builder.Toolkit}
+ *            toolkit
  */
-ejs.Builder.prototype.removed = function(file) {
+ejs.Builder.prototype.removed = function(file, toolkit) {
 
 };
 
@@ -58,5 +120,44 @@ ejs.Builder.extend = function(descriptor) {
 		return this;
 	};
 	result.prototype = Object.create(ejs.Builder.prototype);
+	return result;
+};
+
+/**
+ * @constructor
+ * @param {ejs.Builder}
+ *            builder
+ */
+ejs.Builder.Toolkit = function(builder) {
+	this.builder = builder;
+	return this;
+};
+
+/**
+ * @param {ejs.File}
+ *            file
+ */
+ejs.Builder.Toolkit.prototype.markBuildResult = function(file) {
+	file.setPersistentProperty("net.jeeeyul.eclipse.js", this.builder.getId(), "true");
+	file.setDerived(true);
+};
+
+/**
+ * 
+ * @param {ejs.Project}
+ *            project
+ * @returns {Array} an array which contains {@link ejs.Resource}s.
+ */
+ejs.Builder.Toolkit.prototype.getBuildResults = function(project) {
+	var me = this;
+	var result = [];
+	project.accept(function(/* ejs.Resource */r) {
+		if (r.getType() == "file") {
+			var prop = r.getPersistentProperty("net.jeeeyul.eclipse.js", me.builder.getId());
+			if (prop == "true") {
+				result.push(r);
+			}
+		}
+	});
 	return result;
 };

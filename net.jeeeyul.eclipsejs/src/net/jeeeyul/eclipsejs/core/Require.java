@@ -52,7 +52,7 @@ public class Require {
 		}
 		return cached;
 	}
-
+	
 	/**
 	 * @return module maps for current {@link Thread}.
 	 */

@@ -105,8 +105,11 @@ public class EclipseJSCore extends AbstractUIPlugin implements
 
 	@Override
 	public void resourceChanged(IResourceChangeEvent event) {
-		IResourceDelta member = event.getDelta().findMember(
-				new Path("/" + PROJECT_NAME));
+		IResourceDelta delta = event.getDelta();
+		if (delta == null) {
+			return;
+		}
+		IResourceDelta member = delta.findMember(new Path("/" + PROJECT_NAME));
 		if (member != null) {
 			Require.unloadModulesForAllThread();
 		}

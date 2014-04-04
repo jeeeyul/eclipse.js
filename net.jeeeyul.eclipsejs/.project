@@ -36,5 +36,6 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>net.jeeeyul.pdetools.icg.nature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 </projectDescription>

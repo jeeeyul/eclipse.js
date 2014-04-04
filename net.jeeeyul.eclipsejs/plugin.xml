@@ -181,11 +181,11 @@ monitor.done();
                name="Builder">
             <pattern>
                module = ejs.Builder.extend({
-	changed: function(/*ejs.File*/ file){
+	changed: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit){
 	},
-	added: function(/*ejs.File*/ file){
+	added: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit){
 	},
-	removed: function(/*ejs.File*/ file){
+	removed: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit){
 	}
 });
             </pattern>
@@ -221,6 +221,20 @@ monitor.done();
          <builder
                id="net.jeeeyul.eclipsejs.builder">
          </builder>
+      </extension>
+      <extension
+            point="org.eclipse.ui.console.consolePatternMatchListeners">
+         <consolePatternMatchListener
+               class="net.jeeeyul.eclipsejs.ui.console.ConsoleLinkMatcher"
+               id="net.jeeeyul.eclipsejs.consolePatternMatchListener1"
+               regex="((eclipsejs):/)?(/[^/\r\n\s]+(/[^/\r\n\s]+)*/[a-zA-Z0-9_\-\s\.]+\.js)[:#]([\d]+)">
+            <enablement>
+               <test
+                     forcePluginActivation="true"
+                     property="org.eclipse.ui.console.consoleTypeTest"
+                     value="eclipse.js">
+               </test></enablement>
+         </consolePatternMatchListener>
       </extension>
 
 </plugin>

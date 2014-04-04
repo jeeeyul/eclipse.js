@@ -35,7 +35,7 @@ public class EJSLibraryInitializer extends JsGlobalScopeContainerInitializer
 	public LibraryLocation getLibraryLocation() {
 		return EJSLibraryLocation.getInstance();
 	}
-
+	
 	static class EJSLibraryLocation implements LibraryLocation {
 		public EJSLibraryLocation() {
 			IPath stateLocation = EclipseJSCore.getDefault().getStateLocation();

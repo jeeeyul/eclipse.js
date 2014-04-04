@@ -80,7 +80,7 @@ public class ScopeFactory {
 		for (URL each : list) {
 			try {
 				String script = io.readInputStream(each.openStream(), "UTF-8");
-				ctx.evaluateString(scope, script, each.getPath(), 1, null);
+				ctx.evaluateString(scope, script, "eclipsejs:/" + each.getPath(), 1, null);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

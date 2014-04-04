@@ -34,7 +34,8 @@ public class EJSContextFactory extends ContextFactory {
 
 	@Override
 	protected Context makeContext() {
-		return new EJSContext(this);
+		EJSContext context = new EJSContext(this);
+		return context;
 	}
 	
 	
