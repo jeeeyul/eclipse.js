@@ -10,6 +10,7 @@ org.eclipse.swt.custom.AnimatedProgress = function(composite, int){
 
 
 
+
 /**
  */
 org.eclipse.swt.custom.AnimatedProgress.prototype.clear = function(){
@@ -995,6 +996,13 @@ org.eclipse.swt.custom.AnimatedProgress.prototype.notify = function(){
 org.eclipse.swt.custom.AnimatedProgress.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.BidiSegmentEvent = function(){
+	return this;
+};
+
 
 
 
@@ -1057,6 +1065,13 @@ org.eclipse.swt.custom.BidiSegmentEvent.prototype.notify = function(){
 org.eclipse.swt.custom.BidiSegmentEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.BidiSegmentListener = function(){
+	return this;
+};
+
 
 
 
@@ -1077,6 +1092,7 @@ org.eclipse.swt.custom.Bullet = function(int, styleRange){
 	this.text = new java.lang.String();
 	return this;
 }
+
 
 
 
@@ -1141,6 +1157,7 @@ org.eclipse.swt.custom.BusyIndicator = function(){
 }
 
 
+
 /**
  * @param {org.eclipse.swt.widgets.Display} display
  * @param {java.lang.Runnable} runnable
@@ -1199,6 +1216,13 @@ org.eclipse.swt.custom.BusyIndicator.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.custom.BusyIndicator.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CaretEvent = function(){
+	return this;
 };
 
 
@@ -1263,6 +1287,13 @@ org.eclipse.swt.custom.CaretEvent.prototype.notify = function(){
 org.eclipse.swt.custom.CaretEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CaretListener = function(){
+	return this;
+};
+
 
 
 
@@ -1281,6 +1312,7 @@ org.eclipse.swt.custom.CBanner = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -2280,6 +2312,13 @@ org.eclipse.swt.custom.CBanner.prototype.notify = function(){
 org.eclipse.swt.custom.CBanner.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CBannerLayout = function(){
+	return this;
+};
+
 
 
 
@@ -2345,6 +2384,7 @@ org.eclipse.swt.custom.CCombo = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -3531,6 +3571,7 @@ org.eclipse.swt.custom.CLabel = function(composite, int){
 
 
 
+
 /**
  * @param {java.lang.String} string
  */
@@ -4615,6 +4656,13 @@ org.eclipse.swt.custom.CLabel.prototype.notify = function(){
 org.eclipse.swt.custom.CLabel.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CLayoutData = function(){
+	return this;
+};
+
 
 
 
@@ -4684,6 +4732,7 @@ org.eclipse.swt.custom.ControlEditor = function(composite){
 	this.minimumHeight = new Number();
 	return this;
 }
+
 
 
 
@@ -4774,6 +4823,7 @@ org.eclipse.swt.custom.CTabFolder = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 org.eclipse.swt.custom.CTabFolder.borderInsideRGB = new org.eclipse.swt.graphics.RGB();
 org.eclipse.swt.custom.CTabFolder.borderMiddleRGB = new org.eclipse.swt.graphics.RGB();
@@ -6084,6 +6134,7 @@ org.eclipse.swt.custom.CTabFolder2Adapter = function(){
 
 
 
+
 /**
  * @param {org.eclipse.swt.custom.CTabFolderEvent} cTabFolderEvent
  */
@@ -6167,6 +6218,13 @@ org.eclipse.swt.custom.CTabFolder2Adapter.prototype.notify = function(){
 org.eclipse.swt.custom.CTabFolder2Adapter.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CTabFolder2Listener = function(){
+	return this;
+};
+
 
 
 
@@ -6206,6 +6264,7 @@ org.eclipse.swt.custom.CTabFolder2Listener.prototype.showList = function(cTabFol
 org.eclipse.swt.custom.CTabFolderAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -6266,6 +6325,13 @@ org.eclipse.swt.custom.CTabFolderAdapter.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.custom.CTabFolderAdapter.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CTabFolderEvent = function(){
+	return this;
 };
 
 
@@ -6330,6 +6396,13 @@ org.eclipse.swt.custom.CTabFolderEvent.prototype.notify = function(){
 org.eclipse.swt.custom.CTabFolderEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CTabFolderLayout = function(){
+	return this;
+};
+
 
 
 
@@ -6386,6 +6459,13 @@ org.eclipse.swt.custom.CTabFolderLayout.prototype.notify = function(){
 org.eclipse.swt.custom.CTabFolderLayout.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CTabFolderListener = function(){
+	return this;
+};
+
 
 
 
@@ -6393,6 +6473,13 @@ org.eclipse.swt.custom.CTabFolderLayout.prototype.notifyAll = function(){
  * @param {org.eclipse.swt.custom.CTabFolderEvent} cTabFolderEvent
  */
 org.eclipse.swt.custom.CTabFolderListener.prototype.itemClosed = function(cTabFolderEvent){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.CTabFolderRenderer = function(){
+	return this;
 };
 
 
@@ -6469,6 +6556,7 @@ org.eclipse.swt.custom.CTabFolderRenderer.prototype.notifyAll = function(){
 org.eclipse.swt.custom.CTabItem = function(cTabFolder, int, int){
 	return this;
 }
+
 
 
 
@@ -6729,6 +6817,13 @@ org.eclipse.swt.custom.CTabItem.prototype.notify = function(){
 org.eclipse.swt.custom.CTabItem.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.DefaultContent = function(){
+	return this;
+};
+
 
 
 
@@ -6875,6 +6970,7 @@ org.eclipse.swt.custom.ExtendedModifyEvent = function(styledTextEvent){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -6934,6 +7030,13 @@ org.eclipse.swt.custom.ExtendedModifyEvent.prototype.notify = function(){
 org.eclipse.swt.custom.ExtendedModifyEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.ExtendedModifyListener = function(){
+	return this;
+};
+
 
 
 
@@ -6957,6 +7060,7 @@ org.eclipse.swt.custom.LineBackgroundEvent = function(styledTextEvent){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -7019,6 +7123,13 @@ org.eclipse.swt.custom.LineBackgroundEvent.prototype.notify = function(){
 org.eclipse.swt.custom.LineBackgroundEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.LineBackgroundListener = function(){
+	return this;
+};
+
 
 
 
@@ -7050,6 +7161,7 @@ org.eclipse.swt.custom.LineStyleEvent = function(styledTextEvent){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -7112,6 +7224,13 @@ org.eclipse.swt.custom.LineStyleEvent.prototype.notify = function(){
 org.eclipse.swt.custom.LineStyleEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.LineStyleListener = function(){
+	return this;
+};
+
 
 
 
@@ -7137,6 +7256,7 @@ org.eclipse.swt.custom.MovementEvent = function(styledTextEvent){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -7199,6 +7319,13 @@ org.eclipse.swt.custom.MovementEvent.prototype.notify = function(){
 org.eclipse.swt.custom.MovementEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.MovementListener = function(){
+	return this;
+};
+
 
 
 
@@ -7233,6 +7360,7 @@ org.eclipse.swt.custom.PaintObjectEvent = function(styledTextEvent){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -7295,6 +7423,13 @@ org.eclipse.swt.custom.PaintObjectEvent.prototype.notify = function(){
 org.eclipse.swt.custom.PaintObjectEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.PaintObjectListener = function(){
+	return this;
+};
+
 
 
 
@@ -7312,6 +7447,7 @@ org.eclipse.swt.custom.PaintObjectListener.prototype.paintObject = function(pain
 org.eclipse.swt.custom.PopupList = function(shell, int){
 	return this;
 }
+
 
 
 
@@ -7427,6 +7563,7 @@ org.eclipse.swt.custom.SashForm = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -8390,6 +8527,13 @@ org.eclipse.swt.custom.SashForm.prototype.notify = function(){
 org.eclipse.swt.custom.SashForm.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.SashFormData = function(){
+	return this;
+};
+
 
 
 
@@ -8444,6 +8588,13 @@ org.eclipse.swt.custom.SashFormData.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.custom.SashFormData.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.SashFormLayout = function(){
+	return this;
 };
 
 
@@ -8511,6 +8662,7 @@ org.eclipse.swt.custom.ScrolledComposite = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -9560,6 +9712,13 @@ org.eclipse.swt.custom.ScrolledComposite.prototype.notify = function(){
 org.eclipse.swt.custom.ScrolledComposite.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.ScrolledCompositeLayout = function(){
+	return this;
+};
+
 
 
 
@@ -9622,6 +9781,7 @@ org.eclipse.swt.custom.ScrolledCompositeLayout.prototype.notifyAll = function(){
 org.eclipse.swt.custom.ST = function(){
 	return this;
 }
+
 
 org.eclipse.swt.custom.ST.LINE_UP = new Number();
 org.eclipse.swt.custom.ST.LINE_DOWN = new Number();
@@ -9746,6 +9906,7 @@ org.eclipse.swt.custom.StackLayout = function(){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -9808,6 +9969,7 @@ org.eclipse.swt.custom.StyledText = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -11749,6 +11911,13 @@ org.eclipse.swt.custom.StyledText.prototype.notify = function(){
 org.eclipse.swt.custom.StyledText.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.StyledTextContent = function(){
+	return this;
+};
+
 
 
 
@@ -11832,6 +12001,7 @@ org.eclipse.swt.custom.StyledTextContent.prototype.replaceTextRange = function(i
 org.eclipse.swt.custom.StyledTextDropTargetEffect = function(styledText){
 	return this;
 }
+
 
 
 
@@ -11938,6 +12108,13 @@ org.eclipse.swt.custom.StyledTextDropTargetEffect.prototype.notify = function(){
 org.eclipse.swt.custom.StyledTextDropTargetEffect.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.StyledTextEvent = function(){
+	return this;
+};
+
 
 
 
@@ -12004,6 +12181,13 @@ org.eclipse.swt.custom.StyledTextEvent.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.custom.StyledTextEvent.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.StyledTextListener = function(){
+	return this;
 };
 
 
@@ -12090,6 +12274,7 @@ org.eclipse.swt.custom.StyledTextPrintOptions = function(){
 	return this;
 }
 
+
 org.eclipse.swt.custom.StyledTextPrintOptions.PAGE_TAG = new java.lang.String();
 org.eclipse.swt.custom.StyledTextPrintOptions.SEPARATOR = new java.lang.String();
 
@@ -12145,6 +12330,13 @@ org.eclipse.swt.custom.StyledTextPrintOptions.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.custom.StyledTextPrintOptions.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.StyledTextRenderer = function(){
+	return this;
 };
 
 
@@ -12233,6 +12425,7 @@ org.eclipse.swt.custom.StyleRange = function(int, int, color, color, int){
 
 
 
+
 /**
  * @param {java.lang.Object} object
  * @returns {Boolean}
@@ -12314,6 +12507,7 @@ org.eclipse.swt.custom.TableCursor = function(table, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -13341,6 +13535,7 @@ org.eclipse.swt.custom.TableEditor = function(table){
 
 
 
+
 /**
  */
 org.eclipse.swt.custom.TableEditor.prototype.dispose = function(){
@@ -13457,6 +13652,7 @@ org.eclipse.swt.custom.TableTree = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -14513,6 +14709,7 @@ org.eclipse.swt.custom.TableTreeEditor = function(tableTree){
 
 
 
+
 /**
  */
 org.eclipse.swt.custom.TableTreeEditor.prototype.dispose = function(){
@@ -14629,6 +14826,7 @@ org.eclipse.swt.custom.TableTreeEditor.prototype.notifyAll = function(){
 org.eclipse.swt.custom.TableTreeItem = function(tableTree, int, int){
 	return this;
 }
+
 
 
 
@@ -14970,6 +15168,7 @@ org.eclipse.swt.custom.TextChangedEvent = function(styledTextContent){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -15029,6 +15228,13 @@ org.eclipse.swt.custom.TextChangedEvent.prototype.notify = function(){
 org.eclipse.swt.custom.TextChangedEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.TextChangeListener = function(){
+	return this;
+};
+
 
 
 
@@ -15067,6 +15273,7 @@ org.eclipse.swt.custom.TextChangingEvent = function(styledTextContent){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -15138,6 +15345,7 @@ org.eclipse.swt.custom.TreeCursor = function(tree, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -16165,6 +16373,7 @@ org.eclipse.swt.custom.TreeEditor = function(tree){
 
 
 
+
 /**
  */
 org.eclipse.swt.custom.TreeEditor.prototype.dispose = function(){
@@ -16279,6 +16488,13 @@ org.eclipse.swt.custom.TreeEditor.prototype.notify = function(){
 org.eclipse.swt.custom.TreeEditor.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.VerifyKeyListener = function(){
+	return this;
+};
+
 
 
 
@@ -16301,6 +16517,7 @@ org.eclipse.swt.custom.ViewForm = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 org.eclipse.swt.custom.ViewForm.borderInsideRGB = new org.eclipse.swt.graphics.RGB();
 org.eclipse.swt.custom.ViewForm.borderMiddleRGB = new org.eclipse.swt.graphics.RGB();
@@ -17289,6 +17506,13 @@ org.eclipse.swt.custom.ViewForm.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.custom.ViewForm.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.custom.ViewFormLayout = function(){
+	return this;
 };
 
 

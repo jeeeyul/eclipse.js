@@ -10,6 +10,7 @@ org.eclipse.swt.widgets.Button = function(composite, int){
 
 
 
+
 /**
  * @param {java.lang.String} string
  */
@@ -872,6 +873,7 @@ org.eclipse.swt.widgets.Canvas = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -1856,6 +1858,7 @@ org.eclipse.swt.widgets.Caret = function(canvas, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.Canvas}
  */
@@ -2129,6 +2132,7 @@ org.eclipse.swt.widgets.ColorDialog = function(shell, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.graphics.RGB}
  */
@@ -2245,6 +2249,7 @@ org.eclipse.swt.widgets.Combo = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 org.eclipse.swt.widgets.Combo.LIMIT = new Number();
 
@@ -3444,6 +3449,7 @@ org.eclipse.swt.widgets.Composite = function(composite, int){
 
 
 
+
 /**
  * @param {org.eclipse.swt.widgets.Control[]} controls
  */
@@ -4380,6 +4386,7 @@ org.eclipse.swt.widgets.Control = function(composite, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.Composite}
  */
@@ -5170,6 +5177,7 @@ org.eclipse.swt.widgets.CoolBar = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -6179,6 +6187,7 @@ org.eclipse.swt.widgets.CoolItem = function(coolBar, int, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.CoolBar}
  */
@@ -6468,6 +6477,7 @@ org.eclipse.swt.widgets.DateTime = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -7504,6 +7514,7 @@ org.eclipse.swt.widgets.Decorations = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -8572,6 +8583,7 @@ org.eclipse.swt.widgets.Dialog = function(shell, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.Shell}
  */
@@ -8657,6 +8669,7 @@ org.eclipse.swt.widgets.Dialog.prototype.notifyAll = function(){
 org.eclipse.swt.widgets.DirectoryDialog = function(shell, int){
 	return this;
 }
+
 
 
 
@@ -8774,6 +8787,7 @@ org.eclipse.swt.widgets.DirectoryDialog.prototype.notifyAll = function(){
 org.eclipse.swt.widgets.Display = function(deviceData){
 	return this;
 }
+
 
 
 /**
@@ -9332,6 +9346,7 @@ org.eclipse.swt.widgets.Event = function(){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -9395,6 +9410,13 @@ org.eclipse.swt.widgets.Event.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.widgets.Event.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.EventTable = function(){
+	return this;
 };
 
 
@@ -9509,6 +9531,7 @@ org.eclipse.swt.widgets.ExpandBar = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -10498,6 +10521,7 @@ org.eclipse.swt.widgets.ExpandItem = function(expandBar, int, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.ExpandBar}
  */
@@ -10736,6 +10760,7 @@ org.eclipse.swt.widgets.FileDialog = function(shell, int){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -10908,6 +10933,7 @@ org.eclipse.swt.widgets.FontDialog = function(shell, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.graphics.FontData}
  */
@@ -11048,6 +11074,7 @@ org.eclipse.swt.widgets.Group = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -11998,6 +12025,7 @@ org.eclipse.swt.widgets.IME = function(canvas, int){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -12213,6 +12241,7 @@ org.eclipse.swt.widgets.Item = function(widget, int, int){
 
 
 
+
 /**
  * @param {java.lang.String} string
  */
@@ -12401,6 +12430,7 @@ org.eclipse.swt.widgets.Label = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -13230,6 +13260,7 @@ org.eclipse.swt.widgets.Layout = function(){
 
 
 
+
 /**
  */
 org.eclipse.swt.widgets.Layout.prototype.wait = function(){
@@ -13292,6 +13323,7 @@ org.eclipse.swt.widgets.Link = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -14109,6 +14141,7 @@ org.eclipse.swt.widgets.List = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -15162,6 +15195,13 @@ org.eclipse.swt.widgets.List.prototype.notify = function(){
 org.eclipse.swt.widgets.List.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.Listener = function(){
+	return this;
+};
+
 
 
 
@@ -15179,6 +15219,7 @@ org.eclipse.swt.widgets.Listener.prototype.handleEvent = function(event){
 org.eclipse.swt.widgets.Menu = function(decorations, int){
 	return this;
 }
+
 
 
 
@@ -15496,6 +15537,7 @@ org.eclipse.swt.widgets.MenuItem = function(menu, int, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.Menu}
  */
@@ -15794,6 +15836,7 @@ org.eclipse.swt.widgets.MessageBox = function(shell, int){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -15889,6 +15932,13 @@ org.eclipse.swt.widgets.MessageBox.prototype.notify = function(){
 org.eclipse.swt.widgets.MessageBox.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.Monitor = function(){
+	return this;
+};
+
 
 
 
@@ -15966,6 +16016,7 @@ org.eclipse.swt.widgets.ProgressBar = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -16798,6 +16849,13 @@ org.eclipse.swt.widgets.ProgressBar.prototype.notify = function(){
 org.eclipse.swt.widgets.ProgressBar.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.RunnableLock = function(){
+	return this;
+};
+
 
 
 
@@ -16863,6 +16921,7 @@ org.eclipse.swt.widgets.Sash = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -17668,6 +17727,7 @@ org.eclipse.swt.widgets.Scale = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -18536,6 +18596,7 @@ org.eclipse.swt.widgets.Scrollable = function(composite, int){
 
 
 
+
 /**
  * @param {Number} int
  * @param {Number} int
@@ -19351,6 +19412,13 @@ org.eclipse.swt.widgets.Scrollable.prototype.notify = function(){
 org.eclipse.swt.widgets.Scrollable.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.ScrollBar = function(){
+	return this;
+};
+
 
 
 
@@ -19673,6 +19741,7 @@ org.eclipse.swt.widgets.Shell = function(display, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -20853,6 +20922,7 @@ org.eclipse.swt.widgets.Slider = function(composite, int){
 
 
 
+
 /**
  * @param {org.eclipse.swt.events.SelectionListener} selectionListener
  */
@@ -21738,6 +21808,7 @@ org.eclipse.swt.widgets.Spinner = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 org.eclipse.swt.widgets.Spinner.LIMIT = new Number();
 
@@ -22816,6 +22887,7 @@ org.eclipse.swt.widgets.Synchronizer = function(display){
 
 
 
+
 /**
  */
 org.eclipse.swt.widgets.Synchronizer.prototype.wait = function(){
@@ -22878,6 +22950,7 @@ org.eclipse.swt.widgets.TabFolder = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -23892,6 +23965,7 @@ org.eclipse.swt.widgets.TabItem = function(tabFolder, int, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.TabFolder}
  */
@@ -24116,6 +24190,7 @@ org.eclipse.swt.widgets.Table = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -25397,6 +25472,7 @@ org.eclipse.swt.widgets.TableColumn = function(table, int, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.Table}
  */
@@ -25680,6 +25756,7 @@ org.eclipse.swt.widgets.TableColumn.prototype.notifyAll = function(){
 org.eclipse.swt.widgets.TableItem = function(table, int, int){
 	return this;
 }
+
 
 
 
@@ -26049,6 +26126,13 @@ org.eclipse.swt.widgets.TableItem.prototype.notify = function(){
 org.eclipse.swt.widgets.TableItem.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.TaskBar = function(){
+	return this;
+};
+
 
 
 
@@ -26231,6 +26315,13 @@ org.eclipse.swt.widgets.TaskBar.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.widgets.TaskBar.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.TaskItem = function(){
+	return this;
 };
 
 
@@ -26490,6 +26581,7 @@ org.eclipse.swt.widgets.Text = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 org.eclipse.swt.widgets.Text.LIMIT = new Number();
 org.eclipse.swt.widgets.Text.DELIMITER = new java.lang.String();
@@ -27613,6 +27705,7 @@ org.eclipse.swt.widgets.ToolBar = function(composite, int){
 
 
 
+
 /**
  * @param {org.eclipse.swt.widgets.ToolItem} toolItem
  * @returns {Number}
@@ -28588,6 +28681,7 @@ org.eclipse.swt.widgets.ToolItem = function(toolBar, int, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.ToolBar}
  */
@@ -28892,6 +28986,7 @@ org.eclipse.swt.widgets.ToolTip = function(shell, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.Shell}
  */
@@ -29132,6 +29227,13 @@ org.eclipse.swt.widgets.ToolTip.prototype.notify = function(){
 org.eclipse.swt.widgets.ToolTip.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.Touch = function(){
+	return this;
+};
+
 
 
 
@@ -29186,6 +29288,13 @@ org.eclipse.swt.widgets.Touch.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.widgets.Touch.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.TouchSource = function(){
+	return this;
 };
 
 
@@ -29264,6 +29373,7 @@ org.eclipse.swt.widgets.TouchSource.prototype.notifyAll = function(){
 org.eclipse.swt.widgets.Tracker = function(display, int){
 	return this;
 }
+
 
 
 
@@ -29487,6 +29597,13 @@ org.eclipse.swt.widgets.Tracker.prototype.notify = function(){
 org.eclipse.swt.widgets.Tracker.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.widgets.Tray = function(){
+	return this;
+};
+
 
 
 
@@ -29672,6 +29789,7 @@ org.eclipse.swt.widgets.Tray.prototype.notifyAll = function(){
 org.eclipse.swt.widgets.TrayItem = function(tray, int){
 	return this;
 }
+
 
 
 
@@ -29941,6 +30059,7 @@ org.eclipse.swt.widgets.Tree = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 
@@ -31153,6 +31272,7 @@ org.eclipse.swt.widgets.TreeColumn = function(tree, int, int){
 
 
 
+
 /**
  * @returns {org.eclipse.swt.widgets.Tree}
  */
@@ -31437,6 +31557,7 @@ org.eclipse.swt.widgets.TreeItem = function(treeItem, int, int){
 	this.handle = new org.eclipse.swt.internal.cocoa.SWTTreeItem();
 	return this;
 }
+
 
 
 
@@ -31872,6 +31993,7 @@ org.eclipse.swt.widgets.TypedListener = function(sWTEventListener){
 
 
 
+
 /**
  * @param {org.eclipse.swt.widgets.Event} event
  */
@@ -31945,6 +32067,7 @@ org.eclipse.swt.widgets.TypedListener.prototype.notifyAll = function(){
 org.eclipse.swt.widgets.Widget = function(widget, int){
 	return this;
 }
+
 
 
 
@@ -32112,6 +32235,7 @@ org.eclipse.swt.browser.Browser = function(composite, int){
 	this.view = new org.eclipse.swt.internal.cocoa.NSView();
 	return this;
 }
+
 
 
 /**
@@ -33283,6 +33407,7 @@ org.eclipse.swt.SWT = function(){
 	return this;
 }
 
+
 org.eclipse.swt.SWT.None = new Number();
 org.eclipse.swt.SWT.KeyDown = new Number();
 org.eclipse.swt.SWT.KeyUp = new Number();
@@ -33850,6 +33975,13 @@ org.eclipse.swt.SWT.prototype.notify = function(){
 org.eclipse.swt.SWT.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.layout.FillData = function(){
+	return this;
+};
+
 
 
 
@@ -33917,6 +34049,7 @@ org.eclipse.swt.layout.FillLayout = function(int){
 	this.spacing = new Number();
 	return this;
 }
+
 
 
 
@@ -33990,6 +34123,7 @@ org.eclipse.swt.layout.FormAttachment = function(control, int, int){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -34060,6 +34194,7 @@ org.eclipse.swt.layout.FormData = function(int, int){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -34126,6 +34261,7 @@ org.eclipse.swt.layout.FormLayout = function(){
 	this.spacing = new Number();
 	return this;
 }
+
 
 
 
@@ -34207,6 +34343,7 @@ org.eclipse.swt.layout.GridData = function(int, int, boolean, boolean, int, int)
 	this.exclude = new Boolean();
 	return this;
 }
+
 
 org.eclipse.swt.layout.GridData.BEGINNING = new Number();
 org.eclipse.swt.layout.GridData.CENTER = new Number();
@@ -34301,6 +34438,7 @@ org.eclipse.swt.layout.GridLayout = function(int, boolean){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -34365,6 +34503,7 @@ org.eclipse.swt.layout.RowData = function(int, int){
 	this.exclude = new Boolean();
 	return this;
 }
+
 
 
 
@@ -34444,6 +34583,7 @@ org.eclipse.swt.layout.RowLayout = function(int){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -34505,6 +34645,7 @@ org.eclipse.swt.layout.RowLayout.prototype.notifyAll = function(){
 org.eclipse.swt.printing.PrintDialog = function(shell, int){
 	return this;
 }
+
 
 
 
@@ -34658,6 +34799,7 @@ org.eclipse.swt.printing.PrintDialog.prototype.notifyAll = function(){
 org.eclipse.swt.printing.Printer = function(printerData){
 	return this;
 }
+
 
 
 /**
@@ -34874,6 +35016,7 @@ org.eclipse.swt.printing.PrinterData = function(string, string){
 	return this;
 }
 
+
 org.eclipse.swt.printing.PrinterData.ALL_PAGES = new Number();
 org.eclipse.swt.printing.PrinterData.PAGE_RANGE = new Number();
 org.eclipse.swt.printing.PrinterData.SELECTION = new Number();
@@ -34935,6 +35078,13 @@ org.eclipse.swt.printing.PrinterData.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.printing.PrinterData.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.program.Program = function(){
+	return this;
 };
 
 

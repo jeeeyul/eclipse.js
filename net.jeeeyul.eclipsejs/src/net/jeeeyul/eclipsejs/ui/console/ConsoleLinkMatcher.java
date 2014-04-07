@@ -46,7 +46,7 @@ public class ConsoleLinkMatcher implements IPatternMatchListenerDelegate {
 					console.addHyperlink(new SourceLink(file, lineNumber),
 							event.getOffset(), event.getLength());
 				} else {
-					console.addHyperlink(new BundleLink(path),
+					console.addHyperlink(new BundleLink(path, lineNumber),
 							event.getOffset(), event.getLength());
 				}
 			}

@@ -1,3 +1,10 @@
+/**
+ * @constructor
+ */
+org.eclipse.core.runtime.IProgressMonitor = function(){
+	return this;
+};
+
 
 org.eclipse.core.runtime.IProgressMonitor.UNKNOWN = new Number();
 
@@ -48,6 +55,13 @@ org.eclipse.core.runtime.IProgressMonitor.prototype.subTask = function(string){
  * @param {Number} int
  */
 org.eclipse.core.runtime.IProgressMonitor.prototype.worked = function(int){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.core.runtime.IPath = function(){
+	return this;
 };
 
 
@@ -288,6 +302,7 @@ org.eclipse.core.runtime.IPath.prototype.uptoSegment = function(int){
 org.eclipse.core.runtime.Path = function(string, string){
 	return this;
 }
+
 
 org.eclipse.core.runtime.Path.EMPTY = new org.eclipse.core.runtime.Path();
 org.eclipse.core.runtime.Path.ROOT = new org.eclipse.core.runtime.Path();
@@ -569,5 +584,171 @@ org.eclipse.core.runtime.Path.prototype.notify = function(){
 /**
  */
 org.eclipse.core.runtime.Path.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.core.resources.IMarker = function(){
+	return this;
+};
+
+
+org.eclipse.core.resources.IMarker.MARKER = new java.lang.String();
+org.eclipse.core.resources.IMarker.TASK = new java.lang.String();
+org.eclipse.core.resources.IMarker.PROBLEM = new java.lang.String();
+org.eclipse.core.resources.IMarker.TEXT = new java.lang.String();
+org.eclipse.core.resources.IMarker.BOOKMARK = new java.lang.String();
+org.eclipse.core.resources.IMarker.SEVERITY = new java.lang.String();
+org.eclipse.core.resources.IMarker.MESSAGE = new java.lang.String();
+org.eclipse.core.resources.IMarker.LOCATION = new java.lang.String();
+org.eclipse.core.resources.IMarker.PRIORITY = new java.lang.String();
+org.eclipse.core.resources.IMarker.DONE = new java.lang.String();
+org.eclipse.core.resources.IMarker.CHAR_START = new java.lang.String();
+org.eclipse.core.resources.IMarker.CHAR_END = new java.lang.String();
+org.eclipse.core.resources.IMarker.LINE_NUMBER = new java.lang.String();
+org.eclipse.core.resources.IMarker.TRANSIENT = new java.lang.String();
+org.eclipse.core.resources.IMarker.USER_EDITABLE = new java.lang.String();
+org.eclipse.core.resources.IMarker.SOURCE_ID = new java.lang.String();
+org.eclipse.core.resources.IMarker.PRIORITY_HIGH = new Number();
+org.eclipse.core.resources.IMarker.PRIORITY_NORMAL = new Number();
+org.eclipse.core.resources.IMarker.PRIORITY_LOW = new Number();
+org.eclipse.core.resources.IMarker.SEVERITY_ERROR = new Number();
+org.eclipse.core.resources.IMarker.SEVERITY_WARNING = new Number();
+org.eclipse.core.resources.IMarker.SEVERITY_INFO = new Number();
+
+
+/**
+ * @param {java.lang.Object} object
+ * @returns {Boolean}
+ */
+org.eclipse.core.resources.IMarker.prototype.equals = function(object){
+};
+
+/**
+ * @returns {org.eclipse.core.resources.IResource}
+ */
+org.eclipse.core.resources.IMarker.prototype.getResource = function(){
+};
+
+/**
+ * @returns {Number}
+ */
+org.eclipse.core.resources.IMarker.prototype.getId = function(){
+};
+
+/**
+ * @returns {java.lang.String}
+ */
+org.eclipse.core.resources.IMarker.prototype.getType = function(){
+};
+
+/**
+ */
+org.eclipse.core.resources.IMarker.prototype.deleteMarker = function(){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.core.resources.IMarker.prototype.exists = function(){
+};
+
+/**
+ * @param {java.lang.String[]} strings
+ * @returns {java.lang.Object[]}
+ */
+org.eclipse.core.resources.IMarker.prototype.getAttributes = function(strings){
+};
+
+/**
+ * @returns {java.util.Map}
+ */
+org.eclipse.core.resources.IMarker.prototype.getAttributes = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {java.lang.String} string
+ * @returns {java.lang.String}
+ */
+org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string, string){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {Boolean} boolean
+ * @returns {Boolean}
+ */
+org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string, boolean){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {Number} int
+ * @returns {Number}
+ */
+org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string, int){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {java.lang.Object}
+ */
+org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string){
+};
+
+/**
+ * @returns {Number}
+ */
+org.eclipse.core.resources.IMarker.prototype.getCreationTime = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {Boolean}
+ */
+org.eclipse.core.resources.IMarker.prototype.isSubtypeOf = function(string){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {Number} int
+ */
+org.eclipse.core.resources.IMarker.prototype.setAttribute = function(string, int){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {java.lang.Object} object
+ */
+org.eclipse.core.resources.IMarker.prototype.setAttribute = function(string, object){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {Boolean} boolean
+ */
+org.eclipse.core.resources.IMarker.prototype.setAttribute = function(string, boolean){
+};
+
+/**
+ * @param {java.lang.String[]} strings
+ * @param {java.lang.Object[]} objects
+ */
+org.eclipse.core.resources.IMarker.prototype.setAttributes = function(strings, objects){
+};
+
+/**
+ * @param {java.util.Map} map
+ */
+org.eclipse.core.resources.IMarker.prototype.setAttributes = function(map){
+};
+
+/**
+ * @param {java.lang.Class} class
+ * @returns {java.lang.Object}
+ */
+org.eclipse.core.resources.IMarker.prototype.getAdapter = function(class){
 };
 

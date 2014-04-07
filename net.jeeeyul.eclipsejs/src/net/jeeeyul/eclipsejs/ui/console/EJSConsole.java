@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.script.api;
+package net.jeeeyul.eclipsejs.ui.console;
 
 import java.io.UnsupportedEncodingException;
 

@@ -3,6 +3,7 @@ package net.jeeeyul.eclipsejs;
 import net.jeeeyul.eclipsejs.core.Require;
 import net.jeeeyul.eclipsejs.runtime.EnsureRuntimeProject;
 import net.jeeeyul.eclipsejs.runtime.IRuntimeProjectCallback;
+import net.jeeeyul.eclipsejs.script.bridge.EJSExtension;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -113,6 +114,10 @@ public class EclipseJSCore extends AbstractUIPlugin implements
 		if (member != null) {
 			Require.unloadModulesForAllThread();
 		}
+	}
+
+	public EJSExtension getExtension(String point, String id, Object... args) {
+		return new EJSExtension(point, id, args);
 	}
 
 }

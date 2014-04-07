@@ -5,127 +5,80 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.jeeeyul.eclipsejs.EclipseJSCore;
 import net.jeeeyul.eclipsejs.script.api.IO;
 import net.jeeeyul.eclipsejs.script.context.EJSContextFactory;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.Path;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ScriptableObject;
 
 public class Require {
-	private static Map<Thread, Map<String, Object>> moduleMap = new HashMap<Thread, Map<String, Object>>();
-	private IPath path;
+	private static Map<Thread, Map<IFile, Object>> moduleMap = new HashMap<Thread, Map<IFile, Object>>();
+	private IPath workingDir;
 	private Context context;
 	private ModuleWrapper moduleWrapper = new ModuleWrapper();
 
-	public Require(IPath path) {
-		this.path = path;
+	public Require(IPath workingDir) {
+		this.workingDir = workingDir;
 		this.context = EJSContextFactory.getSharedContext();
 	}
 
 	public Object require(String modulePath) throws IOException, CoreException {
-		String qualifiedPath = resolveQualifiedName(modulePath);
-		Map<String, Object> map = getModuleMap();
-		Object cached = map.get(qualifiedPath);
+		ModuleDescriptor descriptor = ModuleDescriptor.resolve(
+				workingDir, modulePath);
+
+		Map<IFile, Object> map = getModuleMap();
+		Object cached = map.get(descriptor.getModuleFile());
 		if (cached == null) {
 			ScriptableObject scope = ScopeFactory.getInstance().create(
-					new Path(qualifiedPath));
+					descriptor.getModuleDirPath());
 			moduleWrapper.before(context, scope);
 
-			IFile file = ResourcesPlugin.getWorkspace().getRoot()
-					.getFile(new Path(qualifiedPath));
+			IFile file = descriptor.getModuleFile();
 			String moduleScript = IO.getInstance().readInputStream(
 					file.getContents(), file.getCharset());
 			context.evaluateString(scope, moduleScript, file.getFullPath()
 					.toPortableString(), 1, null);
 
 			cached = moduleWrapper.after(context, scope);
-			map.put(qualifiedPath, cached);
+			map.put(descriptor.getModuleFile(), cached);
 		}
 		return cached;
 	}
-	
+
 	/**
 	 * @return module maps for current {@link Thread}.
 	 */
-	private Map<String, Object> getModuleMap() {
-		Map<String, Object> map = moduleMap.get(Thread.currentThread());
+	private Map<IFile, Object> getModuleMap() {
+		Map<IFile, Object> map = moduleMap.get(Thread.currentThread());
 		if (map == null) {
-			map = new HashMap<String, Object>();
+			map = new HashMap<IFile, Object>();
 			moduleMap.put(Thread.currentThread(), map);
 
 		}
 		return map;
 	}
 
-	public String resolveQualifiedName(String modulePath) {
-		IPath offset = getOffsetPath();
-
-		if (modulePath.startsWith(".")) {
-			offset = offset.append(modulePath);
-		} else if (modulePath.startsWith("/")) {
-			offset = new Path(modulePath);
-		}
-
-		else {
-			offset = new Path(EclipseJSCore.PROJECT_NAME + "/modules")
-					.append(modulePath);
-		}
-
-		if (!isFile(offset)) {
-			if (isFile(offset.addFileExtension("js"))) {
-				offset = offset.addFileExtension("js");
-			} else if (isDirectory(offset)) {
-				offset = offset.append("index.js");
-			}
-		}
-
-		return offset.toPortableString();
-	}
-
-	public IPath getOffsetPath() {
-		IPath offset = path;
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		IFolder folder = root.getFolder(path);
-		if (folder.exists() == false) {
-			offset = path.removeLastSegments(1);
-		}
-		return offset;
-	}
-
-	private boolean isDirectory(IPath path) {
-		IFolder folder = ResourcesPlugin.getWorkspace().getRoot()
-				.getFolder(path);
-		return folder.exists();
-	}
-
-	private boolean isFile(IPath path) {
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
-		return file.exists();
-	}
-
 	public static final void unloadModulesForAllThread() {
 		moduleMap.clear();
-		moduleMap = new HashMap<Thread, Map<String, Object>>();
+		moduleMap = new HashMap<Thread, Map<IFile, Object>>();
 	}
 
 	public void unload(String modulePath, boolean allThread) {
-		String qualifiedPath = resolveQualifiedName(modulePath);
+		ModuleDescriptor location = ModuleDescriptor.resolve(
+				workingDir, modulePath);
 
 		if (allThread) {
-			for (Map<String, Object> each : moduleMap.values()) {
-				each.remove(qualifiedPath);
+			for (Map<IFile, Object> each : moduleMap.values()) {
+				each.remove(location.getModuleFile());
 			}
 		} else {
-			getModuleMap().remove(qualifiedPath);
+			getModuleMap().remove(location.getModuleFile());
 		}
 	}
 
@@ -141,7 +94,7 @@ public class Require {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
 			IFolder folder = ResourcesPlugin.getWorkspace().getRoot()
-					.getFolder(getOffsetPath());
+					.getFolder(workingDir);
 			IResource[] members = folder.members();
 			for (IResource each : members) {
 				if (each.getType() == IResource.FOLDER) {
@@ -161,11 +114,8 @@ public class Require {
 
 		return result.toArray(new String[result.size()]);
 	}
-
-	public IFile getFile(String path) {
-		IFile file = ResourcesPlugin.getWorkspace().getRoot()
-				.getFile(getOffsetPath().append(path));
-		return file;
+	
+	public String getWorkingDir(){
+		return workingDir.toPortableString();
 	}
-
 }

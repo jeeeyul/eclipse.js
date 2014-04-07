@@ -2,6 +2,7 @@ package net.jeeeyul.eclipsejs.core;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -13,6 +14,8 @@ import net.jeeeyul.eclipsejs.EclipseJSCore;
 import net.jeeeyul.eclipsejs.script.api.IO;
 import net.jeeeyul.eclipsejs.script.context.EJSContextFactory;
 
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ScriptableObject;
@@ -37,7 +40,21 @@ public class ScopeFactory {
 		return create(path, new HashMap<String, Object>());
 	}
 
+	/**
+	 * 
+	 * @param path
+	 *            working directory path. It will be passed as "__dirname" in
+	 *            script.
+	 * @param map
+	 * @return
+	 */
 	public ScriptableObject create(IPath path, Map<String, Object> map) {
+		IFolder folder = ResourcesPlugin.getWorkspace().getRoot()
+				.getFolder(path);
+		if (folder.exists() == false) {
+			throw new IllegalArgumentException(MessageFormat.format(
+					"{0} is not indicating folder", path));
+		}
 		Context ctx = EJSContextFactory.getSharedContext();
 		ScriptableObject scope = ctx.initStandardObjects();
 
@@ -80,7 +97,8 @@ public class ScopeFactory {
 		for (URL each : list) {
 			try {
 				String script = io.readInputStream(each.openStream(), "UTF-8");
-				ctx.evaluateString(scope, script, "eclipsejs:/" + each.getPath(), 1, null);
+				ctx.evaluateString(scope, script,
+						"eclipsejs:/" + each.getPath(), 1, null);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

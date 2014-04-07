@@ -1448,7 +1448,14 @@ ReferenceError.prototype=new Error("");
   * @since Standard ECMA-262 3rd. Edition
   * @since Level 2 Document Object Model Core Definition.
  */
-function SyntaxError(){};
+function SyntaxError(){
+	this.message = "";
+	this.fileName = "";
+	this.lineNumber = new Number();
+	this.name = "";
+	this.stack = [];
+};
+
 SyntaxError.prototype=new Error("");
 /**
   * Object TypeError()

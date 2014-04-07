@@ -22,7 +22,7 @@ import org.eclipse.wst.jsdt.internal.compiler.ast.StringLiteral;
 @SuppressWarnings("restriction")
 public class AdvancedInferenceEngine extends ASTVisitor implements IInferEngine {
 	private Pattern staticFieldPatthern = Pattern
-			.compile("^([a-zA-Z_][a-zA-Z0-9_-]*(\\.[a-zA-Z_][a-zA-Z0-9_-]*)+)(\\.)([a-zA-Z_][a-zA-Z0-9_-]*)$");
+			.compile("^([a-zA-Z_][a-zA-Z0-9_-]+(\\.[a-zA-Z_][a-zA-Z0-9_-]*)+)(\\.)([a-zA-Z_][a-zA-Z0-9_-]*)$");
 	private CompilationUnitDeclaration parsedUnit;
 
 	public AdvancedInferenceEngine() {
@@ -82,7 +82,6 @@ public class AdvancedInferenceEngine extends ASTVisitor implements IInferEngine 
 							+ type.length() + 1;
 					targetType.addAttribute(inferredAttribute);
 				}
-
 			}
 		}
 		super.endVisit(assignment);

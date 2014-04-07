@@ -160,6 +160,31 @@ ejs.Resource.prototype.deleteResource = function(force, monitor) {
 	this.handle["delete"].call(this.handle, force, monitor);
 };
 
+/**
+ * 
+ * @param {String} type
+ * @returns {ejs.Marker}
+ */
+ejs.Resource.prototype.createMarker = function(type){
+	return this.handle.createMarker(type);
+};
+
+/**
+ * @param {String} type
+ * @param {Boolean} includeSubType
+ * @param {Number} depth
+ * @returns {Array}
+ */
+ejs.Resource.prototype.findMarkers = function(type, includeSubType, depth){
+	/**
+	 * @type Array
+	 */
+	var markerHandles = this.handle.findMarkers(type, includeSubType, depth);
+	return markerHandles.map(function(it){
+		return new ejs.Marker(it);
+	});
+};
+
 // 
 // Container
 // 
@@ -215,8 +240,8 @@ ejs.Container.prototype.members = function() {
  */
 ejs.Container.prototype.findFiles = function(pattern) {
 	var result = [];
-	var exp = pattern.replace(/\*\*/g, "«ANY_PATH»").replace(/\*/, "«ANY_SEGMENT»").replace(/\./, "«DOT»").replace("?", "«ANY_CHAR»");
-	exp = exp.replace(/«ANY_PATH»/g, ".*").replace(/«ANY_SEGMENT»/g, "[^/]*").replace(/«DOT»/g, "\\\.").replace(/«ANY_CHAR»/g, ".")
+	var exp = pattern.replace(/\*\*/g, "��ANY_PATH��").replace(/\*/, "��ANY_SEGMENT��").replace(/\./, "��DOT��").replace("?", "��ANY_CHAR��");
+	exp = exp.replace(/��ANY_PATH��/g, ".*").replace(/��ANY_SEGMENT��/g, "[^/]*").replace(/��DOT��/g, "\\\.").replace(/��ANY_CHAR��/g, ".")
 	var regexp = new RegExp("^" + exp + "$");
 	
 	var offsetLength = this.getFullPath().segmentCount();
@@ -408,3 +433,77 @@ ejs.Workspace.prototype.getRoot = function() {
 };
 
 var workspace = new ejs.Workspace();
+
+//
+// Marker
+//
+ejs.Marker = function(handle){
+	this.handle = handle;
+};
+ejs.Marker.MARKER = "org.eclipse.core.resources.marker";
+ejs.Marker.TASK = "org.eclipse.core.resources.taskmarker";
+ejs.Marker.PROBLEM = "org.eclipse.core.resources.problemmarker";
+ejs.Marker.TEXT = "org.eclipse.core.resources.textmarker";
+ejs.Marker.BOOKMARK = "org.eclipse.core.resources.bookmark";
+ejs.Marker.SEVERITY = "severity";
+ejs.Marker.MESSAGE = "message";
+ejs.Marker.LOCATION = "location";
+ejs.Marker.PRIORITY = "priority";
+ejs.Marker.DONE = "done";
+ejs.Marker.CHAR_START = "charStart";
+ejs.Marker.CHAR_END = "charEnd";
+ejs.Marker.LINE_NUMBER = "lineNumber";
+ejs.Marker.TRANSIENT = "transient";
+ejs.Marker.USER_EDITABLE = "userEditable";
+ejs.Marker.SOURCE_ID = "sourceId";
+ejs.Marker.PRIORITY_HIGH = 2;
+ejs.Marker.PRIORITY_NORMAL = 1;
+ejs.Marker.PRIORITY_LOW = 0;
+ejs.Marker.SEVERITY_ERROR = 2;
+ejs.Marker.SEVERITY_WARNING = 1;
+ejs.Marker.SEVERITY_INFO = 0;
+
+/**
+ * 
+ * @param {String} attrName
+ * @returns {Object}
+ */
+ejs.Marker.prototype.getAttribute = function(attrName, fallback){
+	var value = this.handle.getAttribute(attrName);
+	if(value instanceof java.lang.String){
+		value = String(value);
+	}
+	if(value != null && value != undefined){
+		return value;
+	}else{
+		return fallback;
+	}
+};
+
+/**
+ * 
+ * @returns {ejs.Resource}
+ */
+ejs.Marker.prototype.getResource = function(){
+	return ejs.internal.wrapResource(this.handle.getResource());
+};
+
+/**
+ * @returns {String}
+ */
+ejs.Marker.prototype.getType = function(){
+	return this.handle.getType();
+};
+
+/**
+ * 
+ * @param {String} attrName
+ * @param value
+ */
+ejs.Marker.prototype.setAttribute = function(attrName, value){
+	this.handle.setAttribute(attrName, value);
+};
+
+ejs.Marker.prototype.deleteMarker = function(){
+	this.handle["delete"]();
+};

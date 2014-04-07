@@ -1,3 +1,4 @@
 org.eclipse.core.runtime.IProgressMonitor
 org.eclipse.core.runtime.IPath
 org.eclipse.core.runtime.Path
+org.eclipse.core.resources.IMarker

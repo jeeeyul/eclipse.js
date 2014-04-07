@@ -1,5 +1,19 @@
 var ejs = {};
 ejs.io = new net.jeeeyul.eclipsejs.script.api.IO();
+/**
+ * @constructor
+ */
+ejs.ModuleDescription = function(data) {
+	if (data == undefined) {
+		data = {};
+	}
+	this.data = data;
+	return this;
+};
+
+ejs.ModuleDescription.prototype.extend = function(data) {
+	_.extend(this.data, data);
+};
 
 /**
  * Inject a module with given module name. What if module is not loaded, it will
@@ -29,4 +43,4 @@ function unrequireAll(allThread) {
 	__REQUIRE__.unloadAll(allThread);
 }
 
-var __dirname = __REQUIRE__.getOffsetPath().toPortableString();
+var __dirname = __REQUIRE__.getWorkingDir();

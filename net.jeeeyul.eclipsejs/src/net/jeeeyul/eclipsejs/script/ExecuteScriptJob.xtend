@@ -2,7 +2,7 @@ package net.jeeeyul.eclipsejs.script
 
 import java.util.Map
 import java.util.concurrent.CancellationException
-import net.jeeeyul.eclipsejs.script.api.EJSConsole
+import net.jeeeyul.eclipsejs.ui.console.EJSConsole
 import net.jeeeyul.eclipsejs.core.ScopeFactory
 import net.jeeeyul.eclipsejs.script.context.EJSContext
 import net.jeeeyul.eclipsejs.script.context.EJSContextFactory
@@ -32,7 +32,7 @@ class ExecuteScriptJob extends WorkspaceJob {
 		} 
 		
 		try {
-			var scope = ScopeFactory.instance.create(scriptProvider.fullPath, map)
+			var scope = ScopeFactory.instance.create(scriptProvider.fullPath.removeLastSegments(1), map)
 			ctx.evaluateString(scope, scriptProvider.getScript(), scriptProvider.fullPath.toPortableString, 1, null)
 		} catch (CancellationException ce) {
 			EJSConsole.singleton.errorStream.println("Execution was canceled.")

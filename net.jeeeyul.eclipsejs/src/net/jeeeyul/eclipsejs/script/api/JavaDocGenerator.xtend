@@ -25,7 +25,15 @@ class JavaDocGenerator {
 				«ENDFOR»
 				return this;
 			}
+		«ELSE»
+			/**
+			 * @constructor
+			 */
+			«type.^package.name».«type.simpleName» = function(){
+				return this;
+			};
 		«ENDIF»
+		
 		
 		«FOR eachField : type.declaredFields.filter[it.public && it.static]»
 			«type.canonicalName».«eachField.name» = «eachField.type.fieldInitializer»;
@@ -98,7 +106,7 @@ class JavaDocGenerator {
 			'''new «type.typeName»()'''
 		}
 	}
-
+	
 	def private typeName(Class<?> type) {
 		if (type.primitive) {
 			switch (type) {

@@ -51,6 +51,7 @@ ejs.Builder.prototype.build = function(delta, monitor) {
 				return;
 			}
 			monitor.subTask(it.file.getName());
+			me.toolkit.clearError(it.file);
 			it.handler.call(me, it.file, me.toolkit);
 			monitor.worked(1);
 		});
@@ -61,7 +62,7 @@ ejs.Builder.prototype.build = function(delta, monitor) {
 ejs.Builder.prototype.fullBuild = function(projectHandle, monitor) {
 	var me = this;
 	var project = new ejs.Project(projectHandle);
-	var allFiles = project.find("**");
+	var allFiles = project.findFiles("**");
 
 	monitor.beginTask("Build", allFiles.length);
 	allFiles.forEach(function(/* ejs.File */it) {
@@ -76,10 +77,19 @@ ejs.Builder.prototype.fullBuild = function(projectHandle, monitor) {
 };
 
 ejs.Builder.prototype.clean = function(projectHandle, monitor) {
+	var me = this;
 	var project = new ejs.Project(projectHandle);
 	var files = this.toolkit.getBuildResults(project);
 	files.forEach(function(/* ejs.Resource */r) {
 		r.deleteResource();
+	});
+
+	var markers = project.findMarkers(ejs.Marker.PROBLEM, true, ejs.Resource.DEPTH_INFINITE);
+	markers = markers.filter(function(/* ejs.Marker */it) {
+		return it.getAttribute("eclipse.js.builder") == me.getId();
+	});
+	markers.forEach(function(/* ejs.Marker */it) {
+		it.deleteMarker();
 	});
 };
 
@@ -160,4 +170,38 @@ ejs.Builder.Toolkit.prototype.getBuildResults = function(project) {
 		}
 	});
 	return result;
+};
+
+/**
+ * 
+ * @param {ejs.File}
+ *            file
+ * @param {Number}
+ *            lineNumber
+ * @param {String}
+ *            message
+ */
+ejs.Builder.Toolkit.prototype.reportError = function(file, lineNumber, message) {
+	var errMarker = file.createMarker(ejs.Marker.PROBLEM);
+	errMarker.setAttribute(ejs.Marker.SEVERITY, ejs.Marker.SEVERITY_ERROR);
+	errMarker.setAttribute(ejs.Marker.LINE_NUMBER, lineNumber);
+	errMarker.setAttribute(ejs.Marker.MESSAGE, message);
+	errMarker.setAttribute("eclipse.js.builder", this.builder.getId());
+};
+
+/**
+ * 
+ * @param {ejs.File}
+ *            file
+ */
+ejs.Builder.Toolkit.prototype.clearError = function(file) {
+	var me = this;
+	var markers = file.findMarkers(ejs.Marker.PROBLEM, true, ejs.Resource.DEPTH_ONE);
+	markers = markers.filter(function(/* ejs.Marker */it) {
+		return it.getAttribute("eclipse.js.builder") == me.builder.getId();
+	});
+	
+	markers.forEach(function(/* ejs.Marker */it) {
+		it.deleteMarker();
+	});
 };

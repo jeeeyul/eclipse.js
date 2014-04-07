@@ -12,6 +12,7 @@ org.eclipse.swt.graphics.Color = function(device, int, int, int){
 
 
 
+
 /**
  * @param {java.lang.Object} object
  * @returns {Boolean}
@@ -121,6 +122,7 @@ org.eclipse.swt.graphics.Cursor = function(device, imageData, imageData, int, in
 
 
 
+
 /**
  * @param {java.lang.Object} object
  * @returns {Boolean}
@@ -198,6 +200,7 @@ org.eclipse.swt.graphics.Cursor.prototype.notifyAll = function(){
 org.eclipse.swt.graphics.Device = function(deviceData){
 	return this;
 }
+
 
 org.eclipse.swt.graphics.Device.DEBUG = new Boolean();
 
@@ -349,6 +352,7 @@ org.eclipse.swt.graphics.DeviceData = function(){
 
 
 
+
 /**
  */
 org.eclipse.swt.graphics.DeviceData.prototype.wait = function(){
@@ -402,6 +406,13 @@ org.eclipse.swt.graphics.DeviceData.prototype.notify = function(){
 org.eclipse.swt.graphics.DeviceData.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.graphics.Drawable = function(){
+	return this;
+};
+
 
 
 
@@ -418,6 +429,7 @@ org.eclipse.swt.graphics.Font = function(device, string, int, int){
 	this.extraTraits = new Number();
 	return this;
 }
+
 
 
 
@@ -510,6 +522,7 @@ org.eclipse.swt.graphics.FontData = function(string, int, int){
 	this.nsName = new java.lang.String();
 	return this;
 }
+
 
 
 
@@ -614,6 +627,13 @@ org.eclipse.swt.graphics.FontData.prototype.notify = function(){
 org.eclipse.swt.graphics.FontData.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.graphics.FontMetrics = function(){
+	return this;
+};
+
 
 
 
@@ -709,6 +729,7 @@ org.eclipse.swt.graphics.GC = function(drawable, int){
 	this.handle = new org.eclipse.swt.internal.cocoa.NSGraphicsContext();
 	return this;
 }
+
 
 
 
@@ -1411,6 +1432,7 @@ org.eclipse.swt.graphics.GCData = function(){
 
 
 
+
 /**
  */
 org.eclipse.swt.graphics.GCData.prototype.wait = function(){
@@ -1479,6 +1501,7 @@ org.eclipse.swt.graphics.GlyphMetrics = function(int, int, int){
 
 
 
+
 /**
  * @param {java.lang.Object} object
  * @returns {Boolean}
@@ -1543,6 +1566,7 @@ org.eclipse.swt.graphics.Image = function(device, imageData, imageData){
 	this.handle = new org.eclipse.swt.internal.cocoa.NSImage();
 	return this;
 }
+
 
 
 
@@ -1669,6 +1693,7 @@ org.eclipse.swt.graphics.ImageData = function(int, int, int, paletteData, int, b
 	this.delayTime = new Number();
 	return this;
 }
+
 
 
 
@@ -1849,6 +1874,13 @@ org.eclipse.swt.graphics.ImageData.prototype.notify = function(){
 org.eclipse.swt.graphics.ImageData.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.graphics.ImageDataLoader = function(){
+	return this;
+};
+
 
 
 /**
@@ -1930,6 +1962,7 @@ org.eclipse.swt.graphics.ImageLoader = function(){
 	this.compression = new Number();
 	return this;
 }
+
 
 
 
@@ -2054,6 +2087,7 @@ org.eclipse.swt.graphics.ImageLoaderEvent = function(imageLoader, imageData, int
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -2113,6 +2147,13 @@ org.eclipse.swt.graphics.ImageLoaderEvent.prototype.notify = function(){
 org.eclipse.swt.graphics.ImageLoaderEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.graphics.ImageLoaderListener = function(){
+	return this;
+};
+
 
 
 
@@ -2142,6 +2183,7 @@ org.eclipse.swt.graphics.LineAttributes = function(float, int, int, int, floats,
 	this.miterLimit = new Number();
 	return this;
 }
+
 
 
 
@@ -2215,6 +2257,7 @@ org.eclipse.swt.graphics.PaletteData = function(int, int, int){
 	this.blueShift = new Number();
 	return this;
 }
+
 
 
 
@@ -2301,6 +2344,7 @@ org.eclipse.swt.graphics.Path = function(device, path, float){
 	this.handle = new org.eclipse.swt.internal.cocoa.NSBezierPath();
 	return this;
 }
+
 
 
 
@@ -2487,6 +2531,7 @@ org.eclipse.swt.graphics.PathData = function(){
 
 
 
+
 /**
  */
 org.eclipse.swt.graphics.PathData.prototype.wait = function(){
@@ -2555,6 +2600,7 @@ org.eclipse.swt.graphics.PathData.prototype.notifyAll = function(){
 org.eclipse.swt.graphics.Pattern = function(device, float, float, float, float, color, int, color, int){
 	return this;
 }
+
 
 
 
@@ -2641,6 +2687,7 @@ org.eclipse.swt.graphics.Point = function(int, int){
 
 
 
+
 /**
  * @param {java.lang.Object} object
  * @returns {Boolean}
@@ -2708,6 +2755,7 @@ org.eclipse.swt.graphics.Rectangle = function(int, int, int, int){
 	this.height = new Number();
 	return this;
 }
+
 
 
 
@@ -2836,6 +2884,7 @@ org.eclipse.swt.graphics.Region = function(device){
 	this.handle = new Number();
 	return this;
 }
+
 
 
 
@@ -3050,6 +3099,7 @@ org.eclipse.swt.graphics.Resource = function(){
 
 
 
+
 /**
  * @returns {Boolean}
  */
@@ -3135,6 +3185,7 @@ org.eclipse.swt.graphics.RGB = function(float, float, float){
 
 
 
+
 /**
  * @param {java.lang.Object} object
  * @returns {Boolean}
@@ -3201,6 +3252,7 @@ org.eclipse.swt.graphics.RGB.prototype.notifyAll = function(){
 org.eclipse.swt.graphics.TextLayout = function(device){
 	return this;
 }
+
 
 
 
@@ -3622,6 +3674,7 @@ org.eclipse.swt.graphics.TextStyle = function(font, color, color){
 
 
 
+
 /**
  * @param {java.lang.Object} object
  * @returns {Boolean}
@@ -3689,6 +3742,7 @@ org.eclipse.swt.graphics.Transform = function(device, float, float, float, float
 	this.handle = new org.eclipse.swt.internal.cocoa.NSAffineTransform();
 	return this;
 }
+
 
 
 

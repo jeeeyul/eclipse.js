@@ -12,6 +12,7 @@ org.eclipse.swt.events.ArmEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -71,6 +72,13 @@ org.eclipse.swt.events.ArmEvent.prototype.notify = function(){
 org.eclipse.swt.events.ArmEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.ArmListener = function(){
+	return this;
+};
+
 
 
 
@@ -86,6 +94,7 @@ org.eclipse.swt.events.ArmListener.prototype.widgetArmed = function(armEvent){
 org.eclipse.swt.events.ControlAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -168,6 +177,7 @@ org.eclipse.swt.events.ControlEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -227,6 +237,13 @@ org.eclipse.swt.events.ControlEvent.prototype.notify = function(){
 org.eclipse.swt.events.ControlEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.ControlListener = function(){
+	return this;
+};
+
 
 
 
@@ -253,6 +270,7 @@ org.eclipse.swt.events.DisposeEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -315,6 +333,13 @@ org.eclipse.swt.events.DisposeEvent.prototype.notify = function(){
 org.eclipse.swt.events.DisposeEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.DisposeListener = function(){
+	return this;
+};
+
 
 
 
@@ -340,6 +365,7 @@ org.eclipse.swt.events.DragDetectEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -402,6 +428,13 @@ org.eclipse.swt.events.DragDetectEvent.prototype.notify = function(){
 org.eclipse.swt.events.DragDetectEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.DragDetectListener = function(){
+	return this;
+};
+
 
 
 
@@ -417,6 +450,7 @@ org.eclipse.swt.events.DragDetectListener.prototype.dragDetected = function(drag
 org.eclipse.swt.events.ExpandAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -508,6 +542,7 @@ org.eclipse.swt.events.ExpandEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -567,6 +602,13 @@ org.eclipse.swt.events.ExpandEvent.prototype.notify = function(){
 org.eclipse.swt.events.ExpandEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.ExpandListener = function(){
+	return this;
+};
+
 
 
 
@@ -588,6 +630,7 @@ org.eclipse.swt.events.ExpandListener.prototype.itemExpanded = function(expandEv
 org.eclipse.swt.events.FocusAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -670,6 +713,7 @@ org.eclipse.swt.events.FocusEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -729,6 +773,13 @@ org.eclipse.swt.events.FocusEvent.prototype.notify = function(){
 org.eclipse.swt.events.FocusEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.FocusListener = function(){
+	return this;
+};
+
 
 
 
@@ -764,6 +815,7 @@ org.eclipse.swt.events.GestureEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -826,6 +878,13 @@ org.eclipse.swt.events.GestureEvent.prototype.notify = function(){
 org.eclipse.swt.events.GestureEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.GestureListener = function(){
+	return this;
+};
+
 
 
 
@@ -846,6 +905,7 @@ org.eclipse.swt.events.HelpEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -908,6 +968,13 @@ org.eclipse.swt.events.HelpEvent.prototype.notify = function(){
 org.eclipse.swt.events.HelpEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.HelpListener = function(){
+	return this;
+};
+
 
 
 
@@ -923,6 +990,7 @@ org.eclipse.swt.events.HelpListener.prototype.helpRequested = function(helpEvent
 org.eclipse.swt.events.KeyAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -1010,6 +1078,7 @@ org.eclipse.swt.events.KeyEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -1069,6 +1138,13 @@ org.eclipse.swt.events.KeyEvent.prototype.notify = function(){
 org.eclipse.swt.events.KeyEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.KeyListener = function(){
+	return this;
+};
+
 
 
 
@@ -1090,6 +1166,7 @@ org.eclipse.swt.events.KeyListener.prototype.keyReleased = function(keyEvent){
 org.eclipse.swt.events.MenuAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -1176,6 +1253,7 @@ org.eclipse.swt.events.MenuDetectEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -1235,6 +1313,13 @@ org.eclipse.swt.events.MenuDetectEvent.prototype.notify = function(){
 org.eclipse.swt.events.MenuDetectEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.MenuDetectListener = function(){
+	return this;
+};
+
 
 
 
@@ -1255,6 +1340,7 @@ org.eclipse.swt.events.MenuEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -1317,6 +1403,13 @@ org.eclipse.swt.events.MenuEvent.prototype.notify = function(){
 org.eclipse.swt.events.MenuEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.MenuListener = function(){
+	return this;
+};
+
 
 
 
@@ -1343,6 +1436,7 @@ org.eclipse.swt.events.ModifyEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -1405,6 +1499,13 @@ org.eclipse.swt.events.ModifyEvent.prototype.notify = function(){
 org.eclipse.swt.events.ModifyEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.ModifyListener = function(){
+	return this;
+};
+
 
 
 
@@ -1420,6 +1521,7 @@ org.eclipse.swt.events.ModifyListener.prototype.modifyText = function(modifyEven
 org.eclipse.swt.events.MouseAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -1513,6 +1615,7 @@ org.eclipse.swt.events.MouseEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -1572,6 +1675,13 @@ org.eclipse.swt.events.MouseEvent.prototype.notify = function(){
 org.eclipse.swt.events.MouseEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.MouseListener = function(){
+	return this;
+};
+
 
 
 
@@ -1593,6 +1703,13 @@ org.eclipse.swt.events.MouseListener.prototype.mouseUp = function(mouseEvent){
 org.eclipse.swt.events.MouseListener.prototype.mouseDoubleClick = function(mouseEvent){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.MouseMoveListener = function(){
+	return this;
+};
+
 
 
 
@@ -1608,6 +1725,7 @@ org.eclipse.swt.events.MouseMoveListener.prototype.mouseMove = function(mouseEve
 org.eclipse.swt.events.MouseTrackAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -1682,6 +1800,13 @@ org.eclipse.swt.events.MouseTrackAdapter.prototype.notify = function(){
 org.eclipse.swt.events.MouseTrackAdapter.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.MouseTrackListener = function(){
+	return this;
+};
+
 
 
 
@@ -1701,6 +1826,13 @@ org.eclipse.swt.events.MouseTrackListener.prototype.mouseExit = function(mouseEv
  * @param {org.eclipse.swt.events.MouseEvent} mouseEvent
  */
 org.eclipse.swt.events.MouseTrackListener.prototype.mouseHover = function(mouseEvent){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.MouseWheelListener = function(){
+	return this;
 };
 
 
@@ -1729,6 +1861,7 @@ org.eclipse.swt.events.PaintEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -1791,6 +1924,13 @@ org.eclipse.swt.events.PaintEvent.prototype.notify = function(){
 org.eclipse.swt.events.PaintEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.PaintListener = function(){
+	return this;
+};
+
 
 
 
@@ -1815,6 +1955,7 @@ org.eclipse.swt.events.SegmentEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -1877,6 +2018,13 @@ org.eclipse.swt.events.SegmentEvent.prototype.notify = function(){
 org.eclipse.swt.events.SegmentEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.SegmentListener = function(){
+	return this;
+};
+
 
 
 
@@ -1892,6 +2040,7 @@ org.eclipse.swt.events.SegmentListener.prototype.getSegments = function(segmentE
 org.eclipse.swt.events.SelectionAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -1983,6 +2132,7 @@ org.eclipse.swt.events.SelectionEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -2042,6 +2192,13 @@ org.eclipse.swt.events.SelectionEvent.prototype.notify = function(){
 org.eclipse.swt.events.SelectionEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.SelectionListener = function(){
+	return this;
+};
+
 
 
 
@@ -2063,6 +2220,7 @@ org.eclipse.swt.events.SelectionListener.prototype.widgetSelected = function(sel
 org.eclipse.swt.events.ShellAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -2164,6 +2322,7 @@ org.eclipse.swt.events.ShellEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -2223,6 +2382,13 @@ org.eclipse.swt.events.ShellEvent.prototype.notify = function(){
 org.eclipse.swt.events.ShellEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.ShellListener = function(){
+	return this;
+};
+
 
 
 
@@ -2271,6 +2437,7 @@ org.eclipse.swt.events.TouchEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -2333,6 +2500,13 @@ org.eclipse.swt.events.TouchEvent.prototype.notify = function(){
 org.eclipse.swt.events.TouchEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.TouchListener = function(){
+	return this;
+};
+
 
 
 
@@ -2359,6 +2533,7 @@ org.eclipse.swt.events.TraverseEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -2421,6 +2596,13 @@ org.eclipse.swt.events.TraverseEvent.prototype.notify = function(){
 org.eclipse.swt.events.TraverseEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.TraverseListener = function(){
+	return this;
+};
+
 
 
 
@@ -2436,6 +2618,7 @@ org.eclipse.swt.events.TraverseListener.prototype.keyTraversed = function(traver
 org.eclipse.swt.events.TreeAdapter = function(){
 	return this;
 }
+
 
 
 
@@ -2527,6 +2710,7 @@ org.eclipse.swt.events.TreeEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -2586,6 +2770,13 @@ org.eclipse.swt.events.TreeEvent.prototype.notify = function(){
 org.eclipse.swt.events.TreeEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.TreeListener = function(){
+	return this;
+};
+
 
 
 
@@ -2612,6 +2803,7 @@ org.eclipse.swt.events.TypedEvent = function(event){
 	this.data = new java.lang.Object();
 	return this;
 }
+
 
 
 
@@ -2696,6 +2888,7 @@ org.eclipse.swt.events.VerifyEvent = function(event){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -2755,6 +2948,13 @@ org.eclipse.swt.events.VerifyEvent.prototype.notify = function(){
 org.eclipse.swt.events.VerifyEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.events.VerifyListener = function(){
+	return this;
+};
+
 
 
 
@@ -2770,6 +2970,7 @@ org.eclipse.swt.events.VerifyListener.prototype.verifyText = function(verifyEven
 org.eclipse.swt.dnd.ByteArrayTransfer = function(){
 	return this;
 }
+
 
 
 /**
@@ -2852,6 +3053,7 @@ org.eclipse.swt.dnd.ByteArrayTransfer.prototype.notifyAll = function(){
 org.eclipse.swt.dnd.Clipboard = function(display){
 	return this;
 }
+
 
 
 
@@ -2986,6 +3188,7 @@ org.eclipse.swt.dnd.DND = function(){
 	return this;
 }
 
+
 org.eclipse.swt.dnd.DND.CLIPBOARD = new Number();
 org.eclipse.swt.dnd.DND.SELECTION_CLIPBOARD = new Number();
 org.eclipse.swt.dnd.DND.DROP_NONE = new Number();
@@ -3082,6 +3285,13 @@ org.eclipse.swt.dnd.DND.prototype.notify = function(){
 org.eclipse.swt.dnd.DND.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.DNDEvent = function(){
+	return this;
+};
+
 
 
 
@@ -3148,6 +3358,13 @@ org.eclipse.swt.dnd.DNDEvent.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.dnd.DNDEvent.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.DNDListener = function(){
+	return this;
 };
 
 
@@ -3226,6 +3443,7 @@ org.eclipse.swt.dnd.DNDListener.prototype.notifyAll = function(){
 org.eclipse.swt.dnd.DragSource = function(control, int){
 	return this;
 }
+
 
 
 
@@ -3441,6 +3659,7 @@ org.eclipse.swt.dnd.DragSourceAdapter = function(){
 
 
 
+
 /**
  * @param {org.eclipse.swt.dnd.DragSourceEvent} dragSourceEvent
  */
@@ -3519,6 +3738,7 @@ org.eclipse.swt.dnd.DragSourceAdapter.prototype.notifyAll = function(){
 org.eclipse.swt.dnd.DragSourceEffect = function(control){
 	return this;
 }
+
 
 
 
@@ -3621,6 +3841,7 @@ org.eclipse.swt.dnd.DragSourceEvent = function(dNDEvent){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -3680,6 +3901,13 @@ org.eclipse.swt.dnd.DragSourceEvent.prototype.notify = function(){
 org.eclipse.swt.dnd.DragSourceEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.DragSourceListener = function(){
+	return this;
+};
+
 
 
 
@@ -3709,6 +3937,7 @@ org.eclipse.swt.dnd.DragSourceListener.prototype.dragStart = function(dragSource
 org.eclipse.swt.dnd.DropTarget = function(control, int){
 	return this;
 }
+
 
 
 
@@ -3924,6 +4153,7 @@ org.eclipse.swt.dnd.DropTargetAdapter = function(){
 
 
 
+
 /**
  * @param {org.eclipse.swt.dnd.DropTargetEvent} dropTargetEvent
  */
@@ -4020,6 +4250,7 @@ org.eclipse.swt.dnd.DropTargetAdapter.prototype.notifyAll = function(){
 org.eclipse.swt.dnd.DropTargetEffect = function(control){
 	return this;
 }
+
 
 
 
@@ -4148,6 +4379,7 @@ org.eclipse.swt.dnd.DropTargetEvent = function(dNDEvent){
 
 
 
+
 /**
  * @returns {java.lang.String}
  */
@@ -4207,6 +4439,13 @@ org.eclipse.swt.dnd.DropTargetEvent.prototype.notify = function(){
 org.eclipse.swt.dnd.DropTargetEvent.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.DropTargetListener = function(){
+	return this;
+};
+
 
 
 
@@ -4244,6 +4483,13 @@ org.eclipse.swt.dnd.DropTargetListener.prototype.dropAccept = function(dropTarge
  * @param {org.eclipse.swt.dnd.DropTargetEvent} dropTargetEvent
  */
 org.eclipse.swt.dnd.DropTargetListener.prototype.dragOperationChanged = function(dropTargetEvent){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.FileTransfer = function(){
+	return this;
 };
 
 
@@ -4341,6 +4587,13 @@ org.eclipse.swt.dnd.FileTransfer.prototype.notify = function(){
 org.eclipse.swt.dnd.FileTransfer.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.HTMLTransfer = function(){
+	return this;
+};
+
 
 
 /**
@@ -4436,6 +4689,13 @@ org.eclipse.swt.dnd.HTMLTransfer.prototype.notify = function(){
 org.eclipse.swt.dnd.HTMLTransfer.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.ImageTransfer = function(){
+	return this;
+};
+
 
 
 /**
@@ -4529,6 +4789,13 @@ org.eclipse.swt.dnd.ImageTransfer.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.dnd.ImageTransfer.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.RTFTransfer = function(){
+	return this;
 };
 
 
@@ -4636,6 +4903,7 @@ org.eclipse.swt.dnd.TableDragSourceEffect = function(table){
 
 
 
+
 /**
  * @param {org.eclipse.swt.dnd.DragSourceEvent} dragSourceEvent
  */
@@ -4720,6 +4988,7 @@ org.eclipse.swt.dnd.TableDragSourceEffect.prototype.notifyAll = function(){
 org.eclipse.swt.dnd.TableDropTargetEffect = function(table){
 	return this;
 }
+
 
 
 
@@ -4826,6 +5095,13 @@ org.eclipse.swt.dnd.TableDropTargetEffect.prototype.notify = function(){
 org.eclipse.swt.dnd.TableDropTargetEffect.prototype.notifyAll = function(){
 };
 
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.TextTransfer = function(){
+	return this;
+};
+
 
 
 /**
@@ -4929,6 +5205,7 @@ org.eclipse.swt.dnd.Transfer = function(){
 }
 
 
+
 /**
  * @param {java.lang.String} string
  * @returns {Number}
@@ -5013,6 +5290,7 @@ org.eclipse.swt.dnd.TransferData = function(){
 
 
 
+
 /**
  */
 org.eclipse.swt.dnd.TransferData.prototype.wait = function(){
@@ -5073,6 +5351,7 @@ org.eclipse.swt.dnd.TransferData.prototype.notifyAll = function(){
 org.eclipse.swt.dnd.TreeDragSourceEffect = function(tree){
 	return this;
 }
+
 
 
 
@@ -5160,6 +5439,7 @@ org.eclipse.swt.dnd.TreeDragSourceEffect.prototype.notifyAll = function(){
 org.eclipse.swt.dnd.TreeDropTargetEffect = function(tree){
 	return this;
 }
+
 
 
 
@@ -5264,6 +5544,13 @@ org.eclipse.swt.dnd.TreeDropTargetEffect.prototype.notify = function(){
 /**
  */
 org.eclipse.swt.dnd.TreeDropTargetEffect.prototype.notifyAll = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.swt.dnd.URLTransfer = function(){
+	return this;
 };
 
 

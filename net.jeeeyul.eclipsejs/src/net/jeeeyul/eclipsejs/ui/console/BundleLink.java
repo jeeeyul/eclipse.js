@@ -4,11 +4,13 @@ import net.jeeeyul.eclipsejs.EclipseJSCore;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.IHyperlink;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.wst.jsdt.core.IClassFile;
 import org.eclipse.wst.jsdt.core.IJavaScriptElement;
 import org.eclipse.wst.jsdt.core.IJavaScriptModel;
@@ -23,9 +25,11 @@ import org.eclipse.wst.jsdt.internal.ui.javaeditor.EditorUtility;
 public class BundleLink implements IHyperlink {
 
 	private String path;
+	private int line;
 
-	public BundleLink(String path) {
+	public BundleLink(String path, int line) {
 		this.path = path;
+		this.line = line;
 	}
 
 	@Override
@@ -65,20 +69,26 @@ public class BundleLink implements IHyperlink {
 
 		if (target != null) {
 			try {
-				for(IJavaScriptElement e : target.getChildren()){
+				for (IJavaScriptElement e : target.getChildren()) {
 					IPackageFragment fragment = (IPackageFragment) e;
 					IClassFile classFile = fragment.getClassFiles()[0];
-					IEditorInput editorInput = EditorUtility.getEditorInput(classFile);
-					IDE.openEditor(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage(), editorInput, "org.eclipse.wst.jsdt.ui.ClassFileEditor");
+					IEditorInput editorInput = EditorUtility
+							.getEditorInput(classFile);
+					AbstractTextEditor editor = (AbstractTextEditor) IDE.openEditor(PlatformUI
+							.getWorkbench().getActiveWorkbenchWindow()
+							.getActivePage(), editorInput,
+							"org.eclipse.wst.jsdt.ui.ClassFileEditor");
+					IDocument document = editor.getDocumentProvider()
+							.getDocument(editor.getEditorInput());
+					IRegion lineInformation = document
+							.getLineInformation(line - 1);
+					editor.selectAndReveal(lineInformation.getOffset(),
+							lineInformation.getLength());
 				}
-			} catch (JavaScriptModelException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-			} catch (PartInitException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} 
+			}
 		}
 
 	}
-
 }

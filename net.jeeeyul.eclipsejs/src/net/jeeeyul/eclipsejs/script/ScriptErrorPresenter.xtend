@@ -1,6 +1,6 @@
 package net.jeeeyul.eclipsejs.script
 
-import net.jeeeyul.eclipsejs.script.api.EJSConsole
+import net.jeeeyul.eclipsejs.ui.console.EJSConsole
 import org.mozilla.javascript.RhinoException
 import org.mozilla.javascript.ScriptStackElement
 
