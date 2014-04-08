@@ -6,6 +6,7 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import net.jeeeyul.eclipsejs.util.BitExtension
+import net.jeeeyul.eclipsejs.util.IO
 import org.eclipse.swt.layout.GridData
 
 class JavaDocGenerator {

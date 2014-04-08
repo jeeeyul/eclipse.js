@@ -2,7 +2,7 @@ package net.jeeeyul.eclipsejs.extensions.builder
 
 import java.util.ArrayList
 import java.util.Map
-import net.jeeeyul.eclipsejs.script.api.IO
+import net.jeeeyul.eclipsejs.util.IO
 import org.eclipse.core.resources.IncrementalProjectBuilder
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor

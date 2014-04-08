@@ -7,6 +7,11 @@ import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.IPath
 import org.eclipse.core.runtime.Path
 
+/**
+ * This class provides light-weight informations for module that can be required.
+ *
+ * @since 0.1
+ */
 class ModuleDescriptor {
 	IFile fModuleFile
 	ModuleMetaData fMetaData
@@ -30,6 +35,10 @@ class ModuleDescriptor {
 		}
 	}
 
+	/**
+	 * Gets a meta data of module. Meta data is stored as <code>${moduleName}.json</code> or <code>index.json</code> what if the module is structured as a folder.
+	 * @returns The meta data of module.
+	 */
 	def ModuleMetaData getMetaData() {
 		if (fMetaData == null) {
 			fMetaData = new ModuleMetaData(this)
@@ -46,6 +55,10 @@ class ModuleDescriptor {
 		}
 	}
 
+	/**
+	 * @returns Human readable name of module. It returns <code>name</code> value of meta data.
+	 * What if there is no meta data json file, It will returns module name.
+	 */
 	def String getHumanReadableName() {
 		metaData.get("name") as String
 	}

@@ -3,14 +3,14 @@ package net.jeeeyul.eclipsejs.script
 import java.util.Map
 import java.util.concurrent.CancellationException
 import net.jeeeyul.eclipsejs.ui.console.EJSConsole
-import net.jeeeyul.eclipsejs.core.ScopeFactory
-import net.jeeeyul.eclipsejs.script.context.EJSContext
-import net.jeeeyul.eclipsejs.script.context.EJSContextFactory
+import net.jeeeyul.eclipsejs.core.EJSContext
+import net.jeeeyul.eclipsejs.core.EJSContextFactory
 import org.eclipse.core.resources.WorkspaceJob
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Status
 import org.mozilla.javascript.Context
+import net.jeeeyul.eclipsejs.core.EJSScopeFactory
 
 class ExecuteScriptJob extends WorkspaceJob {
 	IScriptProvider scriptProvider
@@ -32,7 +32,7 @@ class ExecuteScriptJob extends WorkspaceJob {
 		} 
 		
 		try {
-			var scope = ScopeFactory.instance.create(scriptProvider.fullPath.removeLastSegments(1), map)
+			var scope = EJSScopeFactory.getInstance.create(scriptProvider.fullPath.removeLastSegments(1), map)
 			ctx.evaluateString(scope, scriptProvider.getScript(), scriptProvider.fullPath.toPortableString, 1, null)
 		} catch (CancellationException ce) {
 			EJSConsole.singleton.errorStream.println("Execution was canceled.")

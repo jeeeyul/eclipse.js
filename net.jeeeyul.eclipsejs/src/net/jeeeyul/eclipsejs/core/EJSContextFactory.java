@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.script.context;
+package net.jeeeyul.eclipsejs.core;
 
 import net.jeeeyul.eclipsejs.script.ScriptErrorPresenter;
 
@@ -22,22 +22,20 @@ public class EJSContextFactory extends ContextFactory {
 	}
 
 	@Override
+	protected Context makeContext() {
+		EJSContext context = new EJSContext(this);
+		return context;
+	}
+
+	@Override
 	protected Object doTopCall(Callable callable, Context cx, Scriptable scope,
 			Scriptable thisObj, Object[] args) {
 		try {
-			return super.doTopCall(callable, cx, scope, thisObj, args);
+			Object result = super.doTopCall(callable, cx, scope, thisObj, args);
+			return result;
 		} catch (RhinoException e) {
 			ScriptErrorPresenter.INSTANCE.showError(e);
 			throw e;
 		}
 	}
-
-	@Override
-	protected Context makeContext() {
-		EJSContext context = new EJSContext(this);
-		return context;
-	}
-	
-	
-
 }

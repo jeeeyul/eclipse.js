@@ -1,9 +1,9 @@
 package net.jeeeyul.eclipsejs;
 
 import net.jeeeyul.eclipsejs.core.Require;
+import net.jeeeyul.eclipsejs.extensions.EJSExtension;
 import net.jeeeyul.eclipsejs.runtime.EnsureRuntimeProject;
 import net.jeeeyul.eclipsejs.runtime.IRuntimeProjectCallback;
-import net.jeeeyul.eclipsejs.script.bridge.EJSExtension;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;

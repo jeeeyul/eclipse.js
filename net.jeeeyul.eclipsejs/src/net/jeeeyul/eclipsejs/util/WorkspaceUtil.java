@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.script.api;
+package net.jeeeyul.eclipsejs.util;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceVisitor;

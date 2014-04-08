@@ -1,6 +1,4 @@
-package net.jeeeyul.eclipsejs.script.api;
-
-import net.jeeeyul.eclipsejs.util.WindowAdapter;
+package net.jeeeyul.eclipsejs.util;
 
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ExecutionException;

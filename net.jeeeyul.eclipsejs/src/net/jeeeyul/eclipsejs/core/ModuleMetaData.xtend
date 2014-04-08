@@ -1,6 +1,6 @@
 package net.jeeeyul.eclipsejs.core
 
-import net.jeeeyul.eclipsejs.script.api.IO
+import net.jeeeyul.eclipsejs.util.IO
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 

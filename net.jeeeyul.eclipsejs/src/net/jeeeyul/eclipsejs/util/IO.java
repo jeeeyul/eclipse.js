@@ -1,4 +1,4 @@
-package net.jeeeyul.eclipsejs.script.api;
+package net.jeeeyul.eclipsejs.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

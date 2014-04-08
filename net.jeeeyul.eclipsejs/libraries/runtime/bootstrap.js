@@ -18,3 +18,9 @@ ejs.internal.wrapResource = function(resource) {
 		return new ejs.Project(resource.getFullPath());
 	}
 };
+
+/**
+ * @type String
+ */
+ejs.pluginId = String(net.jeeeyul.eclipsejs.EclipseJSCore.PLUGIN_ID);
+

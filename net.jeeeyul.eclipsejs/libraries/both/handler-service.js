@@ -17,7 +17,7 @@ ejs.HandlerService.prototype.executeCommand = function(commandId, paramMap){
 		paramMap = {};
 	}
 	
-	var commandFactory = new net.jeeeyul.eclipsejs.script.api.ParameterizedCommandFactory(commandService.handle);
+	var commandFactory = new net.jeeeyul.eclipsejs.util.ParameterizedCommandFactory(commandService.handle);
 	var parameterizedCommand = commandFactory.create(commandId, paramMap);
 	
 	return this.handle.executeCommand(parameterizedCommand, null);

@@ -9,7 +9,7 @@ class ModuleWrapper {
 			var module = {};
 			var exports = {};
 		'''
-		context.evaluateString(scope, before, "require-before", 1, null);
+		context.evaluateString(scope, before, '''net.jeeeyul.eclipsejs.core.ModuleWrapper#before''', 1, null);
 	}
 	
 	def after(Context context, ScriptableObject scope){
@@ -23,6 +23,6 @@ class ModuleWrapper {
 			})();
 		'''
 		
-		return context.evaluateString(scope, after, "require-after", 1, null);
+		return context.evaluateString(scope, after, "net.jeeeyul.eclipsejs.core.ModuleWrapper#after", 1, null);
 	}
 }

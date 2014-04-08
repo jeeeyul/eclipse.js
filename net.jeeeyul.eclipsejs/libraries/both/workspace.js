@@ -162,25 +162,29 @@ ejs.Resource.prototype.deleteResource = function(force, monitor) {
 
 /**
  * 
- * @param {String} type
+ * @param {String}
+ *            type
  * @returns {ejs.Marker}
  */
-ejs.Resource.prototype.createMarker = function(type){
+ejs.Resource.prototype.createMarker = function(type) {
 	return this.handle.createMarker(type);
 };
 
 /**
- * @param {String} type
- * @param {Boolean} includeSubType
- * @param {Number} depth
+ * @param {String}
+ *            type
+ * @param {Boolean}
+ *            includeSubType
+ * @param {Number}
+ *            depth
  * @returns {Array}
  */
-ejs.Resource.prototype.findMarkers = function(type, includeSubType, depth){
+ejs.Resource.prototype.findMarkers = function(type, includeSubType, depth) {
 	/**
 	 * @type Array
 	 */
 	var markerHandles = this.handle.findMarkers(type, includeSubType, depth);
-	return markerHandles.map(function(it){
+	return markerHandles.map(function(it) {
 		return new ejs.Marker(it);
 	});
 };
@@ -243,7 +247,7 @@ ejs.Container.prototype.findFiles = function(pattern) {
 	var exp = pattern.replace(/\*\*/g, "��ANY_PATH��").replace(/\*/, "��ANY_SEGMENT��").replace(/\./, "��DOT��").replace("?", "��ANY_CHAR��");
 	exp = exp.replace(/��ANY_PATH��/g, ".*").replace(/��ANY_SEGMENT��/g, "[^/]*").replace(/��DOT��/g, "\\\.").replace(/��ANY_CHAR��/g, ".")
 	var regexp = new RegExp("^" + exp + "$");
-	
+
 	var offsetLength = this.getFullPath().segmentCount();
 
 	this.handle.accept({
@@ -251,7 +255,7 @@ ejs.Container.prototype.findFiles = function(pattern) {
 			var fullPath = it.getFullPath();
 			var relPath = fullPath.removeFirstSegments(offsetLength)
 			var isFile = (it.type == org.eclipse.core.resources.IResource.FILE);
-			if(offsetLength == 0){
+			if (offsetLength == 0) {
 				relPath = relPath.makeRelative();
 			}
 			if (isFile && regexp.test(relPath.toString())) {
@@ -280,11 +284,11 @@ ejs.Container.prototype.accept = function(visitor, depth, memberFlag) {
 		memberFlag = ejs.Resource.NONE;
 	}
 
-	net.jeeeyul.eclipsejs.script.api.WorkspaceUtil.accept(this.handle, {
+	net.jeeeyul.eclipsejs.util.WorkspaceUtil.accept(this.handle, {
 		visit : function(it) {
 			var resosurce = ejs.internal.wrapResource(it);
 			var drillDown = visitor(resosurce);
-			if(drillDown === undefined){
+			if (drillDown === undefined) {
 				drillDown = true;
 			}
 			return drillDown;
@@ -416,6 +420,17 @@ ejs.File.prototype.setContents = function(contents) {
 	}
 };
 
+/**
+ * gets file path for OS file path notation.
+ * 
+ * @returns {String} native file path.
+ */
+ejs.File.prototype.getNativeFilePath = function() {
+	var EFS = org.eclipse.core.filesystem.EFS;
+	var uri = this.handle.getRawLocationURI();
+	return EFS.getStore(uri).toLocalFile(0, null);
+};
+
 // 
 // Workspace
 //
@@ -437,7 +452,7 @@ var workspace = new ejs.Workspace();
 //
 // Marker
 //
-ejs.Marker = function(handle){
+ejs.Marker = function(handle) {
 	this.handle = handle;
 };
 ejs.Marker.MARKER = "org.eclipse.core.resources.marker";
@@ -465,17 +480,18 @@ ejs.Marker.SEVERITY_INFO = 0;
 
 /**
  * 
- * @param {String} attrName
+ * @param {String}
+ *            attrName
  * @returns {Object}
  */
-ejs.Marker.prototype.getAttribute = function(attrName, fallback){
+ejs.Marker.prototype.getAttribute = function(attrName, fallback) {
 	var value = this.handle.getAttribute(attrName);
-	if(value instanceof java.lang.String){
+	if (value instanceof java.lang.String) {
 		value = String(value);
 	}
-	if(value != null && value != undefined){
+	if (value != null && value != undefined) {
 		return value;
-	}else{
+	} else {
 		return fallback;
 	}
 };
@@ -484,26 +500,27 @@ ejs.Marker.prototype.getAttribute = function(attrName, fallback){
  * 
  * @returns {ejs.Resource}
  */
-ejs.Marker.prototype.getResource = function(){
+ejs.Marker.prototype.getResource = function() {
 	return ejs.internal.wrapResource(this.handle.getResource());
 };
 
 /**
  * @returns {String}
  */
-ejs.Marker.prototype.getType = function(){
+ejs.Marker.prototype.getType = function() {
 	return this.handle.getType();
 };
 
 /**
  * 
- * @param {String} attrName
+ * @param {String}
+ *            attrName
  * @param value
  */
-ejs.Marker.prototype.setAttribute = function(attrName, value){
+ejs.Marker.prototype.setAttribute = function(attrName, value) {
 	this.handle.setAttribute(attrName, value);
 };
 
-ejs.Marker.prototype.deleteMarker = function(){
+ejs.Marker.prototype.deleteMarker = function() {
 	this.handle["delete"]();
 };

@@ -1,7 +1,7 @@
 package net.jeeeyul.eclipsejs.extensions.builder
 
 import net.jeeeyul.eclipsejs.EclipseJSCore
-import net.jeeeyul.eclipsejs.script.bridge.EJSExtension
+import net.jeeeyul.eclipsejs.extensions.EJSExtension
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IResourceDelta
 import org.eclipse.core.runtime.IProgressMonitor

@@ -1,8 +1,8 @@
 package net.jeeeyul.eclipsejs.extensions.view;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
+import net.jeeeyul.eclipsejs.extensions.EJSExtension;
 import net.jeeeyul.eclipsejs.runtime.IRuntimeProjectCallback;
-import net.jeeeyul.eclipsejs.script.bridge.EJSExtension;
 import net.jeeeyul.eclipsejs.util.ResourceRegistry;
 import net.jeeeyul.eclipsejs.util.ResourceRegistry.Factory;
 

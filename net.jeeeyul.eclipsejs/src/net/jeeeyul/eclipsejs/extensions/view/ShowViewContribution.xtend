@@ -3,9 +3,9 @@ package net.jeeeyul.eclipsejs.extensions.view
 import java.util.ArrayList
 import net.jeeeyul.eclipsejs.EclipseJSCore
 import net.jeeeyul.eclipsejs.core.Require
+import org.eclipse.jface.action.ActionContributionItem
 import org.eclipse.jface.action.IContributionItem
 import org.eclipse.ui.actions.CompoundContributionItem
-import org.eclipse.jface.action.ActionContributionItem
 
 class ShowViewContribution extends CompoundContributionItem {
 	override protected getContributionItems() {

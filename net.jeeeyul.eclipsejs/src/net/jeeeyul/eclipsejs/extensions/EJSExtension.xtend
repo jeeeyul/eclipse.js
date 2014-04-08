@@ -1,15 +1,13 @@
-package net.jeeeyul.eclipsejs.script.bridge
+package net.jeeeyul.eclipsejs.extensions
 
 import net.jeeeyul.eclipsejs.EclipseJSCore
-import net.jeeeyul.eclipsejs.core.ScopeFactory
-import net.jeeeyul.eclipsejs.script.ScriptErrorPresenter
-import net.jeeeyul.eclipsejs.script.context.EJSContextFactory
+import net.jeeeyul.eclipsejs.core.EJSContextFactory
+import net.jeeeyul.eclipsejs.core.EJSScopeFactory
+import net.jeeeyul.eclipsejs.core.ModuleDescriptor
 import org.eclipse.core.resources.IFile
 import org.mozilla.javascript.Context
 import org.mozilla.javascript.Function
-import org.mozilla.javascript.RhinoException
 import org.mozilla.javascript.ScriptableObject
-import net.jeeeyul.eclipsejs.core.ModuleDescriptor
 
 class EJSExtension {
 	ModuleDescriptor fDescriptor
@@ -27,12 +25,12 @@ class EJSExtension {
 
 	def ScriptableObject getInstance() {
 		if (fInstance == null) {
-			this.scope = ScopeFactory.instance.create(fDescriptor.moduleDirPath)
-			
+			this.scope = EJSScopeFactory.getInstance.create(fDescriptor.getModuleDirPath)
+
 			var script = '''
-				var ModuleType = require("«fDescriptor.qualifiedName»");
+				var ModuleType = require("«fDescriptor.getQualifiedName»");
 			'''
-			ctx.evaluateString(scope, script, fDescriptor.moduleFile.fullPath.toPortableString, 1, null)
+			ctx.evaluateString(scope, script, fDescriptor.getModuleFile.fullPath.toPortableString, 1, null)
 
 			var jsArgs = constructorArgs.map [
 				Context.javaToJS(it, scope)
@@ -44,22 +42,17 @@ class EJSExtension {
 	}
 
 	def getMetaData(String key) {
-		fDescriptor.metaData.get(key)
+		fDescriptor.getMetaData.get(key)
 	}
 
 	def Object callInstanceFunction(String name, Object... args) {
-		try {
-			var jsArgs = args.map [
-				Context.javaToJS(it, scope)
-			]
-			var fn = ScriptableObject.getProperty(instance, name);
-			if (fn instanceof Function) {
-				return (fn as Function).call(ctx, scope, instance, jsArgs);
-			} else {
-				return null;
-			}
-		} catch (RhinoException e) {
-			ScriptErrorPresenter.INSTANCE.showError(e);
+		var jsArgs = args.map [
+			Context.javaToJS(it, scope)
+		]
+		var fn = ScriptableObject.getProperty(getInstance, name);
+		if (fn instanceof Function) {
+			return (fn as Function).call(ctx, scope, getInstance, jsArgs);
+		} else {
 			return null;
 		}
 	}

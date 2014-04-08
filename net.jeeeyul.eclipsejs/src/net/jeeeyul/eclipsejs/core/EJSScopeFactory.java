@@ -11,8 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
-import net.jeeeyul.eclipsejs.script.api.IO;
-import net.jeeeyul.eclipsejs.script.context.EJSContextFactory;
+import net.jeeeyul.eclipsejs.util.IO;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,19 +20,25 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ScriptableObject;
 import org.osgi.framework.Bundle;
 
-public class ScopeFactory {
-	private static ScopeFactory instance;
+/**
+ * 
+ * @author Jeeeyul
+ * @see #create(IPath, Map)
+ *
+ */
+public class EJSScopeFactory {
+	private static EJSScopeFactory instance;
 
 	private IO io = new IO();
 
-	public static ScopeFactory getInstance() {
+	public static EJSScopeFactory getInstance() {
 		if (instance == null) {
-			instance = new ScopeFactory();
+			instance = new EJSScopeFactory();
 		}
 		return instance;
 	}
 
-	private ScopeFactory() {
+	private EJSScopeFactory() {
 	}
 
 	public ScriptableObject create(IPath path) {
@@ -41,12 +46,17 @@ public class ScopeFactory {
 	}
 
 	/**
+	 * Creates a java script scope for eclipse.js scripts. Returned scope will
+	 * contains all libraries that shipped with eclipse.js and
+	 * <code>require</code> functionality.
 	 * 
 	 * @param path
-	 *            working directory path. It will be passed as "__dirname" in
-	 *            script.
+	 *            Working directory path. It will be passed as "__dirname" in
+	 *            script. This path will be used as offset path of
+	 *            <code>require()</code> function also.
 	 * @param map
-	 * @return
+	 *            Additional objects to pass java script scope.
+	 * @return java script scope.
 	 */
 	public ScriptableObject create(IPath path, Map<String, Object> map) {
 		IFolder folder = ResourcesPlugin.getWorkspace().getRoot()

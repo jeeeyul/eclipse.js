@@ -2,10 +2,10 @@ package net.jeeeyul.eclipsejs.extensions.view
 
 import net.jeeeyul.eclipsejs.EclipseJSCore
 import org.eclipse.jface.action.Action
-import org.eclipse.ui.IWorkbenchPage
-import org.eclipse.ui.PlatformUI
 import org.eclipse.jface.resource.ImageDescriptor
 import org.eclipse.swt.graphics.ImageData
+import org.eclipse.ui.IWorkbenchPage
+import org.eclipse.ui.PlatformUI
 
 class ShowEJSViewAction extends Action {
 	String viewId
