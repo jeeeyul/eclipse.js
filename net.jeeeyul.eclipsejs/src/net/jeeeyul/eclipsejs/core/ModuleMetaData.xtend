@@ -1,8 +1,8 @@
 package net.jeeeyul.eclipsejs.core
 
-import net.jeeeyul.eclipsejs.util.IO
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import net.jeeeyul.eclipsejs.util.FileUtil
 
 class ModuleMetaData {
 	ModuleDescriptor descriptor
@@ -17,7 +17,7 @@ class ModuleMetaData {
 			if (descriptor.metaFile.exists) {
 				try {
 					var jsonFile = descriptor.metaFile
-					var source = IO.instance.readInputStream(jsonFile.contents, jsonFile.charset)
+					var source = FileUtil.getInstance.readInputStream(jsonFile.contents, jsonFile.charset)
 					json = new JSONParser().parse(source) as JSONObject
 				} catch (Exception e) {
 					e.printStackTrace()

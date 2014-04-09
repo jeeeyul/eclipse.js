@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.jeeeyul.eclipsejs.util.IO;
+import net.jeeeyul.eclipsejs.util.FileUtil;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
@@ -115,7 +115,7 @@ public class Require {
 			moduleWrapper.before(context, scope);
 
 			IFile file = descriptor.getModuleFile();
-			String moduleScript = IO.getInstance().readInputStream(
+			String moduleScript = FileUtil.getInstance().readInputStream(
 					file.getContents(), file.getCharset());
 			context.evaluateString(scope, moduleScript, file.getFullPath()
 					.toPortableString(), 1, null);

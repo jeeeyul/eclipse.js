@@ -1,5 +1,5 @@
 var ejs = {};
-ejs.io = new net.jeeeyul.eclipsejs.util.IO();
+ejs.io = new net.jeeeyul.eclipsejs.util.FileUtil();
 
 /**
  * Inject a module with given module name. What if module is not loaded, it will

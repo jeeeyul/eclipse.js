@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.jeeeyul.eclipsejs.EclipseJSCore;
-import net.jeeeyul.eclipsejs.util.IO;
+import net.jeeeyul.eclipsejs.util.FileUtil;
 
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -29,7 +29,7 @@ import org.osgi.framework.Bundle;
 public class EJSScopeFactory {
 	private static EJSScopeFactory instance;
 
-	private IO io = new IO();
+	private FileUtil io = new FileUtil();
 
 	public static EJSScopeFactory getInstance() {
 		if (instance == null) {

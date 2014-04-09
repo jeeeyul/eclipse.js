@@ -1,6 +1,6 @@
 package net.jeeeyul.eclipsejs.script;
 
-import net.jeeeyul.eclipsejs.util.IO;
+import net.jeeeyul.eclipsejs.util.FileUtil;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
@@ -16,7 +16,7 @@ public class FileScript implements IScriptProvider {
 	@Override
 	public String getScript() {
 		try {
-			return IO.getInstance().readInputStream(file.getContents(),
+			return FileUtil.getInstance().readInputStream(file.getContents(),
 					file.getCharset());
 		} catch (Exception e) {
 			throw new RuntimeException(e);

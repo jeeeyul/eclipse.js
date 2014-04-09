@@ -113,3 +113,53 @@ ejs.WorkbenchPage.prototype.showView = function(viewId) {
 ejs.WorkbenchPage.prototype.showEJSView = function(viewId) {
 	this.handle.showView("net.jeeeyul.eclipsejs.common.view", viewId, 1);
 };
+
+//
+// Workbench Site
+//
+/**
+ * @constructor
+ * @base ejs.ServiceLocator
+ */
+ejs.WorkbenchSite = function(handle) {
+	ejs.ServiceLocator.apply(this, arguments);
+	this.handle = handle;
+	this.constructor = ejs.WorkbenchSite;
+};
+
+ejs.WorkbenchSite.prototype = Object.create(ejs.ServiceLocator.prototype);
+
+/**
+ * Returns the page containing this workbench site.
+ * 
+ * @returns {ejs.WorkbenchPage} the page containing this workbench site.
+ */
+ejs.WorkbenchSite.prototype.getPage = function() {
+	return new ejs.WorkbenchPage(this.handle.getPage());
+};
+
+/**
+ * Returns the shell for this workbench site. Not intended to be called from
+ * outside the UI thread. Clients should call IWorkbench.getDisplay() to gain
+ * access to the display rather than calling getShell().getDisplay().
+ * 
+ * <p>
+ * For compatibility, this method will not throw an exception if called from
+ * outside the UI thread, but the returned Shell may be wrong.
+ * </p>
+ * 
+ * @returns {org.eclipse.swt.widgets.Shell} the shell for this workbench site
+ */
+ejs.WorkbenchSite.prototype.getShell = function() {
+	return this.handle.getShell();
+};
+
+/**
+ * Returns the workbench window containing this workbench site.
+ * 
+ * @returns {ejs.WorkbenchWindow} the workbench window containing this workbench
+ *          site
+ */
+ejs.WorkbenchSite.prototype.getWorkbenchWindow = function() {
+	return new ejs.WorkbenchWindow(this.handle.getWorkbenchWindow());
+};

@@ -19,8 +19,19 @@ ejs.internal.wrapResource = function(resource) {
 	}
 };
 
+ejs.internal.wrapWorkbenchModel = function(handle) {
+	if (n instanceof org.eclipse.ui.IWorkbenchPage) {
+		return new ejs.WorkbenchPage(handle);
+	}
+
+	else if (n instanceof org.eclipse.ui.IWorkbenchWindow) {
+		return new ejs.WorkbenchWindow(handle);
+	}
+
+	throw new Error("unsupported workbench model");
+};
+
 /**
  * @type String
  */
 ejs.pluginId = String(net.jeeeyul.eclipsejs.EclipseJSCore.PLUGIN_ID);
-

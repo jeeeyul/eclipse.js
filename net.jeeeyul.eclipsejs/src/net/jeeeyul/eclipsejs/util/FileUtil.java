@@ -12,14 +12,14 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
-public class IO {
-	private static final IO instance = new IO();
+public class FileUtil {
+	private static final FileUtil instance = new FileUtil();
 
-	public static IO getInstance() {
+	public static FileUtil getInstance() {
 		return instance;
 	}
 
-	public IO() {
+	public FileUtil() {
 	}
 
 	public String readInputStream(InputStream is, String charset)
@@ -32,7 +32,7 @@ public class IO {
 			baos.write(buf, 0, len);
 		}
 		is.close();
-		return baos.toString();
+		return baos.toString(charset);
 	}
 
 	public void setContents(IFile file, String content)

@@ -2,7 +2,6 @@ package net.jeeeyul.eclipsejs.extensions.builder
 
 import java.util.ArrayList
 import java.util.Map
-import net.jeeeyul.eclipsejs.util.IO
 import org.eclipse.core.resources.IncrementalProjectBuilder
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
@@ -10,6 +9,7 @@ import org.eclipse.core.runtime.SubProgressMonitor
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import java.util.List
+import net.jeeeyul.eclipsejs.util.FileUtil
 
 class EJSBuilder extends IncrementalProjectBuilder {
 	private JSONParser jsonParser = new JSONParser()
@@ -33,7 +33,7 @@ class EJSBuilder extends IncrementalProjectBuilder {
 		if (file == null) {
 			return null
 		}
-		var jsonSource = IO.instance.readInputStream(file.contents, file.charset)
+		var jsonSource = FileUtil.getInstance.readInputStream(file.contents, file.charset)
 		var result = jsonParser.parse(jsonSource) as JSONObject
 
 		return result

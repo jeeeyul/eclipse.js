@@ -6,8 +6,8 @@ import java.lang.reflect.Field
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import net.jeeeyul.eclipsejs.util.BitExtension
-import net.jeeeyul.eclipsejs.util.IO
 import org.eclipse.swt.layout.GridData
+import net.jeeeyul.eclipsejs.util.FileUtil
 
 class JavaDocGenerator {
 	extension BitExtension = new BitExtension
@@ -125,7 +125,7 @@ class JavaDocGenerator {
 	
 	def static genrate(String name){
 		var is = typeof(JavaDocGenerator).getResource('''«name».txt''').openStream
-		var list = IO.instance.readInputStream(is, "UTF-8").split("(\r\n|\r|\n)+")
+		var list = FileUtil.getInstance.readInputStream(is, "UTF-8").split("(\r\n|\r|\n)+")
 		var gen = new JavaDocGenerator
 		var fos = new FileOutputStream('''/Users/Jeeeyul/Workspaces/personal/eclipse.js/net.jeeeyul.eclipsejs/libraries/docs/«name».js''');
 		var ps = new PrintStream(fos)

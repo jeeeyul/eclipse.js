@@ -431,6 +431,18 @@ ejs.File.prototype.getNativeFilePath = function() {
 	return EFS.getStore(uri).toLocalFile(0, null);
 };
 
+/**
+ * 
+ * @returns {Number} The file size.
+ */
+ejs.File.prototype.getSize = function() {
+	var EFS = org.eclipse.core.filesystem.EFS;
+	var uri = this.handle.getRawLocationURI();
+	var store = EFS.getStore(uri).toLocalFile(0, null);
+	var info = store.fetch();
+	return info.getLength();
+};
+
 // 
 // Workspace
 //
