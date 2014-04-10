@@ -442,7 +442,7 @@ ejs.File.prototype.getSize = function() {
 	var EFS = org.eclipse.core.filesystem.EFS;
 	var uri = this.handle.getRawLocationURI();
 	var store = EFS.getStore(uri);
-	var info = store.fetch();
+	var info = store.fetchInfo();
 	return info.getLength();
 };
 
