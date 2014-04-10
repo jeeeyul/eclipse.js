@@ -29,9 +29,9 @@ class EJSBuilder extends IncrementalProjectBuilder {
 	}
 	
 	def private JSONObject getBuilderSettings() {
-		var file = project.getFile(".ejs.build.json")
-		if (file == null) {
-			return null
+		var file = project.getFile("ejs-build.json")
+		if (!file.exists) {
+			return new JSONObject()
 		}
 		var jsonSource = FileUtil.getInstance.readInputStream(file.contents, file.charset)
 		var result = jsonParser.parse(jsonSource) as JSONObject
@@ -89,7 +89,7 @@ class EJSBuilder extends IncrementalProjectBuilder {
 	}
 
 	private def ContributedBuilder[] getBuilders() {
-		var settings = builderSettings
+		val settings = builderSettings
 		if(settings == null){
 			return #[]
 		}
@@ -105,6 +105,8 @@ class EJSBuilder extends IncrementalProjectBuilder {
 		builderIds.forEach [
 			try {
 				var eachBuilder = new ContributedBuilder(it)
+				var options = settings.get(it) as JSONObject
+				eachBuilder.options = options
 				builders += eachBuilder
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -56,6 +56,10 @@ class EJSExtension {
 			return null;
 		}
 	}
+	
+	def Object evaluate(String script){
+		return ctx.evaluateString(scope, script, "module-evaluation", 1, null)
+	}
 
 	def IFile getResourceFile(String relPath) {
 		return fDescriptor.getResource(relPath)

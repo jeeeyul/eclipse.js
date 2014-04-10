@@ -589,166 +589,621 @@ org.eclipse.core.runtime.Path.prototype.notifyAll = function(){
 /**
  * @constructor
  */
-org.eclipse.core.resources.IMarker = function(){
+org.eclipse.jface.action.IContributionManager = function(){
 	return this;
 };
 
 
-org.eclipse.core.resources.IMarker.MARKER = new java.lang.String();
-org.eclipse.core.resources.IMarker.TASK = new java.lang.String();
-org.eclipse.core.resources.IMarker.PROBLEM = new java.lang.String();
-org.eclipse.core.resources.IMarker.TEXT = new java.lang.String();
-org.eclipse.core.resources.IMarker.BOOKMARK = new java.lang.String();
-org.eclipse.core.resources.IMarker.SEVERITY = new java.lang.String();
-org.eclipse.core.resources.IMarker.MESSAGE = new java.lang.String();
-org.eclipse.core.resources.IMarker.LOCATION = new java.lang.String();
-org.eclipse.core.resources.IMarker.PRIORITY = new java.lang.String();
-org.eclipse.core.resources.IMarker.DONE = new java.lang.String();
-org.eclipse.core.resources.IMarker.CHAR_START = new java.lang.String();
-org.eclipse.core.resources.IMarker.CHAR_END = new java.lang.String();
-org.eclipse.core.resources.IMarker.LINE_NUMBER = new java.lang.String();
-org.eclipse.core.resources.IMarker.TRANSIENT = new java.lang.String();
-org.eclipse.core.resources.IMarker.USER_EDITABLE = new java.lang.String();
-org.eclipse.core.resources.IMarker.SOURCE_ID = new java.lang.String();
-org.eclipse.core.resources.IMarker.PRIORITY_HIGH = new Number();
-org.eclipse.core.resources.IMarker.PRIORITY_NORMAL = new Number();
-org.eclipse.core.resources.IMarker.PRIORITY_LOW = new Number();
-org.eclipse.core.resources.IMarker.SEVERITY_ERROR = new Number();
-org.eclipse.core.resources.IMarker.SEVERITY_WARNING = new Number();
-org.eclipse.core.resources.IMarker.SEVERITY_INFO = new Number();
 
 
 /**
- * @param {java.lang.Object} object
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IContributionManager.prototype.add = function(iContributionItem){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IContributionManager.prototype.add = function(iAction){
+};
+
+/**
  * @returns {Boolean}
  */
-org.eclipse.core.resources.IMarker.prototype.equals = function(object){
+org.eclipse.jface.action.IContributionManager.prototype.isEmpty = function(){
 };
 
 /**
- * @returns {org.eclipse.core.resources.IResource}
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IContributionItem}
  */
-org.eclipse.core.resources.IMarker.prototype.getResource = function(){
+org.eclipse.jface.action.IContributionManager.prototype.find = function(string){
 };
 
 /**
- * @returns {Number}
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IContributionItem}
  */
-org.eclipse.core.resources.IMarker.prototype.getId = function(){
+org.eclipse.jface.action.IContributionManager.prototype.remove = function(string){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IContributionManager.prototype.remove = function(iContributionItem){
+};
+
+/**
+ */
+org.eclipse.jface.action.IContributionManager.prototype.removeAll = function(){
+};
+
+/**
+ * @param {Boolean} boolean
+ */
+org.eclipse.jface.action.IContributionManager.prototype.update = function(boolean){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IContributionItem[]}
+ */
+org.eclipse.jface.action.IContributionManager.prototype.getItems = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IContributionManager.prototype.insertBefore = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IContributionManager.prototype.insertBefore = function(string, iAction){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IContributionManager.prototype.appendToGroup = function(string, iAction){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IContributionManager.prototype.appendToGroup = function(string, iContributionItem){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IContributionManagerOverrides}
+ */
+org.eclipse.jface.action.IContributionManager.prototype.getOverrides = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IContributionManager.prototype.insertAfter = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IContributionManager.prototype.insertAfter = function(string, iAction){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IContributionManager.prototype.isDirty = function(){
+};
+
+/**
+ */
+org.eclipse.jface.action.IContributionManager.prototype.markDirty = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IContributionManager.prototype.prependToGroup = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IContributionManager.prototype.prependToGroup = function(string, iAction){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.jface.action.IMenuManager = function(){
+	return this;
+};
+
+
+
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.isEnabled = function(){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IMenuListener} iMenuListener
+ */
+org.eclipse.jface.action.IMenuManager.prototype.addMenuListener = function(iMenuListener){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IMenuListener} iMenuListener
+ */
+org.eclipse.jface.action.IMenuManager.prototype.removeMenuListener = function(iMenuListener){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IMenuManager}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.findMenuUsingPath = function(string){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.findUsingPath = function(string){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.getRemoveAllWhenShown = function(){
+};
+
+/**
+ * @param {Boolean} boolean
+ */
+org.eclipse.jface.action.IMenuManager.prototype.setRemoveAllWhenShown = function(boolean){
+};
+
+/**
+ * @param {Boolean} boolean
+ */
+org.eclipse.jface.action.IMenuManager.prototype.updateAll = function(boolean){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IMenuManager.prototype.add = function(iContributionItem){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IMenuManager.prototype.add = function(iAction){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.isEmpty = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.find = function(string){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.remove = function(string){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.remove = function(iContributionItem){
+};
+
+/**
+ */
+org.eclipse.jface.action.IMenuManager.prototype.removeAll = function(){
+};
+
+/**
+ * @param {Boolean} boolean
+ */
+org.eclipse.jface.action.IMenuManager.prototype.update = function(boolean){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IContributionItem[]}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.getItems = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IMenuManager.prototype.insertBefore = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IMenuManager.prototype.insertBefore = function(string, iAction){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IMenuManager.prototype.appendToGroup = function(string, iAction){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IMenuManager.prototype.appendToGroup = function(string, iContributionItem){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IContributionManagerOverrides}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.getOverrides = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IMenuManager.prototype.insertAfter = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IMenuManager.prototype.insertAfter = function(string, iAction){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.isDirty = function(){
+};
+
+/**
+ */
+org.eclipse.jface.action.IMenuManager.prototype.markDirty = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IMenuManager.prototype.prependToGroup = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IMenuManager.prototype.prependToGroup = function(string, iAction){
 };
 
 /**
  * @returns {java.lang.String}
  */
-org.eclipse.core.resources.IMarker.prototype.getType = function(){
+org.eclipse.jface.action.IMenuManager.prototype.getId = function(){
 };
 
 /**
+ * @param {org.eclipse.swt.widgets.Composite} composite
  */
-org.eclipse.core.resources.IMarker.prototype.deleteMarker = function(){
+org.eclipse.jface.action.IMenuManager.prototype.fill = function(composite){
 };
 
 /**
- * @returns {Boolean}
- */
-org.eclipse.core.resources.IMarker.prototype.exists = function(){
-};
-
-/**
- * @param {java.lang.String[]} strings
- * @returns {java.lang.Object[]}
- */
-org.eclipse.core.resources.IMarker.prototype.getAttributes = function(strings){
-};
-
-/**
- * @returns {java.util.Map}
- */
-org.eclipse.core.resources.IMarker.prototype.getAttributes = function(){
-};
-
-/**
- * @param {java.lang.String} string
- * @param {java.lang.String} string
- * @returns {java.lang.String}
- */
-org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string, string){
-};
-
-/**
- * @param {java.lang.String} string
- * @param {Boolean} boolean
- * @returns {Boolean}
- */
-org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string, boolean){
-};
-
-/**
- * @param {java.lang.String} string
- * @param {Number} int
- * @returns {Number}
- */
-org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string, int){
-};
-
-/**
- * @param {java.lang.String} string
- * @returns {java.lang.Object}
- */
-org.eclipse.core.resources.IMarker.prototype.getAttribute = function(string){
-};
-
-/**
- * @returns {Number}
- */
-org.eclipse.core.resources.IMarker.prototype.getCreationTime = function(){
-};
-
-/**
- * @param {java.lang.String} string
- * @returns {Boolean}
- */
-org.eclipse.core.resources.IMarker.prototype.isSubtypeOf = function(string){
-};
-
-/**
- * @param {java.lang.String} string
+ * @param {org.eclipse.swt.widgets.Menu} menu
  * @param {Number} int
  */
-org.eclipse.core.resources.IMarker.prototype.setAttribute = function(string, int){
+org.eclipse.jface.action.IMenuManager.prototype.fill = function(menu, int){
 };
 
 /**
- * @param {java.lang.String} string
- * @param {java.lang.Object} object
+ * @param {org.eclipse.swt.widgets.ToolBar} toolBar
+ * @param {Number} int
  */
-org.eclipse.core.resources.IMarker.prototype.setAttribute = function(string, object){
+org.eclipse.jface.action.IMenuManager.prototype.fill = function(toolBar, int){
+};
+
+/**
+ * @param {org.eclipse.swt.widgets.CoolBar} coolBar
+ * @param {Number} int
+ */
+org.eclipse.jface.action.IMenuManager.prototype.fill = function(coolBar, int){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IContributionManager} iContributionManager
+ */
+org.eclipse.jface.action.IMenuManager.prototype.setParent = function(iContributionManager){
 };
 
 /**
  * @param {java.lang.String} string
+ */
+org.eclipse.jface.action.IMenuManager.prototype.update = function(string){
+};
+
+/**
+ */
+org.eclipse.jface.action.IMenuManager.prototype.update = function(){
+};
+
+/**
+ */
+org.eclipse.jface.action.IMenuManager.prototype.dispose = function(){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.isVisible = function(){
+};
+
+/**
  * @param {Boolean} boolean
  */
-org.eclipse.core.resources.IMarker.prototype.setAttribute = function(string, boolean){
+org.eclipse.jface.action.IMenuManager.prototype.setVisible = function(boolean){
 };
 
 /**
- * @param {java.lang.String[]} strings
- * @param {java.lang.Object[]} objects
+ * @returns {Boolean}
  */
-org.eclipse.core.resources.IMarker.prototype.setAttributes = function(strings, objects){
+org.eclipse.jface.action.IMenuManager.prototype.isDynamic = function(){
 };
 
 /**
- * @param {java.util.Map} map
+ * @returns {Boolean}
  */
-org.eclipse.core.resources.IMarker.prototype.setAttributes = function(map){
+org.eclipse.jface.action.IMenuManager.prototype.isDirty = function(){
 };
 
 /**
- * @param {java.lang.Class} class
- * @returns {java.lang.Object}
+ * @returns {Boolean}
  */
-org.eclipse.core.resources.IMarker.prototype.getAdapter = function(class){
+org.eclipse.jface.action.IMenuManager.prototype.isGroupMarker = function(){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IMenuManager.prototype.isSeparator = function(){
+};
+
+/**
+ */
+org.eclipse.jface.action.IMenuManager.prototype.saveWidgetState = function(){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.jface.action.IToolBarManager = function(){
+	return this;
+};
+
+
+
+
+/**
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.add = function(iContributionItem){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.add = function(iAction){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.isEmpty = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.find = function(string){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.remove = function(string){
+};
+
+/**
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ * @returns {org.eclipse.jface.action.IContributionItem}
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.remove = function(iContributionItem){
+};
+
+/**
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.removeAll = function(){
+};
+
+/**
+ * @param {Boolean} boolean
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.update = function(boolean){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IContributionItem[]}
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.getItems = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.insertBefore = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.insertBefore = function(string, iAction){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.appendToGroup = function(string, iAction){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.appendToGroup = function(string, iContributionItem){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IContributionManagerOverrides}
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.getOverrides = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.insertAfter = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.insertAfter = function(string, iAction){
+};
+
+/**
+ * @returns {Boolean}
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.isDirty = function(){
+};
+
+/**
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.markDirty = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IContributionItem} iContributionItem
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.prependToGroup = function(string, iContributionItem){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.jface.action.IToolBarManager.prototype.prependToGroup = function(string, iAction){
+};
+
+/**
+ * @constructor
+ */
+org.eclipse.ui.IActionBars = function(){
+	return this;
+};
+
+
+
+
+/**
+ */
+org.eclipse.ui.IActionBars.prototype.clearGlobalActionHandlers = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @returns {org.eclipse.jface.action.IAction}
+ */
+org.eclipse.ui.IActionBars.prototype.getGlobalActionHandler = function(string){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IMenuManager}
+ */
+org.eclipse.ui.IActionBars.prototype.getMenuManager = function(){
+};
+
+/**
+ * @returns {org.eclipse.ui.services.IServiceLocator}
+ */
+org.eclipse.ui.IActionBars.prototype.getServiceLocator = function(){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IStatusLineManager}
+ */
+org.eclipse.ui.IActionBars.prototype.getStatusLineManager = function(){
+};
+
+/**
+ * @returns {org.eclipse.jface.action.IToolBarManager}
+ */
+org.eclipse.ui.IActionBars.prototype.getToolBarManager = function(){
+};
+
+/**
+ * @param {java.lang.String} string
+ * @param {org.eclipse.jface.action.IAction} iAction
+ */
+org.eclipse.ui.IActionBars.prototype.setGlobalActionHandler = function(string, iAction){
+};
+
+/**
+ */
+org.eclipse.ui.IActionBars.prototype.updateActionBars = function(){
 };
 

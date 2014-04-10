@@ -19,16 +19,25 @@ ejs.internal.wrapResource = function(resource) {
 	}
 };
 
-ejs.internal.wrapWorkbenchModel = function(handle) {
-	if (n instanceof org.eclipse.ui.IWorkbenchPage) {
-		return new ejs.WorkbenchPage(handle);
-	}
-
-	else if (n instanceof org.eclipse.ui.IWorkbenchWindow) {
-		return new ejs.WorkbenchWindow(handle);
+/**
+ * @param handle
+ * @returns {ejs.WorkbenchSite}
+ */
+ejs.internal.wrapWorkbenchSite = function(handle) {
+	if (handle instanceof org.eclipse.ui.IViewSite) {
+		return new ejs.ViewSite(handle);
 	}
 
 	throw new Error("unsupported workbench model");
+};
+
+/**
+ * 
+ * @param handle
+ * @returns {ejs.WorkbenchPart}
+ */
+ejs.internal.wrapWorkbenchPart = function(handle) {
+
 };
 
 /**

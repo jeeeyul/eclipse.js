@@ -24,6 +24,7 @@ public class EJSContextFactory extends ContextFactory {
 	@Override
 	protected Context makeContext() {
 		EJSContext context = new EJSContext(this);
+		context.setWrapFactory(new EJSWrapFactory());
 		return context;
 	}
 

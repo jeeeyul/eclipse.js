@@ -5,25 +5,25 @@ import net.jeeeyul.eclipsejs.extensions.EJSExtension
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.IResourceDelta
 import org.eclipse.core.runtime.IProgressMonitor
+import org.json.simple.JSONObject
 
 class ContributedBuilder {
-	EJSExtension module
+	EJSExtension fModule
+	@Property JSONObject options
 
 	new(String builderId) {
-		module = EclipseJSCore.^default.getExtension("builders", builderId, builderId)
+		fModule = EclipseJSCore.^default.getExtension("builders", builderId, builderId)
 	}
 
 	def incremetalBuild(IResourceDelta delta, IProgressMonitor monitor) {
-		module.callInstanceFunction("build", delta, monitor)
+		fModule.callInstanceFunction("build", delta, monitor, options)
 	}
 	
 	def fullBuild(IProject project, IProgressMonitor monitor){
-		module.callInstanceFunction("fullBuild", project, monitor)
+		fModule.callInstanceFunction("fullBuild", project, monitor, options)
 	}
 	
 	def clean(IProject project, IProgressMonitor monitor){
-		module.callInstanceFunction("clean", project, monitor)
+		fModule.callInstanceFunction("clean", project, monitor, options)
 	}
-	
-
 }

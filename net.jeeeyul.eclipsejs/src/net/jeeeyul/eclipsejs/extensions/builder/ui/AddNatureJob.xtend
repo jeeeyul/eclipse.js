@@ -1,13 +1,14 @@
 package net.jeeeyul.eclipsejs.extensions.builder.ui
 
 import java.util.List
+import net.jeeeyul.eclipsejs.EclipseJSCore
+import net.jeeeyul.eclipsejs.util.FileUtil
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.resources.WorkspaceJob
 import org.eclipse.core.runtime.CoreException
 import org.eclipse.core.runtime.IProgressMonitor
-import org.eclipse.core.runtime.Status
 import org.eclipse.core.runtime.IStatus
-import net.jeeeyul.eclipsejs.EclipseJSCore
+import org.eclipse.core.runtime.Status
 
 class AddNatureJob extends WorkspaceJob {
 	String natureId
@@ -30,6 +31,12 @@ class AddNatureJob extends WorkspaceJob {
 		natures.add(natureId)
 		desc.natureIds = natures
 		project.setDescription(desc, monitor)
+		
+		var buildFile = project.getFile("ejs-build.json")
+		if(!buildFile.exists){
+			FileUtil.instance.create(buildFile, "{}");
+		}
+		
 		return Status.OK_STATUS
 	}
 

@@ -142,9 +142,8 @@
                id="net.jeeeyul.eclipsejs.template.extension.view"
                name="View">
             <pattern>
-               module = ejs.View.extend({&quot;name&quot; : &quot;${viewName}&quot;,
-	&quot;icon&quot; : &quot;${icon}&quot;,
-	&quot;init&quot; : function(viewSite){
+               module = ejs.View.extend({
+	&quot;init&quot; : function(/* ejs.ViewSite */ viewSite){
 		this.viewSite = viewSite;
 	},
 	&quot;create&quot; : function(/*org.eclipse.swt.widgets.Shell*/ parent) {
@@ -163,7 +162,7 @@
                id="net.jeeeyul.eclipsejs.template.extension.find.files"
                name="findFiles">
             <pattern>
-               var ${list:localVar} = workspace.find(${pattern:localVar});
+               var ${list:localVar} = workspace.getRoot().findFiles(${pattern:localVar});
 monitor.beginTask(${taskName:localVar}, ${list}.length);
 ${list}.forEach(function(/* ejs.File */it){
 	${cursor}
@@ -181,11 +180,11 @@ monitor.done();
                name="Builder">
             <pattern>
                module = ejs.Builder.extend({
-	changed: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit){
+	changed: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit, options){
 	},
-	added: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit){
+	added: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit, options){
 	},
-	removed: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit){
+	removed: function(/*ejs.File*/ file, /* ejs.Builder.Toolkit */ toolkit, options){
 	}
 });
             </pattern>

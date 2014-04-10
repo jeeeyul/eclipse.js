@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.jeeeyul.eclipsejs.util.FileUtil;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
@@ -27,10 +25,12 @@ import org.mozilla.javascript.ScriptableObject;
  */
 public class Require {
 	private static Map<Thread, Map<IFile, Object>> moduleMap = new HashMap<Thread, Map<IFile, Object>>();
+
 	public static final void unloadModulesForAllThread() {
 		moduleMap.clear();
 		moduleMap = new HashMap<Thread, Map<IFile, Object>>();
 	}
+
 	private IPath workingDir;
 	private Context context;
 
@@ -115,10 +115,7 @@ public class Require {
 			moduleWrapper.before(context, scope);
 
 			IFile file = descriptor.getModuleFile();
-			String moduleScript = FileUtil.getInstance().readInputStream(
-					file.getContents(), file.getCharset());
-			context.evaluateString(scope, moduleScript, file.getFullPath()
-					.toPortableString(), 1, null);
+			moduleWrapper.evaluate(context, scope, file);
 
 			cached = moduleWrapper.after(context, scope);
 			map.put(descriptor.getModuleFile(), cached);

@@ -12,7 +12,6 @@ ejs.Resource = function(fullPath) {
 	}
 	this.fullPath = fullPath;
 };
-
 ejs.Resource.NONE = 0;
 ejs.Resource.DEPTH_ZERO = 0;
 ejs.Resource.DEPTH_ONE = 1;
@@ -189,6 +188,10 @@ ejs.Resource.prototype.findMarkers = function(type, includeSubType, depth) {
 	});
 };
 
+ejs.Resource.prototype.getProject = function(){
+	return new ejs.Project(this.handle);
+};
+
 // 
 // Container
 // 
@@ -244,8 +247,8 @@ ejs.Container.prototype.members = function() {
  */
 ejs.Container.prototype.findFiles = function(pattern) {
 	var result = [];
-	var exp = pattern.replace(/\*\*/g, "��ANY_PATH��").replace(/\*/, "��ANY_SEGMENT��").replace(/\./, "��DOT��").replace("?", "��ANY_CHAR��");
-	exp = exp.replace(/��ANY_PATH��/g, ".*").replace(/��ANY_SEGMENT��/g, "[^/]*").replace(/��DOT��/g, "\\\.").replace(/��ANY_CHAR��/g, ".")
+	var exp = pattern.replace(/\*\*/g, "«ANY_PATH»").replace(/\*/, "«ANY_SEGMENT»").replace(/\./, "«DOT»").replace("?", "«ANY_CHAR»");
+	exp = exp.replace(/«ANY_PATH»/g, ".*").replace(/«ANY_SEGMENT»/g, "[^/]*").replace(/«DOT»/g, "\\\.").replace(/«ANY_CHAR»/g, ".")
 	var regexp = new RegExp("^" + exp + "$");
 
 	var offsetLength = this.getFullPath().segmentCount();
@@ -408,11 +411,11 @@ ejs.File = function(fullPath) {
 
 ejs.File.prototype = Object.create(ejs.Resource.prototype);
 
-ejs.File.prototype.getContents = function() {
+ejs.File.prototype.getTextContents = function() {
 	return String(ejs.io.readInputStream(this.handle.getContents(), this.handle.getCharset()));
 };
 
-ejs.File.prototype.setContents = function(contents) {
+ejs.File.prototype.setTextContents = function(contents) {
 	if (this.exists()) {
 		ejs.io.setContents(this.handle, contents);
 	} else {

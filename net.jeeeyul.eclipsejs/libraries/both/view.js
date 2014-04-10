@@ -12,8 +12,10 @@ ejs.View.prototype.getImage = function(relPath) {
 	return this.imageRegistry.get(relPath);
 };
 
-ejs.View.prototype.init = function(viewSite) {
-
+ejs.View.prototype._init = function(viewSite) {
+	if (typeof this.init === "function") {
+		this.init.call(this, ejs.internal.wrapWorkbenchSite(viewSite));
+	}
 };
 
 ejs.View.prototype.create = function(parent) {

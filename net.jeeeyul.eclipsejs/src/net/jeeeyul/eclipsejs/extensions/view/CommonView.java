@@ -118,7 +118,7 @@ public class CommonView extends ViewPart {
 		}
 
 		module = new EJSExtension("views", viewId, imageRegistry);
-		module.callInstanceFunction("init", site);
+		module.callInstanceFunction("_init", site);
 
 		String partName = (String) module.getMetaData("name");
 		if (partName != null) {

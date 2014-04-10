@@ -39,27 +39,30 @@ ejs.Selection.prototype.toArray = function() {
  */
 ejs.SelectionService = function(handle) {
 	this.handle = handle;
-
-}
+};
 
 ejs.SelectionService.prototype.addSelectionListener = function(listener) {
 	if (typeof listener !== "function") {
 		throw new Error("listener must be a function.");
 	}
 
-	listener.__bridge = {
-		__owner : listener,
-		selectionChanged : function(part, selection) {
-			listener(part, new ejs.Selection(selection));
-		}
-	};
+	if (listener.__selection_listener_bridge === undefined) {
+		listener.__selection_listener_bridge = {
+			__owner : listener,
+			selectionChanged : function(part, selection) {
+				listener(ejs.internal.wrapWorkbenchPart(part), new ejs.Selection(selection));
+			}
+		};
+	}
 
-	this.handle.addSelectionListener(listener.__bridge);
+	this.handle.addSelectionListener(listener.__selection_listener_bridge);
 };
 
 ejs.SelectionService.prototype.removeSelectionListener = function(listener) {
 	if (typeof listener !== "function") {
 		throw new Error("listener must be a function.");
 	}
-	this.handle.removeSelectionListener(listener.__bridge);
+	if(listener.__selection_listener_bridge){
+		this.handle.removeSelectionListener(listener.__selection_listener_bridge);
+	}
 };

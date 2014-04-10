@@ -11,7 +11,7 @@ ejs.Builder.prototype.getId = function() {
 	return this.id;
 };
 
-ejs.Builder.prototype.build = function(delta, monitor) {
+ejs.Builder.prototype.build = function(delta, monitor, options) {
 	var me = this;
 	var deltas = [];
 	if (delta) {
@@ -51,15 +51,16 @@ ejs.Builder.prototype.build = function(delta, monitor) {
 				return;
 			}
 			monitor.subTask(it.file.getName());
-			me.toolkit.clearError(it.file);
-			it.handler.call(me, it.file, me.toolkit);
+			if (it.file.exists())
+				me.toolkit.clearError(it.file);
+			it.handler.call(me, it.file, me.toolkit, options);
 			monitor.worked(1);
 		});
 		monitor.done();
 	}
 };
 
-ejs.Builder.prototype.fullBuild = function(projectHandle, monitor) {
+ejs.Builder.prototype.fullBuild = function(projectHandle, monitor, options) {
 	var me = this;
 	var project = new ejs.Project(projectHandle);
 	var allFiles = project.findFiles("**");
@@ -76,7 +77,7 @@ ejs.Builder.prototype.fullBuild = function(projectHandle, monitor) {
 	monitor.done();
 };
 
-ejs.Builder.prototype.clean = function(projectHandle, monitor) {
+ejs.Builder.prototype.clean = function(projectHandle, monitor, options) {
 	var me = this;
 	var project = new ejs.Project(projectHandle);
 	var files = this.toolkit.getBuildResults(project);
@@ -98,8 +99,10 @@ ejs.Builder.prototype.clean = function(projectHandle, monitor) {
  *            file
  * @param {ejs.Builder.Toolkit}
  *            toolkit
+ * @param {Object}
+ *            options
  */
-ejs.Builder.prototype.changed = function(file, toolkit) {
+ejs.Builder.prototype.changed = function(file, toolkit, options) {
 
 };
 
@@ -108,8 +111,10 @@ ejs.Builder.prototype.changed = function(file, toolkit) {
  *            file
  * @param {ejs.Builder.Toolkit}
  *            toolkit
+ * @param {Object}
+ *            options
  */
-ejs.Builder.prototype.added = function(file, toolkit) {
+ejs.Builder.prototype.added = function(file, toolkit, options) {
 
 };
 
@@ -118,8 +123,10 @@ ejs.Builder.prototype.added = function(file, toolkit) {
  *            file
  * @param {ejs.Builder.Toolkit}
  *            toolkit
+ * @param {Object}
+ *            options
  */
-ejs.Builder.prototype.removed = function(file, toolkit) {
+ejs.Builder.prototype.removed = function(file, toolkit, options) {
 
 };
 
@@ -200,7 +207,7 @@ ejs.Builder.Toolkit.prototype.clearError = function(file) {
 	markers = markers.filter(function(/* ejs.Marker */it) {
 		return it.getAttribute("eclipse.js.builder") == me.builder.getId();
 	});
-	
+
 	markers.forEach(function(/* ejs.Marker */it) {
 		it.deleteMarker();
 	});

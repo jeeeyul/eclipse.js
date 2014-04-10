@@ -1,4 +1,7 @@
 org.eclipse.core.runtime.IProgressMonitor
 org.eclipse.core.runtime.IPath
 org.eclipse.core.runtime.Path
-org.eclipse.core.resources.IMarker
+org.eclipse.jface.action.IContributionManager
+org.eclipse.jface.action.IMenuManager
+org.eclipse.jface.action.IToolBarManager
+org.eclipse.ui.IActionBars

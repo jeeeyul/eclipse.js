@@ -9,6 +9,11 @@ ejs.ServiceLocator.prototype.getNativeServiceHandle = function(serviceType) {
 	return this.handle.getService(serviceType);
 };
 
+
+ejs.ServiceLocator.prototype.getSelectionService = function() {
+	return new ejs.SelectionService(this.handle.getService(org.eclipse.ui.ISelectionService));
+};
+
 /**
  * @constructor
  * @base ejs.ServiceLocator
@@ -78,10 +83,6 @@ ejs.WorkbenchWindow = function(handle) {
 };
 
 ejs.WorkbenchWindow.prototype = Object.create(ejs.ServiceLocator.prototype);
-
-ejs.WorkbenchWindow.prototype.getSelectionService = function() {
-	return new ejs.SelectionService(this.handle.getService(org.eclipse.ui.ISelectionService));
-};
 
 /**
  * @returns {org.eclipse.swt.widgets.Shell}
@@ -162,4 +163,153 @@ ejs.WorkbenchSite.prototype.getShell = function() {
  */
 ejs.WorkbenchSite.prototype.getWorkbenchWindow = function() {
 	return new ejs.WorkbenchWindow(this.handle.getWorkbenchWindow());
+};
+
+//
+// Workbench Part Site
+//
+
+/**
+ * @constructor
+ * @base ejs.WorkbenchSite
+ */
+ejs.WorkbenchPartSite = function(handle) {
+	ejs.WorkbenchSite.apply(this, arguments);
+	this.handle = handle;
+	this.constructor = ejs.WorkbenchPartSite;
+	return this;
+};
+
+ejs.WorkbenchPartSite.prototype = Object.create(ejs.WorkbenchSite.prototype);
+
+/**
+ * Returns the part registry extension id for this workbench site's part.
+ * <p>
+ * The name comes from the <code>id</code> attribute in the configuration
+ * element.
+ * </p>
+ * 
+ * @returns {String} the registry extension id
+ */
+ejs.WorkbenchPartSite.prototype.getId = function() {
+	return String(this.handle.getId());
+};
+
+ejs.WorkbenchPartSite.prototype.getPluginId = function() {
+	return String(this.handle.getPluginId());
+};
+
+ejs.WorkbenchPartSite.prototype.getRegisteredName = function() {
+	return String(this.handle.getRegisteredName());
+};
+
+/**
+ * 
+ * @returns {ejs.WorkbenchPart}
+ */
+ejs.WorkbenchPartSite.prototype.getPart = function() {
+	return ejs.internal.wrapWorkbenchPart(this.handle.getPart());
+};
+
+//
+// ViewSite
+//
+/**
+ * @constructor
+ * @base ejs.WorkbenchPartSite
+ */
+ejs.ViewSite = function(handle) {
+	ejs.WorkbenchPartSite.apply(this, arguments);
+	this.handle = handle;
+	this.constructor = ejs.ViewSite;
+	return this;
+};
+
+ejs.ViewSite.prototype = Object.create(ejs.WorkbenchPartSite.prototype);
+
+/**
+ * Returns the action bars for this part site. Views have exclusive use of
+ * their site's action bars.
+ * 
+ * @returns {org.eclipse.ui.IActionBars}
+ */
+ejs.ViewSite.prototype.getActionBars = function() {
+	return this.handle.getActionBars();
+};
+
+/**
+ * Returns the secondary id for this part site's part, or <code>null</code> if
+ * it has none.
+ * 
+ * @returns {String} the secondary id for this part site's part or
+ *          <code>null</code> if it has none
+ */
+ejs.ViewSite.prototype.getSecondaryId = function() {
+	var id = this.handle.getSecondaryId();
+	if (id == null) {
+		return null;
+	}
+	return String(id);
+};
+
+//
+// Part
+//
+ejs.WorkbenchPart = function(handle) {
+	this.handle = handle;
+};
+
+/**
+ * 
+ * @returns {ejs.WorkbenchSite}
+ */
+ejs.WorkbenchPart.prototype.getSite = function() {
+	return ejs.internal.wrapWorkbenchSite(this.handle.getSite());
+};
+
+/**
+ * Returns the title of this workbench part. If this value changes the part must
+ * fire a property listener event with <code>PROP_TITLE</code>.
+ * <p>
+ * The title is used to populate the title bar of this part's visual container.
+ * </p>
+ * 
+ * @returns {String} the workbench part title (not <code>null</code>)
+ */
+ejs.WorkbenchPart.prototype.getTitle = function() {
+	return String(this.handle.getTitle());
+};
+
+/**
+ * Returns the title image of this workbench part. If this value changes the
+ * part must fire a property listener event with <code>PROP_TITLE</code>.
+ * <p>
+ * The title image is usually used to populate the title bar of this part's
+ * visual container. Since this image is managed by the part itself, callers
+ * must <b>not</b> dispose the returned image.
+ * </p>
+ * 
+ * @returns {org.eclipse.swt.graphics.Image} the title image
+ */
+ejs.WorkbenchPart.prototype.getTitleImage = function() {
+	return this.handle.getTitleImage();
+};
+
+/**
+ * Returns the title tool tip text of this workbench part. An empty string
+ * result indicates no tool tip. If this value changes the part must fire a
+ * property listener event with <code>PROP_TITLE</code>.
+ * <p>
+ * The tool tip text is used to populate the title bar of this part's visual
+ * container.
+ * </p>
+ * 
+ * @returns {String} the workbench part title tool tip (not <code>null</code>)
+ */
+ejs.WorkbenchPart.prototype.getTitleToolTip = function() {
+	return String(this.handle.getTitleToolTip());
+};
+
+ejs.WorkbenchPart.prototype.setFocus = function() {
+	this.handle.setFocus();
 };
