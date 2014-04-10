@@ -441,7 +441,7 @@ ejs.File.prototype.getNativeFilePath = function() {
 ejs.File.prototype.getSize = function() {
 	var EFS = org.eclipse.core.filesystem.EFS;
 	var uri = this.handle.getRawLocationURI();
-	var store = EFS.getStore(uri).toLocalFile(0, null);
+	var store = EFS.getStore(uri);
 	var info = store.fetch();
 	return info.getLength();
 };
