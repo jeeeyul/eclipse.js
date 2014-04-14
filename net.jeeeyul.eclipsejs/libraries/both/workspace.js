@@ -411,15 +411,15 @@ ejs.File = function(fullPath) {
 
 ejs.File.prototype = Object.create(ejs.Resource.prototype);
 
-ejs.File.prototype.getTextContents = function() {
-	return String(ejs.io.readInputStream(this.handle.getContents(), this.handle.getCharset()));
+ejs.File.prototype.getTextContent = function() {
+	return String(ejs.io.getTextContent(this.handle.getContents(), this.handle.getCharset()));
 };
 
-ejs.File.prototype.setTextContents = function(contents) {
+ejs.File.prototype.setTextContent = function(contents) {
 	if (this.exists()) {
-		ejs.io.setContents(this.handle, contents);
+		ejs.io.setTextContent(this.handle, contents);
 	} else {
-		ejs.io.create(this.handle, contents);
+		ejs.io.createWithTextContent(this.handle, contents);
 	}
 };
 

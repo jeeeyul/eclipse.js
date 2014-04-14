@@ -12,18 +12,31 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 
+/**
+ * 
+ * @author Jeeeyul
+ *
+ */
 public class FileUtil {
 	private static final FileUtil instance = new FileUtil();
 
+	/**
+	 * @return A singleton instance.
+	 */
 	public static FileUtil getInstance() {
 		return instance;
 	}
 
-	public FileUtil() {
-	}
-
-	public String readInputStream(InputStream is, String charset)
-			throws IOException {
+	/**
+	 * 
+	 * @param is
+	 *            {@link InputStream} to read.
+	 * @param charset
+	 *            encoding to read.
+	 * @return Text Content of given input stream.
+	 * @throws IOException
+	 */
+	public String getTextContent(InputStream is, String charset) throws IOException {
 		byte[] buf = new byte[512];
 		int len = -1;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -35,20 +48,42 @@ public class FileUtil {
 		return baos.toString(charset);
 	}
 
-	public void setContents(IFile file, String content)
-			throws UnsupportedEncodingException, CoreException {
+	/**
+	 * Store given text content into {@link IFile}.
+	 * 
+	 * @param file
+	 *            file to save.
+	 * @param content
+	 *            text content to store.
+	 * @throws UnsupportedEncodingException
+	 * @throws CoreException
+	 */
+	public void setTextContent(IFile file, String content) throws UnsupportedEncodingException, CoreException {
 		byte[] data = content.getBytes(file.getCharset());
-		file.setContents(new ByteArrayInputStream(data), true, true,
-				new NullProgressMonitor());
+		file.setContents(new ByteArrayInputStream(data), true, true, new NullProgressMonitor());
 	}
 
-	public void create(IFile file, String content)
-			throws UnsupportedEncodingException, CoreException {
+	/**
+	 * Store give text content into {@link IFile}.
+	 * 
+	 * @param file
+	 *            file to create.
+	 * @param content
+	 *            text content to store.
+	 * @throws UnsupportedEncodingException
+	 * @throws CoreException
+	 */
+	public void createWithTextContent(IFile file, String content) throws UnsupportedEncodingException, CoreException {
 		byte[] data = content.getBytes(file.getCharset());
-		file.create(new ByteArrayInputStream(data), true,
-				new NullProgressMonitor());
+		file.create(new ByteArrayInputStream(data), true, new NullProgressMonitor());
 	}
 
+	/**
+	 * Ensure existence of folder.
+	 * 
+	 * @param folder
+	 *            folder to ensure existence. It will ensure all it's parents.
+	 */
 	public void mkdirp(IFolder folder) {
 		if (folder.exists()) {
 			return;
@@ -59,8 +94,7 @@ public class FileUtil {
 			if (parent instanceof IFolder) {
 				mkdirp((IFolder) parent);
 			} else {
-				throw new RuntimeException(
-						"Project can't be created through mkdirp");
+				throw new RuntimeException("Project can't be created through mkdirp");
 			}
 		}
 

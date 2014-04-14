@@ -33,7 +33,7 @@ class EJSBuilder extends IncrementalProjectBuilder {
 		if (!file.exists) {
 			return new JSONObject()
 		}
-		var jsonSource = FileUtil.getInstance.readInputStream(file.contents, file.charset)
+		var jsonSource = FileUtil.getInstance.getTextContent(file.contents, file.charset)
 		var result = jsonParser.parse(jsonSource) as JSONObject
 
 		return result

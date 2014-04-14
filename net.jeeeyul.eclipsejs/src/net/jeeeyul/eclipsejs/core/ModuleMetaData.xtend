@@ -17,7 +17,7 @@ class ModuleMetaData {
 			if (descriptor.metaFile.exists) {
 				try {
 					var jsonFile = descriptor.metaFile
-					var source = FileUtil.getInstance.readInputStream(jsonFile.contents, jsonFile.charset)
+					var source = FileUtil.getInstance.getTextContent(jsonFile.contents, jsonFile.charset)
 					json = new JSONParser().parse(source) as JSONObject
 				} catch (Exception e) {
 					e.printStackTrace()

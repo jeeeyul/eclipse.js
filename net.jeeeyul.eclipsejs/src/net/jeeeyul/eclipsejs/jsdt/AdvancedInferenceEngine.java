@@ -19,14 +19,17 @@ import org.eclipse.wst.jsdt.internal.compiler.ast.Expression;
 import org.eclipse.wst.jsdt.internal.compiler.ast.NumberLiteral;
 import org.eclipse.wst.jsdt.internal.compiler.ast.StringLiteral;
 
+/**
+ * Additional Inference Engine for eclipse.js
+ * 
+ * @author Jeeeyul
+ *
+ */
 @SuppressWarnings("restriction")
 public class AdvancedInferenceEngine extends ASTVisitor implements IInferEngine {
 	private Pattern staticFieldPatthern = Pattern
 			.compile("^([a-zA-Z_][a-zA-Z0-9_-]+(\\.[a-zA-Z_][a-zA-Z0-9_-]*)+)(\\.)([a-zA-Z_][a-zA-Z0-9_-]*)$");
 	private CompilationUnitDeclaration parsedUnit;
-
-	public AdvancedInferenceEngine() {
-	}
 
 	@Override
 	public void initialize() {
@@ -87,6 +90,7 @@ public class AdvancedInferenceEngine extends ASTVisitor implements IInferEngine 
 		super.endVisit(assignment);
 	}
 
+	// processes type hint in function arguments.
 	@Override
 	public void endVisit(IFunctionDeclaration functionDeclaration) {
 		IArgument[] arguments = functionDeclaration.getArguments();

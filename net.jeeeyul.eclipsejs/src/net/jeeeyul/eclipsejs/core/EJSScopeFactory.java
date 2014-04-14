@@ -16,6 +16,7 @@ import net.jeeeyul.eclipsejs.util.FileUtil;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ScriptableObject;
 import org.osgi.framework.Bundle;
@@ -24,6 +25,7 @@ import org.osgi.framework.Bundle;
  * 
  * @author Jeeeyul
  * @see #create(IPath, Map)
+ * @since 0.1
  *
  */
 public class EJSScopeFactory {
@@ -31,6 +33,10 @@ public class EJSScopeFactory {
 
 	private FileUtil io = new FileUtil();
 
+	/**
+	 * 
+	 * @return {@link EJSScopeFactory} singleton instance.
+	 */
 	public static EJSScopeFactory getInstance() {
 		if (instance == null) {
 			instance = new EJSScopeFactory();
@@ -41,6 +47,13 @@ public class EJSScopeFactory {
 	private EJSScopeFactory() {
 	}
 
+	/**
+	 * Creates a Scope for given offset path.
+	 * 
+	 * @param path
+	 *            offset {@link Path}.
+	 * @return A {@link ScriptableObject} that abstracts an scope.
+	 */
 	public ScriptableObject create(IPath path) {
 		return create(path, new HashMap<String, Object>());
 	}
@@ -106,7 +119,7 @@ public class EJSScopeFactory {
 
 		for (URL each : list) {
 			try {
-				String script = io.readInputStream(each.openStream(), "UTF-8");
+				String script = io.getTextContent(each.openStream(), "UTF-8");
 				ctx.evaluateString(scope, script,
 						"eclipsejs:/" + each.getPath(), 1, null);
 			} catch (IOException e) {

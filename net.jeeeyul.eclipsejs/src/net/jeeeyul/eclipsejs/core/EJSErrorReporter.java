@@ -7,8 +7,17 @@ import org.mozilla.javascript.ErrorReporter;
 import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.ScriptRuntime;
 
+/**
+ * Default {@link ErrorReporter} for {@link EJSContext}.
+ * 
+ * @author Jeeeyul
+ * @since 0.1
+ */
 public class EJSErrorReporter implements ErrorReporter {
 
+	/**
+	 * Creates a {@link EJSErrorReporter}.
+	 */
 	public EJSErrorReporter() {
 	}
 

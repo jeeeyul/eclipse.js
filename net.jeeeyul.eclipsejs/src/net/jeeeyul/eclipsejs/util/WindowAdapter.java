@@ -3,10 +3,13 @@ package net.jeeeyul.eclipsejs.util;
 import org.eclipse.ui.IWindowListener;
 import org.eclipse.ui.IWorkbenchWindow;
 
+/**
+ * Adapter implementation for {@link IWindowListener}.
+ * 
+ * @author Jeeeyul
+ *
+ */
 public class WindowAdapter implements IWindowListener {
-
-	public WindowAdapter() {
-	}
 
 	@Override
 	public void windowActivated(IWorkbenchWindow window) {

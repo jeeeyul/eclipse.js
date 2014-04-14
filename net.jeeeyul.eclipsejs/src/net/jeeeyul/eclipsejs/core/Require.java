@@ -26,6 +26,9 @@ import org.mozilla.javascript.ScriptableObject;
 public class Require {
 	private static Map<Thread, Map<IFile, Object>> moduleMap = new HashMap<Thread, Map<IFile, Object>>();
 
+	/**
+	 * Unloads all required modules for all thread.
+	 */
 	public static final void unloadModulesForAllThread() {
 		moduleMap.clear();
 		moduleMap = new HashMap<Thread, Map<IFile, Object>>();
@@ -57,15 +60,14 @@ public class Require {
 		return map;
 	}
 
-	public String getWorkingDir() {
-		return workingDir.toPortableString();
-	}
-
+	/**
+	 * 
+	 * @return Available module id array in current working directory.
+	 */
 	public String[] lookup() {
 		ArrayList<String> result = new ArrayList<String>();
 		try {
-			IFolder folder = ResourcesPlugin.getWorkspace().getRoot()
-					.getFolder(workingDir);
+			IFolder folder = ResourcesPlugin.getWorkspace().getRoot().getFolder(workingDir);
 			IResource[] members = folder.members();
 			for (IResource each : members) {
 				if (each.getType() == IResource.FOLDER) {
@@ -73,10 +75,8 @@ public class Require {
 					if (eachFolder.getFile("index.js").exists()) {
 						result.add(each.getName());
 					}
-				} else if (each.getType() == IResource.FILE
-						&& each.getFileExtension().equals("js")) {
-					result.add(each.getFullPath().removeFileExtension()
-							.lastSegment());
+				} else if (each.getType() == IResource.FILE && each.getFileExtension().equals("js")) {
+					result.add(each.getFullPath().removeFileExtension().lastSegment());
 				}
 			}
 		} catch (CoreException e) {
@@ -102,16 +102,13 @@ public class Require {
 	 * @throws IOException
 	 * @throws CoreException
 	 */
-	public Object require(String moduleNameExpression) throws IOException,
-			CoreException {
-		ModuleDescriptor descriptor = ModuleDescriptor.resolve(workingDir,
-				moduleNameExpression);
+	public Object require(String moduleNameExpression) throws IOException, CoreException {
+		ModuleDescriptor descriptor = ModuleDescriptor.resolve(workingDir, moduleNameExpression);
 
 		Map<IFile, Object> map = getModuleMap();
 		Object cached = map.get(descriptor.getModuleFile());
 		if (cached == null) {
-			ScriptableObject scope = EJSScopeFactory.getInstance().create(
-					descriptor.getModuleDirPath());
+			ScriptableObject scope = EJSScopeFactory.getInstance().create(descriptor.getModuleDirPath());
 			moduleWrapper.before(context, scope);
 
 			IFile file = descriptor.getModuleFile();
@@ -123,9 +120,16 @@ public class Require {
 		return cached;
 	}
 
+	/**
+	 * Unload require a module.
+	 * 
+	 * @param modulePath
+	 *            module id.
+	 * @param allThread
+	 *            if <code>true</code> unloads modules for all thread.
+	 */
 	public void unload(String modulePath, boolean allThread) {
-		ModuleDescriptor location = ModuleDescriptor.resolve(workingDir,
-				modulePath);
+		ModuleDescriptor location = ModuleDescriptor.resolve(workingDir, modulePath);
 
 		if (allThread) {
 			for (Map<IFile, Object> each : moduleMap.values()) {
@@ -136,11 +140,25 @@ public class Require {
 		}
 	}
 
+	/**
+	 * Unloads all modules that required.
+	 * 
+	 * @param allThread
+	 *            if <code>true</code> unload modules for all thread.
+	 */
 	public void unloadAll(boolean allThread) {
 		if (allThread) {
 			moduleMap.clear();
 		} else {
 			getModuleMap().clear();
 		}
+	}
+
+	/**
+	 * 
+	 * @return working dir full path for module.
+	 */
+	public String getWorkingDirPath() {
+		return workingDir.toPortableString();
 	}
 }

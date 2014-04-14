@@ -16,6 +16,11 @@ class ModuleDescriptor {
 	IFile fModuleFile
 	ModuleMetaData fMetaData
 
+	/**
+	 * Creates a Module Descriptor Object.
+	 * 
+	 * @param file module script file.
+	 */
 	new(IFile file) {
 		if (file == null || !file.exists) {
 			throw new IllegalArgumentException
@@ -23,10 +28,16 @@ class ModuleDescriptor {
 		this.fModuleFile = file
 	}
 
+	/**
+	 * @return module script file.
+	 */
 	def IFile getModuleFile() {
 		return fModuleFile
 	}
 
+	/**
+	 * @return qualified name of module.
+	 */
 	def String getQualifiedName() {
 		if (moduleFile.name.equals("index.js")) {
 			return moduleFile.parent.fullPath.toPortableString
@@ -37,7 +48,7 @@ class ModuleDescriptor {
 
 	/**
 	 * Gets a meta data of module. Meta data is stored as <code>${moduleName}.json</code> or <code>index.json</code> what if the module is structured as a folder.
-	 * @returns The meta data of module.
+	 * @return The meta data of module.
 	 */
 	def ModuleMetaData getMetaData() {
 		if (fMetaData == null) {
@@ -47,6 +58,9 @@ class ModuleDescriptor {
 		return fMetaData
 	}
 
+	/**
+	 * @return name of module. It's not human readable name.
+	 */
 	def String getModuleName() {
 		if (moduleFile.name.equals("index.js")) {
 			return moduleFile.parent.name
@@ -63,14 +77,24 @@ class ModuleDescriptor {
 		metaData.get("name") as String
 	}
 
+	/**
+	 * @return path for container of module.
+	 */
 	def IPath getModuleDirPath() {
 		return moduleFile.parent.fullPath
 	}
 
+	/**
+	 * @param relPath relative resource path for module 
+	 * @return resource file for given path.
+	 */
 	def IFile getResource(String relPath) {
 		return moduleDir.getFile(new Path(relPath))
 	}
 
+	/**
+	 * @return meta data file for module. client should check existence.
+	 */
 	def IFile getMetaFile() {
 		if (moduleFile.name.equals("index.js")) {
 			return moduleFile.parent.getFile(new Path("index.json"));
@@ -80,6 +104,9 @@ class ModuleDescriptor {
 		}
 	}
 
+	/**
+	 * @return A container that contains module script file.
+	 */
 	def IContainer getModuleDir() {
 		var path = moduleDirPath
 		var IContainer result;
@@ -93,6 +120,9 @@ class ModuleDescriptor {
 		return result
 	}
 
+	/**
+	 * Creates an Module Descriptor.
+	 */
 	static def resolve(String workingDir, String moduleName) {
 		return resolve(new Path(workingDir), moduleName);
 	}

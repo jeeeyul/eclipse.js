@@ -4,6 +4,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
@@ -18,10 +19,24 @@ import org.eclipse.wst.jsdt.ui.text.IColorManager;
 import org.eclipse.wst.jsdt.ui.text.IJavaScriptPartitions;
 import org.eclipse.wst.jsdt.ui.text.JavaScriptSourceViewerConfiguration;
 
+/**
+ * {@link SourceViewerConfiguration} for {@link QueryView}.
+ * 
+ * @author Jeeeyul
+ *
+ */
 @SuppressWarnings("restriction")
-public class EJSConfiguration extends JavaScriptSourceViewerConfiguration {
+public class EmbdedJSDTConfiguration extends JavaScriptSourceViewerConfiguration {
 
-	public EJSConfiguration(IColorManager colorManager,
+	/**
+	 * Creates an {@link EmbdedJSDTConfiguration}.
+	 * 
+	 * @param colorManager
+	 * @param preferenceStore
+	 * @param editor
+	 * @param partitioning
+	 */
+	public EmbdedJSDTConfiguration(IColorManager colorManager,
 			IPreferenceStore preferenceStore, ITextEditor editor,
 			String partitioning) {
 		super(colorManager, preferenceStore, editor, partitioning);

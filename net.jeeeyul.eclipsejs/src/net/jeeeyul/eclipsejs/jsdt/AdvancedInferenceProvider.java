@@ -6,11 +6,17 @@ import org.eclipse.wst.jsdt.core.infer.InferrenceProvider;
 import org.eclipse.wst.jsdt.core.infer.RefactoringSupport;
 import org.eclipse.wst.jsdt.core.infer.ResolutionConfiguration;
 
+/**
+ * An additional inference engine provider.
+ * 
+ * @author Jeeeyul
+ *
+ */
 public class AdvancedInferenceProvider implements InferrenceProvider {
+	/**
+	 * Inference Provider ID.
+	 */
 	public static final String ID = "net.jeeeyul.eclipsejs.jsdt.AdvancedInferenceProvider";
-
-	public AdvancedInferenceProvider() {
-	}
 
 	@Override
 	public int applysTo(IInferenceFile arg0) {

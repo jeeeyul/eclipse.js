@@ -12,10 +12,19 @@ import org.eclipse.wst.jsdt.ui.wizards.IJsGlobalScopeContainerPageExtension;
 import org.eclipse.wst.jsdt.ui.wizards.IJsGlobalScopeContainerPageExtension2;
 import org.eclipse.wst.jsdt.ui.wizards.NewElementWizardPage;
 
+/**
+ * Configuration UI for eclipse.js JSDT Library.
+ * 
+ * @author Jeeeyul
+ *
+ */
 public class EJSLibPage extends NewElementWizardPage implements
 		IJsGlobalScopeContainerPage, IJsGlobalScopeContainerPageExtension,
 		IJsGlobalScopeContainerPageExtension2 {
 
+	/**
+	 * Creates an {@link EJSLibPage}.
+	 */
 	public EJSLibPage() {
 		super(EJSLibraryInitializer.LIB_NAME);
 	}

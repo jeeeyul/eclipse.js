@@ -11,6 +11,9 @@ import org.eclipse.ui.console.IPatternMatchListenerDelegate;
 import org.eclipse.ui.console.PatternMatchEvent;
 import org.eclipse.ui.console.TextConsole;
 
+/**
+ * Link detector for eclipse.js console.
+ */
 public class ConsoleLinkMatcher implements IPatternMatchListenerDelegate {
 	private Pattern pattern = Pattern
 			.compile("((eclipsejs):/)?(/[^/\r\n\\s]+(/[^/\r\n\\s]+)*/[a-zA-Z0-9_\\-\\s\\.]+\\.js)[:#]([\\d]+)");

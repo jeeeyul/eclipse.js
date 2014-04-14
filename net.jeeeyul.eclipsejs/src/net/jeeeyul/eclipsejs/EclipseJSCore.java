@@ -19,9 +19,14 @@ import org.osgi.framework.BundleContext;
  */
 public class EclipseJSCore extends AbstractUIPlugin implements
 		IResourceChangeListener {
+	/**
+	 * Name of the runtime project.
+	 */
 	public static final String PROJECT_NAME = ".eclipse.js";
 
-	// The plug-in ID
+	/**
+	 * The Plugin ID.
+	 */
 	public static final String PLUGIN_ID = "net.jeeeyul.eclipsejs"; //$NON-NLS-1$
 
 	// The shared instance
@@ -59,14 +64,29 @@ public class EclipseJSCore extends AbstractUIPlugin implements
 		return ensureRuntimeProject;
 	}
 
+	/**
+	 * 
+	 * @return Runtime project. What if project is not ready yet, it will return
+	 *         <code>null</code>.
+	 */
 	public IProject getPreparedRuntimeProject() {
 		return runtimeProject;
 	}
 
+	/**
+	 * Gets runtime project.
+	 * 
+	 * @param callback
+	 *            callback that handle runtime project when it is ready.
+	 */
 	public void getRuntimeProject(IRuntimeProjectCallback callback) {
 		getEnsureRuntimeProject().addCallback(callback);
 	}
 
+	/**
+	 * 
+	 * @return whether the runtime project is ready.
+	 */
 	public boolean isRuntimeProjectPrepared() {
 		return runtimeProject != null && runtimeProject.exists()
 				&& runtimeProject.isOpen();
@@ -116,6 +136,18 @@ public class EclipseJSCore extends AbstractUIPlugin implements
 		}
 	}
 
+	/**
+	 * Gets EJS extensions.
+	 * 
+	 * @param point
+	 *            extension point name.
+	 * @param id
+	 *            extension id.
+	 * @param args
+	 *            extension construction arguments.
+	 * @return {@link EJSExtension} for given arguments. Can be
+	 *         <code>null</code>.
+	 */
 	public EJSExtension getExtension(String point, String id, Object... args) {
 		return new EJSExtension(point, id, args);
 	}

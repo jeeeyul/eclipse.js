@@ -21,6 +21,12 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 
+/**
+ * Ensures eclipse.js runtime project.
+ * 
+ * @author Jeeeyul
+ *
+ */
 public class EnsureRuntimeProject extends WorkspaceJob {
 
 	private static final String RUNTIME_PROJECT = "runtime-project";
@@ -30,12 +36,20 @@ public class EnsureRuntimeProject extends WorkspaceJob {
 
 	private IProject project;
 
+	/**
+	 * Creates an {@link EnsureRuntimeProject}.
+	 */
 	public EnsureRuntimeProject() {
 		super("Eclipse.JS Project Preparing");
 		setSystem(true);
 		setUser(false);
 	}
 
+	/**
+	 * Adds a callback that will be invoked when runtime project is ready.
+	 * 
+	 * @param callback
+	 */
 	public void addCallback(IRuntimeProjectCallback callback) {
 		synchronized (callbacks) {
 			callbacks.add(callback);

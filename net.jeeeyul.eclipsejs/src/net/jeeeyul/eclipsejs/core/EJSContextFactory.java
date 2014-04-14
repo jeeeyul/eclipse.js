@@ -8,11 +8,19 @@ import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 
+/**
+ * @author Jeeeyul
+ * @since 0.1
+ */
 public class EJSContextFactory extends ContextFactory {
 	static {
 		ContextFactory.initGlobal(new EJSContextFactory());
 	}
 
+	/**
+	 * @return Shared {@link EJSContext}.
+	 * @since 0.1
+	 */
 	public static EJSContext getSharedContext() {
 		Context currentContext = Context.getCurrentContext();
 		if (currentContext == null) {

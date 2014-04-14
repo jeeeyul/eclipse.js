@@ -1,6 +1,9 @@
 package net.jeeeyul.eclipsejs.extensions.view;
 
+import java.util.ArrayList;
+
 import net.jeeeyul.eclipsejs.EclipseJSCore;
+import net.jeeeyul.eclipsejs.core.EJSContextFactory;
 import net.jeeeyul.eclipsejs.extensions.EJSExtension;
 import net.jeeeyul.eclipsejs.runtime.IRuntimeProjectCallback;
 import net.jeeeyul.eclipsejs.util.ResourceRegistry;
@@ -20,8 +23,18 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.ViewPart;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Function;
 
+/**
+ * Common Viw is a bootstrap view for EJSViews.
+ * 
+ * @author Jeeeyul
+ *
+ */
 public class CommonView extends ViewPart {
+	/**
+	 * View ID of {@link CommonView}
+	 */
 	public static final String ID = CommonView.class.getCanonicalName();
 
 	private PageBook pageBook;
@@ -29,7 +42,12 @@ public class CommonView extends ViewPart {
 	private boolean isDisposed = false;
 	private EJSExtension module;
 	private ResourceRegistry<String, Image> imageRegistry;
+	private ArrayList<Function> readyCallbacks = new ArrayList<Function>();
+	private boolean fInitialized = false;
 
+	/**
+	 * Creates a {@link CommonView}
+	 */
 	public CommonView() {
 		imageRegistry = new ResourceRegistry<String, Image>();
 		imageRegistry.setFactory(new Factory<String, Image>() {
@@ -47,6 +65,9 @@ public class CommonView extends ViewPart {
 		});
 	}
 
+	/**
+	 * @return EJS View Id, it is same with secondary view id.
+	 */
 	public String getEJSViewID() {
 		return getViewSite().getSecondaryId();
 	}
@@ -88,12 +109,21 @@ public class CommonView extends ViewPart {
 		if (getViewId() != null && module != null) {
 			module.callInstanceFunction("create", viewPage);
 			pageBook.showPage(viewPage);
+			fInitialized = true;
+			dispatchReadyCallbacks();
 		} else {
 			Label label = new Label(pageBook, SWT.NORMAL);
 			label.setText("E.JS View ID is not specified!");
 			pageBook.showPage(label);
 		}
+	}
 
+	private void dispatchReadyCallbacks() {
+		for (Function each : readyCallbacks) {
+			each.call(EJSContextFactory.getSharedContext(), module.getScope(),
+					module.getInstance(), new Object[] { module.getInstance() });
+		}
+		readyCallbacks.clear();
 	}
 
 	private void doInit(final IViewSite site) {
@@ -165,4 +195,19 @@ public class CommonView extends ViewPart {
 		super.dispose();
 	}
 
+	/**
+	 * Gets view ejs.View instance.
+	 * 
+	 * @param function
+	 *            instance handler function.
+	 */
+	public void getViewModuleInstance(Function function) {
+		if (fInitialized) {
+			function.call(EJSContextFactory.getSharedContext(),
+					module.getScope(), module.getInstance(),
+					new Object[] { module.getInstance() });
+		} else {
+			readyCallbacks.add(function);
+		}
+	}
 }

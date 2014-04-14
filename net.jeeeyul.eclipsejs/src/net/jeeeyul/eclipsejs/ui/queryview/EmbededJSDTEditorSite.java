@@ -12,17 +12,25 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 
+/**
+ * Embeded {@link IEditorSite} for JSDT Editor in {@link QueryView}.
+ * 
+ * @author Jeeeyul
+ *
+ */
 @SuppressWarnings("deprecation")
-public class EJSEditorSite implements IEditorSite {
+public class EmbededJSDTEditorSite implements IEditorSite {
 
 	private IViewSite viewSite;
 
-	public EJSEditorSite(IViewSite viewSite) {
+	/**
+	 * Creates an {@link EmbededJSDTEditorSite}.
+	 * 
+	 * @param viewSite
+	 */
+	public EmbededJSDTEditorSite(IViewSite viewSite) {
 		super();
 		this.viewSite = viewSite;
-	}
-
-	public EJSEditorSite() {
 	}
 
 	@Override

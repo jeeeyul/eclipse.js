@@ -11,6 +11,7 @@ import org.mozilla.javascript.Context;
  * added. see {@link #observeInstructionCount(int)}
  * 
  * @author Jeeeyul
+ * @since 0.1
  *
  */
 public class EJSContext extends Context {

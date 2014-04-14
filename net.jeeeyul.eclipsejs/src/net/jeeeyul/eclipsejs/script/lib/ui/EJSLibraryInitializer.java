@@ -22,20 +22,30 @@ import org.eclipse.wst.jsdt.core.JsGlobalScopeContainerInitializer;
 import org.eclipse.wst.jsdt.core.compiler.libraries.LibraryLocation;
 import org.osgi.framework.Bundle;
 
+/**
+ * eclipse.js jsdt library initializer.
+ * 
+ * @author Jeeeyul
+ *
+ */
 public class EJSLibraryInitializer extends JsGlobalScopeContainerInitializer
 		implements IJsGlobalScopeContainer {
 
+	/**
+	 * JSDT Library ID.
+	 */
 	public static final String LIB_ID = "net.jeeeyul.eclipsejs.lib";
-	public static final String LIB_NAME = "Eclipse.JS Libraries";
 
-	public EJSLibraryInitializer() {
-	}
+	/**
+	 * Human readable Library name.
+	 */
+	public static final String LIB_NAME = "Eclipse.JS Libraries";
 
 	@Override
 	public LibraryLocation getLibraryLocation() {
 		return EJSLibraryLocation.getInstance();
 	}
-	
+
 	static class EJSLibraryLocation implements LibraryLocation {
 		public EJSLibraryLocation() {
 			IPath stateLocation = EclipseJSCore.getDefault().getStateLocation();
@@ -76,7 +86,7 @@ public class EJSLibraryInitializer extends JsGlobalScopeContainerInitializer
 				path = new Path("docs").append(path.lastSegment());
 				result.add(path.toPortableString().toCharArray());
 			}
-			
+
 			Enumeration<URL> runtimes = bundle.findEntries("libraries/both",
 					"*.js", false);
 			while (runtimes.hasMoreElements()) {

@@ -29,4 +29,4 @@ function unrequireAll(allThread) {
 	__REQUIRE__.unloadAll(allThread);
 }
 
-var __dirname = __REQUIRE__.getWorkingDir();
+var __dirname = __REQUIRE__.getWorkingDirPath();

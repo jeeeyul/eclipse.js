@@ -125,7 +125,7 @@ class JavaDocGenerator {
 	
 	def static genrate(String name){
 		var is = typeof(JavaDocGenerator).getResource('''«name».txt''').openStream
-		var list = FileUtil.getInstance.readInputStream(is, "UTF-8").split("(\r\n|\r|\n)+")
+		var list = FileUtil.getInstance.getTextContent(is, "UTF-8").split("(\r\n|\r|\n)+")
 		var gen = new JavaDocGenerator
 		var fos = new FileOutputStream('''/Users/Jeeeyul/Workspaces/personal/eclipse.js/net.jeeeyul.eclipsejs/libraries/docs/«name».js''');
 		var ps = new PrintStream(fos)

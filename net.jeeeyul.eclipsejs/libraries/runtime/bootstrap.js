@@ -37,7 +37,19 @@ ejs.internal.wrapWorkbenchSite = function(handle) {
  * @returns {ejs.WorkbenchPart}
  */
 ejs.internal.wrapWorkbenchPart = function(handle) {
+	if (handle instanceof net.jeeeyul.eclipsejs.extensions.view.CommonView) {
+		return new ejs.EJSViewPart(handle);
+	}
 
+	else if (handle instanceof org.eclipse.ui.IViewPart) {
+		return new ejs.ViewPart(handle);
+	}
+
+	else if (handle instanceof org.eclipse.ui.IWorkbenchPart) {
+		return new ejs.WorkbenchPart(handle);
+	}
+
+	throw new Error("unsupported workbench part");
 };
 
 /**

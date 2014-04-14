@@ -11,7 +11,7 @@ import org.mozilla.javascript.ScriptableObject
 
 class EJSExtension {
 	ModuleDescriptor fDescriptor
-	ScriptableObject scope
+	ScriptableObject fScope
 	Context ctx = EJSContextFactory.sharedContext
 
 	ScriptableObject fInstance
@@ -25,7 +25,7 @@ class EJSExtension {
 
 	def ScriptableObject getInstance() {
 		if (fInstance == null) {
-			this.scope = EJSScopeFactory.getInstance.create(fDescriptor.getModuleDirPath)
+			this.fScope = EJSScopeFactory.getInstance.create(fDescriptor.getModuleDirPath)
 
 			var script = '''
 				var ModuleType = require("«fDescriptor.getQualifiedName»");
@@ -49,12 +49,16 @@ class EJSExtension {
 		var jsArgs = args.map [
 			Context.javaToJS(it, scope)
 		]
-		var fn = ScriptableObject.getProperty(getInstance, name);
+		var fn = ScriptableObject.getProperty(instance, name);
 		if (fn instanceof Function) {
-			return (fn as Function).call(ctx, scope, getInstance, jsArgs);
+			return (fn as Function).call(ctx, fScope, instance, jsArgs);
 		} else {
 			return null;
 		}
+	}
+	
+	def ScriptableObject getScope(){
+		return fScope
 	}
 	
 	def Object evaluate(String script){

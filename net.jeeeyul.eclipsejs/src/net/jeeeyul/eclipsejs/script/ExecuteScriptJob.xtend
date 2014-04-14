@@ -12,9 +12,18 @@ import org.eclipse.core.runtime.Status
 import org.mozilla.javascript.Context
 import net.jeeeyul.eclipsejs.core.EJSScopeFactory
 
+/**
+ * An workspace job that runs scripts from script provider.
+ */
 class ExecuteScriptJob extends WorkspaceJob {
 	IScriptProvider scriptProvider
 
+	/**
+	 * Creates an Execute Script Job.
+	 * 
+	 * @param scriptProvider
+	 * 		script provider to execute.
+	 */
 	new(IScriptProvider scriptProvider) {
 		super("Executing Script")
 		this.scriptProvider = scriptProvider
@@ -26,11 +35,11 @@ class ExecuteScriptJob extends WorkspaceJob {
 		var factory = new EJSContextFactory()
 		var ctx = factory.enterContext as EJSContext
 		ctx.setMonitor(monitor);
-		
+
 		val Map<String, Object> map = #{
 			"monitor" -> monitor as Object
-		} 
-		
+		}
+
 		try {
 			var scope = EJSScopeFactory.getInstance.create(scriptProvider.fullPath.removeLastSegments(1), map)
 			ctx.evaluateString(scope, scriptProvider.getScript(), scriptProvider.fullPath.toPortableString, 1, null)

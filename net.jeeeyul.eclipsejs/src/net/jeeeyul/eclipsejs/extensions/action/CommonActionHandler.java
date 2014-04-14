@@ -8,10 +8,10 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.menus.UIElement;
 
-public class CommonActionHandler extends AbstractHandler implements IElementUpdater{
+public class CommonActionHandler extends AbstractHandler implements IElementUpdater {
 
 	public CommonActionHandler() {
-		
+
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class CommonActionHandler extends AbstractHandler implements IElementUpda
 
 	@Override
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
-		
+
 	}
 
 }

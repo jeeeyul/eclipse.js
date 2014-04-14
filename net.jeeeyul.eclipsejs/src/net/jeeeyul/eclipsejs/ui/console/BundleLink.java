@@ -21,12 +21,27 @@ import org.eclipse.wst.jsdt.core.JavaScriptCore;
 import org.eclipse.wst.jsdt.core.JavaScriptModelException;
 import org.eclipse.wst.jsdt.internal.ui.javaeditor.EditorUtility;
 
+/**
+ * A link that indicated built-in script. built-in script means that this script
+ * is provided by eclipse.js jsdt library.
+ * 
+ * @author Jeeeyul
+ * @since 0.1
+ */
 @SuppressWarnings("restriction")
 public class BundleLink implements IHyperlink {
 
 	private String path;
 	private int line;
 
+	/**
+	 * Creates a link.
+	 * 
+	 * @param path
+	 *            path for eclipse.js script. this path is relative to
+	 *            "/libraries" folder in this project.
+	 * @param line
+	 */
 	public BundleLink(String path, int line) {
 		this.path = path;
 		this.line = line;
@@ -74,10 +89,12 @@ public class BundleLink implements IHyperlink {
 					IClassFile classFile = fragment.getClassFiles()[0];
 					IEditorInput editorInput = EditorUtility
 							.getEditorInput(classFile);
-					AbstractTextEditor editor = (AbstractTextEditor) IDE.openEditor(PlatformUI
-							.getWorkbench().getActiveWorkbenchWindow()
-							.getActivePage(), editorInput,
-							"org.eclipse.wst.jsdt.ui.ClassFileEditor");
+					AbstractTextEditor editor = (AbstractTextEditor) IDE
+							.openEditor(
+									PlatformUI.getWorkbench()
+											.getActiveWorkbenchWindow()
+											.getActivePage(), editorInput,
+									"org.eclipse.wst.jsdt.ui.ClassFileEditor");
 					IDocument document = editor.getDocumentProvider()
 							.getDocument(editor.getEditorInput());
 					IRegion lineInformation = document

@@ -9,7 +9,6 @@ ejs.ServiceLocator.prototype.getNativeServiceHandle = function(serviceType) {
 	return this.handle.getService(serviceType);
 };
 
-
 ejs.ServiceLocator.prototype.getSelectionService = function() {
 	return new ejs.SelectionService(this.handle.getService(org.eclipse.ui.ISelectionService));
 };
@@ -106,13 +105,34 @@ ejs.WorkbenchPage.prototype = Object.create(ejs.ServiceLocator.prototype);
 /**
  * @param {String}
  *            viewId
+ * @returns {ejs.ViewPart}
  */
 ejs.WorkbenchPage.prototype.showView = function(viewId) {
-	this.handle.showView(viewId);
-};
+	var me = this;
+	return runInUI(function() {
+		var viewHandle = me.handle.showView(viewId);
+		if (viewHandle) {
+			return new ejs.ViewPart(viewHandle);
+		} else {
+			return null;
+		}
+	});
 
+};
+/**
+ * @param viewId
+ * @returns {ejs.EJSViewPart}
+ */
 ejs.WorkbenchPage.prototype.showEJSView = function(viewId) {
-	this.handle.showView("net.jeeeyul.eclipsejs.common.view", viewId, 1);
+	var me = this;
+	return runInUI(function(){
+		var viewHandle = me.handle.showView("net.jeeeyul.eclipsejs.extensions.view.CommonView", viewId, 1);
+		if (viewHandle) {
+			return new ejs.EJSViewPart(viewHandle);
+		} else {
+			return null;
+		}
+	})
 };
 
 //
@@ -228,8 +248,8 @@ ejs.ViewSite = function(handle) {
 ejs.ViewSite.prototype = Object.create(ejs.WorkbenchPartSite.prototype);
 
 /**
- * Returns the action bars for this part site. Views have exclusive use of
- * their site's action bars.
+ * Returns the action bars for this part site. Views have exclusive use of their
+ * site's action bars.
  * 
  * @returns {org.eclipse.ui.IActionBars}
  */
@@ -312,4 +332,78 @@ ejs.WorkbenchPart.prototype.getTitleToolTip = function() {
 
 ejs.WorkbenchPart.prototype.setFocus = function() {
 	this.handle.setFocus();
+};
+
+/**
+ * @constructor
+ * @base ejs.WorkbenchPart
+ */
+ejs.ViewPart = function() {
+	ejs.WorkbenchPart.apply(this, arguments);
+	this.constructor = ejs.ViewPart;
+	return this;
+};
+
+ejs.ViewPart.prototype = Object.create(ejs.WorkbenchPart.prototype);
+
+/**
+ * @returns {ejs.ViewSite}
+ */
+ejs.ViewPart.prototype.getSite = function() {
+	return ejs.WorkbenchPart.prototype.getSite.call(this);
+};
+
+ejs.EJSViewPart = function() {
+	ejs.ViewPart.apply(this, arguments);
+	this.constructor = ejs.EJSViewPart;
+	return this;
+}
+
+ejs.EJSViewPart.prototype = Object.create(ejs.ViewPart.prototype);
+/**
+ * 
+ * @param {Function}
+ *            callback
+ */
+ejs.EJSViewPart.prototype.getModuleInstance = function(callback) {
+	this.handle.getViewModuleInstance(callback);
+};
+
+//
+// WPR
+//
+/**
+ * @constructor
+ */
+ejs.WorkbenchPartReference = function(handle) {
+	this.handle = handle;
+	return this;
+};
+
+/**
+ * 
+ * @param {Boolean}
+ *            restore
+ * @returns {ejs.WorkbenchPart}
+ */
+ejs.WorkbenchPartReference.prototype.getPart = function(restore) {
+	return ejs.internal.wrapWorkbenchPart(this.handle.getPart(restore));
+};
+
+/**
+ * @constructor
+ * @base ejs.WorkbenchPartReference
+ */
+ejs.ViewReference = function() {
+	ejs.WorkbenchPartReference.apply(this, arguments);
+	this.constructor = ejs.ViewReference
+};
+
+ejs.ViewReference.prototype = Object.create(ejs.WorkbenchPartReference.prototype);
+
+/**
+ * @returns {ejs.ViewPart}
+ */
+ejs.ViewReference.prototype.getPart = function() {
+	return ejs.WorkbenchPartReference.prototype.getPart.call(this);
 };

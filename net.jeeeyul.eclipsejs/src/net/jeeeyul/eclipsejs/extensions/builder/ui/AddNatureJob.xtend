@@ -34,7 +34,7 @@ class AddNatureJob extends WorkspaceJob {
 		
 		var buildFile = project.getFile("ejs-build.json")
 		if(!buildFile.exists){
-			FileUtil.instance.create(buildFile, "{}");
+			FileUtil.instance.createWithTextContent(buildFile, "{}");
 		}
 		
 		return Status.OK_STATUS

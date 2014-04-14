@@ -96,7 +96,7 @@
             </commandParameter>
          </command>
          <command
-               defaultHandler="net.jeeeyul.eclipsejs.script.internal.ExecuteViewScriptHandler"
+               defaultHandler="net.jeeeyul.eclipsejs.script.internal.ExecuteQueryViewScriptHandler"
                id="net.jeeeyul.eclipsejs.execute.view.script"
                name="Excute View Script">
          </command>

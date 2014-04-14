@@ -17,7 +17,7 @@ class ModuleWrapper {
 	}
 
 	def evaluate(Context context, ScriptableObject scope, IFile file) {
-		var moduleScript = FileUtil.getInstance().readInputStream(file.getContents(), file.getCharset());
+		var moduleScript = FileUtil.getInstance().getTextContent(file.getContents(), file.getCharset());
 		var script = '''
 			«moduleScript»
 		'''

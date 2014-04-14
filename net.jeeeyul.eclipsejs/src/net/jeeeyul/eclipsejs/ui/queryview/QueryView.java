@@ -28,11 +28,22 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor;
 import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditorActionContributor;
 
+/**
+ * View that can edit and run eclipse.js script.
+ * 
+ * @author Jeeeyul
+ * @since 0.1
+ *
+ */
 @SuppressWarnings("restriction")
 public class QueryView extends ViewPart implements IScriptProvider {
 	private static final Path QUERY_SCRIPT_PATH = new Path("user/query.js");
+	/**
+	 * View ID.
+	 */
 	public static final String ID = QueryView.class.getCanonicalName();
-	private EJSEditorSite editorSite;
+
+	private EmbededJSDTEditorSite editorSite;
 	private CompilationUnitEditor editor;
 	private PageBook pageBook;
 	private IProject project;
@@ -40,8 +51,11 @@ public class QueryView extends ViewPart implements IScriptProvider {
 	private CompilationUnitEditorActionContributor contributor;
 	private ExecuteScriptJob executeScriptJob;
 
+	/**
+	 * Creates Query View.
+	 */
 	public QueryView() {
-		editor = new EJSEditor();
+		editor = new EmbededJSDTEditor();
 		contributor = new CompilationUnitEditorActionContributor();
 	}
 
@@ -83,6 +97,10 @@ public class QueryView extends ViewPart implements IScriptProvider {
 		}
 	}
 
+	/**
+	 * 
+	 * @return An {@link ExecuteScriptJob} for scripts in query view.
+	 */
 	public ExecuteScriptJob getExecuteScriptJob() {
 		if (executeScriptJob == null) {
 			executeScriptJob = new ExecuteScriptJob(this);
@@ -103,7 +121,7 @@ public class QueryView extends ViewPart implements IScriptProvider {
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 
-		editorSite = new EJSEditorSite(site);
+		editorSite = new EmbededJSDTEditorSite(site);
 		EclipseJSCore.getDefault().getRuntimeProject(
 				new IRuntimeProjectCallback() {
 					@Override
