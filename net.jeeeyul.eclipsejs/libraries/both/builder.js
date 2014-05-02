@@ -130,6 +130,9 @@ ejs.Builder.prototype.removed = function(file, toolkit, options) {
 
 };
 
+/**
+ * @returns {Function}
+ */
 ejs.Builder.extend = function(descriptor) {
 	var result = function() {
 		ejs.Builder.apply(this, arguments);

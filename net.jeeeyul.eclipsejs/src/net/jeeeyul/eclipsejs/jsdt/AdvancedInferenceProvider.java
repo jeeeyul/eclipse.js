@@ -30,7 +30,9 @@ public class AdvancedInferenceProvider implements InferrenceProvider {
 
 	@Override
 	public IInferEngine getInferEngine() {
-		return new AdvancedInferenceEngine();
+		AdvancedInferenceEngine engine = new AdvancedInferenceEngine();
+		engine.inferenceProvider = this;
+		return engine;
 	}
 
 	@Override

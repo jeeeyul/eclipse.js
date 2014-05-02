@@ -132,7 +132,7 @@ ejs.WorkbenchPage.prototype.showEJSView = function(viewId) {
 		} else {
 			return null;
 		}
-	})
+	});
 };
 
 //

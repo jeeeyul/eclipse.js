@@ -188,7 +188,7 @@ ejs.Resource.prototype.findMarkers = function(type, includeSubType, depth) {
 	});
 };
 
-ejs.Resource.prototype.getProject = function(){
+ejs.Resource.prototype.getProject = function() {
 	return new ejs.Project(this.handle);
 };
 
@@ -205,7 +205,7 @@ ejs.Container = function(fullPath) {
 };
 
 (function() {
-	var k;
+	var k = null;
 	for (k in ejs.Resource) {
 		ejs.Container[k] = ejs.Resource[k];
 	}
@@ -248,7 +248,7 @@ ejs.Container.prototype.members = function() {
 ejs.Container.prototype.findFiles = function(pattern) {
 	var result = [];
 	var exp = pattern.replace(/\*\*/g, "«ANY_PATH»").replace(/\*/, "«ANY_SEGMENT»").replace(/\./, "«DOT»").replace("?", "«ANY_CHAR»");
-	exp = exp.replace(/«ANY_PATH»/g, ".*").replace(/«ANY_SEGMENT»/g, "[^/]*").replace(/«DOT»/g, "\\\.").replace(/«ANY_CHAR»/g, ".")
+	exp = exp.replace(/«ANY_PATH»/g, ".*").replace(/«ANY_SEGMENT»/g, "[^/]*").replace(/«DOT»/g, "\\\.").replace(/«ANY_CHAR»/g, ".");
 	var regexp = new RegExp("^" + exp + "$");
 
 	var offsetLength = this.getFullPath().segmentCount();
@@ -256,7 +256,7 @@ ejs.Container.prototype.findFiles = function(pattern) {
 	this.handle.accept({
 		visit : function(it) {
 			var fullPath = it.getFullPath();
-			var relPath = fullPath.removeFirstSegments(offsetLength)
+			var relPath = fullPath.removeFirstSegments(offsetLength);
 			var isFile = (it.type == org.eclipse.core.resources.IResource.FILE);
 			if (offsetLength == 0) {
 				relPath = relPath.makeRelative();
@@ -315,7 +315,7 @@ ejs.WorkspaceRoot = function() {
 };
 
 (function() {
-	var k;
+	var k = null;
 	for (k in ejs.Container) {
 		ejs.WorkspaceRoot[k] = ejs.Container[k];
 	}
@@ -347,7 +347,7 @@ ejs.Project = function(name) {
 };
 
 (function() {
-	var k;
+	var k = null;
 	for (k in ejs.Container) {
 		ejs.Project[k] = ejs.Container[k];
 	}
@@ -375,7 +375,7 @@ ejs.Folder = function(fullPath) {
 };
 
 (function() {
-	var k;
+	var k = null;
 	for (k in ejs.Container) {
 		ejs.Folder[k] = ejs.Container[k];
 	}
@@ -403,7 +403,7 @@ ejs.File = function(fullPath) {
 };
 
 (function() {
-	var k;
+	var k = null;
 	for (k in ejs.Resource) {
 		ejs.File[k] = ejs.Resource[k];
 	}
@@ -411,10 +411,18 @@ ejs.File = function(fullPath) {
 
 ejs.File.prototype = Object.create(ejs.Resource.prototype);
 
+/**
+ * @returns {String}
+ */
 ejs.File.prototype.getTextContent = function() {
 	return String(ejs.io.getTextContent(this.handle.getContents(), this.handle.getCharset()));
 };
 
+/**
+ * 
+ * @param {String}
+ *            contents
+ */
 ejs.File.prototype.setTextContent = function(contents) {
 	if (this.exists()) {
 		ejs.io.setTextContent(this.handle, contents);

@@ -1,10 +1,5 @@
 ejs.internal = {};
 
-/**
- * 
- * @param resource
- * @returns {ejs.Resource}
- */
 ejs.internal.wrapResource = function(resource) {
 	if (resource instanceof org.eclipse.core.resources.IFile) {
 		return new ejs.File(resource.getFullPath());
@@ -21,7 +16,6 @@ ejs.internal.wrapResource = function(resource) {
 
 /**
  * @param handle
- * @returns {ejs.WorkbenchSite}
  */
 ejs.internal.wrapWorkbenchSite = function(handle) {
 	if (handle instanceof org.eclipse.ui.IViewSite) {
@@ -34,7 +28,6 @@ ejs.internal.wrapWorkbenchSite = function(handle) {
 /**
  * 
  * @param handle
- * @returns {ejs.WorkbenchPart}
  */
 ejs.internal.wrapWorkbenchPart = function(handle) {
 	if (handle instanceof net.jeeeyul.eclipsejs.extensions.view.CommonView) {

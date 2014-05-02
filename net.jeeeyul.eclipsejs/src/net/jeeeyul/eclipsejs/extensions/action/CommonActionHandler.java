@@ -8,12 +8,13 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.menus.UIElement;
 
+/**
+ * Handles EJS based commands
+ * 
+ * @author Jeeeyul
+ * 
+ */
 public class CommonActionHandler extends AbstractHandler implements IElementUpdater {
-
-	public CommonActionHandler() {
-
-	}
-
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		return null;

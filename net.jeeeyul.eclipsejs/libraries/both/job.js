@@ -6,10 +6,7 @@
  * @param {String} name
  */
 ejs.Timeout = function(run, uiThread, name) {
-	var me = this;
-	var IStatus = org.eclipse.core.runtime.IStatus;
-	var Status = org.eclipse.core.runtime.Status;
-	var impl, superType, runMethodName
+	var impl, superType, runMethodName;
 
 	if (uiThread === undefined) {
 		uiThread = true;
@@ -28,9 +25,9 @@ ejs.Timeout = function(run, uiThread, name) {
 			return Status.OK_STATUS;
 		} catch (e) {
 			var message = e.message ? e.message : e.toString();
-			return new Status(IStatus.ERROR, ejs.pluginId, message)
+			return new Status(IStatus.ERROR, ejs.pluginId, message);
 		}
-	}
+	};
 
 	this.handle = new JavaAdapter(superType, impl, name);
 };

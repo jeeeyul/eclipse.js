@@ -3,7 +3,7 @@
  */
 ejs.Selection = function(handle) {
 	this.handle = handle;
-}
+};
 
 /**
  * @returns {String}
@@ -12,7 +12,7 @@ ejs.Selection.prototype.getType = function() {
 	if (this.handle instanceof org.eclipse.jface.text.ITextSelection) {
 		return "text";
 	} else {
-		return "structure"
+		return "structure";
 	}
 };
 
