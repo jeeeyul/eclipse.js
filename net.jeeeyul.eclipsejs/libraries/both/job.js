@@ -7,7 +7,7 @@
  */
 ejs.Timeout = function(run, uiThread, name) {
 	var impl, superType, runMethodName;
-
+	
 	if (uiThread === undefined) {
 		uiThread = true;
 	}
@@ -22,10 +22,10 @@ ejs.Timeout = function(run, uiThread, name) {
 	impl[runMethodName] = function(/* org.eclipse.core.runtime.IProgressMonitor */monitor) {
 		try {
 			run(monitor);
-			return Status.OK_STATUS;
+			return org.eclipse.core.runtime.Status.OK_STATUS;
 		} catch (e) {
 			var message = e.message ? e.message : e.toString();
-			return new Status(IStatus.ERROR, ejs.pluginId, message);
+			return new org.eclipse.core.runtime.Status(org.eclipse.core.runtime.IStatus.ERROR, ejs.pluginId, message);
 		}
 	};
 
