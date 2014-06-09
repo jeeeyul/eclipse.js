@@ -3,4 +3,4 @@ eclipsejs
 
 Extend your eclipse with Java Script!
 
-http://vimeo.com/97696665
+[Short Video](http://vimeo.com/97696665) will explain what it is.
