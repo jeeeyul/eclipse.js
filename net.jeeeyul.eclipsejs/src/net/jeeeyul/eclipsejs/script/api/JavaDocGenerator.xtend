@@ -8,6 +8,8 @@ import java.lang.reflect.Modifier
 import net.jeeeyul.eclipsejs.util.BitExtension
 import org.eclipse.swt.layout.GridData
 import net.jeeeyul.eclipsejs.util.FileUtil
+import java.lang.reflect.Constructor
+import java.util.Collections
 
 class JavaDocGenerator {
 	extension BitExtension = new BitExtension
@@ -92,8 +94,12 @@ class JavaDocGenerator {
 	}
 	
 
-	def private primaryConstructor(Class<?> type) {
-		return type.constructors.sort[a, b|a.parameterTypes.size - b.parameterTypes.size].last
+	def Constructor<?> primaryConstructor(Class<?> type) {
+		var constructors = type.constructors.toList
+		Collections.sort(constructors)[a, b|
+			a.parameterTypes.size - b.parameterTypes.size
+		]
+		constructors.last
 	}
 
 	def private boolean isAPI(Method m) {
